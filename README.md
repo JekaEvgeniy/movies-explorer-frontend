@@ -1,10 +1,10 @@
-# movies-explorer-api
+# movies-explorer-frontend
 
 # Описание
-Бэкенд приложения "Поиск фильма"
+Фронт приложения "Поиск фильма"
 
 ## Адрес репозитория:
-[github](https://github.com/JekaEvgeniy/movies-explorer-api)
+[github](https://github.com/JekaEvgeniy/movies-explorer-frontend)
 
 ## Ссылки на проект
 IP 158.160.39.56
@@ -16,6 +16,9 @@ Frontend https://dip.nomoredomainsrocks.ru/
 * получение данных пользователя
 * валидация данных
 * работа с API
+
+## Запуск frontend проекта
+
 
 ## Запуск backend проекта
 `npm run start` — запускает сервер
