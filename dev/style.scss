@@ -1,13 +1,27 @@
 @import url(./vendor/normalize.css);
 
-$fontUrl: './vendor/fonts';
+$fontUrl       : './vendor/fonts';
+$containerWidth: 1140px;
+$siteOffset    : 70px;
+$time: 0.3s;
+$ff: 'Inter', Arial, sans-serif;
+$color-black: #000;
+$color-white: #fff;
+$color-green: #2BE080;
+$color-blue: #465DFF;
+
+@mixin border-box {
+  box-sizing: border-box;
+}
+
+
 @font-face {
   font-display: swap;
   font-family : 'Inter';
   font-style  : normal;
   font-weight : 400;
   src         : url("#{$fontUrl}/Inter-Regular.woff2?v=3.19") format("woff2"),
-    url("#{$fontUrl}/Inter-Regular.woff?v=3.19") format("woff");
+  url("#{$fontUrl}/Inter-Regular.woff?v=3.19") format("woff");
 }
 
 @font-face {
@@ -16,7 +30,7 @@ $fontUrl: './vendor/fonts';
   font-style  : normal;
   font-weight : 500;
   src         : url("#{$fontUrl}/Inter-Medium.woff2?v=3.19") format("woff2"),
-    url("#{$fontUrl}/Inter-Medium.woff?v=3.19") format("woff");
+  url("#{$fontUrl}/Inter-Medium.woff?v=3.19") format("woff");
 }
 
 @font-face {
@@ -25,12 +39,32 @@ $fontUrl: './vendor/fonts';
   font-style  : normal;
   font-weight : 900;
   src         : url("#{$fontUrl}/Inter-Black.woff2?v=3.19") format("woff2"),
-    url("#{$fontUrl}/Inter-Black.woff?v=3.19") format("woff");
+  url("#{$fontUrl}/Inter-Black.woff?v=3.19") format("woff");
+}
+
+
+.image-contain {
+  display   : block;
+  object-fit: contain;
+  width     : 100%;
+  height    : 100%;
+}
+.image-cover {
+  display   : block;
+  object-fit: cover;
+  width     : 100%;
+  height    : 100%;
 }
 
 .page {
-  font-family: 'Inter', Arial, sans-serif;
-  color      : #fff;
+  @include border-box;
+  display         : flex;
+  flex-direction  : column;
+  min-height      : 100dvh;
+  background-color: #fff;
+
+  font-family: $ff;
+  color      : #000;
 
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing : antialiased;
@@ -42,10 +76,78 @@ $fontUrl: './vendor/fonts';
   text-rendering: optimizeLegibility;
 }
 
-body {
-  background-color: #fff;
+.content {
+  flex: 1;
+}
+
+.footer {
+  @include border-box;
+  margin-top: auto;
+  padding   : 0 ($siteOffset) 0 ($siteOffset);
 }
 
 .header {
+  @include border-box;
+  display         : flex;
+  align-items: flex-start;
+  justify-content : space-between;
+  padding: 15px ($siteOffset) 18px ($siteOffset);
+  background-color:$color-blue;
+
+
+  &__logo {
+    flex            : 0 0 auto;
+    width           : 38px;
+    height          : 38px;
+    margin-top: 3px;
+  }
+
+  &-actions {
+    display    : flex;
+    align-items: center;
+    gap        : 30px;
+    margin-top: 6px;
+
+    &__link {
+      all        : unset;
+      @include border-box;
+      user-select: none;
+
+      &_type_text {
+        font-size  : 12px;
+        font-style : normal;
+        font-weight: 500;
+        line-height: 16px;
+        color      : #fff;
+        font-family: $ff;
+      }
+
+      &_type_btn {
+        display: block;
+        padding: 8px 20px 9px 20px;
+        height : 32px;
+        background-color: $color-green;
+        border          : none;
+        cursor : pointer;
+        user-select: none;
+        border-radius: 3px;
+        transition: background-color $time ease-in-out, color $time ease-in-out;
+
+        font-family: $ff;
+        font-size  : 12px;
+        font-weight: 500;
+        line-height: normal;
+        text-indent: 0;
+        white-space: nowrap;
+        text-align : center;
+        color: $color-black;
+
+
+      }
+    }
+  }
+
 
 }
+
+// END .header
