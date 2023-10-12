@@ -1,0 +1,40 @@
+@import url(./vendor/normalize.css);
+@font-face {
+  font-display: swap;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url("./vendor/fonts/Inter-Regular.woff2?v=3.19") format("woff2"), url("./vendor/fonts/Inter-Regular.woff?v=3.19") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: url("./vendor/fonts/Inter-Medium.woff2?v=3.19") format("woff2"), url("./vendor/fonts/Inter-Medium.woff?v=3.19") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  src: url("./vendor/fonts/Inter-Black.woff2?v=3.19") format("woff2"), url("./vendor/fonts/Inter-Black.woff?v=3.19") format("woff");
+}
+
+.page {
+  font-family: 'Inter', Arial, sans-serif;
+  color: #fff;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: #fff;
+}
+/*# sourceMappingURL=style.css.map */
