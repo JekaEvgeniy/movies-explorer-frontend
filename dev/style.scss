@@ -84,7 +84,9 @@ $color-blue : #465DFF;
   background-color: #fff;
 
   font-family: $ff;
-  color      : #000;
+  color      : $color-black;
+  font-size: 14px;
+  line-height: 20px;
 
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing : antialiased;
@@ -103,7 +105,7 @@ $color-blue : #465DFF;
 .section-header {
   display: block;
   margin: 0;
-  padding: 0 0 16px 0 ;
+  padding: 0 0 23px 0 ;
   border-bottom: 1px solid $color-black;
 
   font-size  : 22px;
@@ -262,5 +264,61 @@ $color-blue : #465DFF;
 
 
 .about-project {
-  padding: 75px ($site-offset) 75px ($site-offset);
+  padding: 111px ($site-offset) 75px ($site-offset);
+
+  &__columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin: 70px 0 0 0;
+  }
+
+  &__title {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    font-size  : 20px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.8px;
+  }
+
+  &__text {
+    margin: 26px 0 0 0;
+  }
+
 }// END .about-project
+
+.progressbar {
+  display: grid;
+  // grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr 4fr;
+  gap: 6px 0;
+  margin-top: 110px;
+
+  &__line {
+    padding: 8px;
+    font-size: 14px;
+    list-style: normal;
+    text-align: center;
+
+    &_bg_green {
+      background-color:$color-green;
+    }
+    &_bg_silver {
+      background-color: #F2F2F2;
+    }
+  }
+
+  &__caption {
+    padding:8px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px;
+    color: #A0A0A0;
+
+    text-align: center;
+  }
+}
