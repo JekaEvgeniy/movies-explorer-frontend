@@ -73,10 +73,13 @@
 
 .header {
   box-sizing: border-box;
+  padding-left: 70px;
+  padding-right: 70px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 15px 70px 18px 70px;
+  padding-top: 15px;
+  padding-bottom: 18px;
   background-color: #465DFF;
 }
 
@@ -132,8 +135,11 @@
 
 .footer {
   box-sizing: border-box;
+  padding-left: 70px;
+  padding-right: 70px;
   margin-top: auto;
-  padding: 79px 70px 20px 70px;
+  padding-top: 79px;
+  padding-bottom: 20px;
   background-color: #FAFAFA;
 }
 
@@ -205,13 +211,16 @@
 /* FIRST SCREEN */
 .first-screen {
   box-sizing: border-box;
+  padding-left: 70px;
+  padding-right: 70px;
   display: grid;
   grid-template-columns: auto 310px;
   grid-template-rows: 1fr 1fr auto;
   gap: 0 64px;
   grid-template-areas: 'header pic' 'desc pic' 'footer .';
   background-color: #465DFF;
-  padding: 75px 70px 75px 70px;
+  padding-top: 75px;
+  padding-bottom: 75px;
   min-height: 574px;
   color: #fff;
 }
@@ -247,7 +256,10 @@
 }
 
 .about-project {
-  padding: 111px 70px 102px 70px;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 111px;
+  padding-bottom: 102px;
 }
 
 .about-project__columns {
@@ -304,8 +316,11 @@
 }
 
 .technologies {
+  padding-left: 70px;
+  padding-right: 70px;
   background-color: #F5F5F5;
-  padding: 101px 70px 100px 70px;
+  padding-top: 101px;
+  padding-bottom: 100px;
 }
 
 .technologies__header {
@@ -348,7 +363,10 @@
 }
 
 .about-me {
-  padding: 111px 70px 61px 70px;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 111px;
+  padding-bottom: 61px;
 }
 
 .about-me-columns {
@@ -416,7 +434,10 @@
 }
 
 .portfolio {
-  padding: 40px 70px 106px 70px;
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-top: 40px;
+  padding-bottom: 106px;
 }
 
 .portfolio__section-header {
