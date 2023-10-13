@@ -112,6 +112,11 @@
   line-height: 16px;
   color: #fff;
   font-family: "Inter", Arial, sans-serif;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.header-actions__link_type_text:hover {
+  opacity: 0.8;
 }
 
 .header-actions__link_type_btn {
@@ -132,6 +137,11 @@
   white-space: nowrap;
   text-align: center;
   color: #000;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.header-actions__link_type_btn:hover {
+  opacity: 0.8;
 }
 
 .footer {
@@ -185,6 +195,11 @@
   line-height: normal;
   color: #000;
   text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-actions__link:hover {
+  color: #465DFF;
 }
 
 .button-stroke {
@@ -197,7 +212,7 @@
   cursor: pointer;
   user-select: none;
   border-radius: 3px;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, color 0.3s ease-in-out;
   font-family: "Inter", Arial, sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -207,6 +222,12 @@
   text-align: center;
   color: #fff;
   text-decoration: none;
+}
+
+.button-stroke:hover {
+  background-color: #fff;
+  border-color: #fff;
+  color: #000;
 }
 
 .promo {
@@ -427,6 +448,11 @@
   line-height: normal;
   color: #000;
   text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.about-me__action:hover {
+  color: #465DFF;
 }
 
 .about-me__photo-img {
@@ -472,6 +498,11 @@
   padding: 20px 6px 19px 0;
   color: #000;
   text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.portfolio__link:hover {
+  color: #465DFF;
 }
 
 .portfolio__link-title {

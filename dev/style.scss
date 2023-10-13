@@ -159,6 +159,12 @@ $color-blue : #465DFF;
         line-height: 16px;
         color      : #fff;
         font-family: $ff;
+
+        transition: opacity $time ease-in-out;
+
+        &:hover {
+          opacity: 0.8;
+        }
       }
 
       &_type_btn {
@@ -180,6 +186,12 @@ $color-blue : #465DFF;
         white-space: nowrap;
         text-align : center;
         color      : $color-black;
+
+        transition: opacity $time ease-in-out;
+
+        &:hover {
+          opacity: 0.8;
+        }
       }
     }
   }
@@ -241,6 +253,12 @@ $color-blue : #465DFF;
       line-height: normal;
       color: $color-black;
       text-decoration: none;
+
+      transition: color $time ease-in-out;
+
+      &:hover {
+        color: $color-blue;
+      }
     }
   }
 }
@@ -255,7 +273,7 @@ $color-blue : #465DFF;
   cursor          : pointer;
   user-select     : none;
   border-radius   : 3px;
-  transition      : background-color $time ease-in-out,
+  transition      : background-color $time ease-in-out, border-color $time ease-in-out,
     color $time ease-in-out;
 
   font-family    : $ff;
@@ -267,6 +285,13 @@ $color-blue : #465DFF;
   text-align     : center;
   color          : $color-white;
   text-decoration: none;
+
+
+  &:hover {
+    background-color: $color-white;
+    border-color: $color-white;
+    color: $color-black;
+  }
 }
 
 
@@ -510,6 +535,12 @@ $color-blue : #465DFF;
     line-height    : normal;
     color          : $color-black;
     text-decoration: none;
+
+    transition: color $time ease-in-out;
+
+    &:hover {
+      color: $color-blue;
+    }
   }
 
   &__photo {
@@ -564,7 +595,11 @@ $color-blue : #465DFF;
     padding: 20px 6px 19px 0;
     color: $color-black;
     text-decoration: none;
+    transition: color $time ease-in-out;
 
+    &:hover {
+      color: $color-blue;
+    }
     &-title {
       flex: 1;
       font-size     : 30px;
