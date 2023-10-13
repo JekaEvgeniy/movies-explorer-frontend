@@ -264,7 +264,7 @@ $color-blue : #465DFF;
 
 
 .about-project {
-  padding: 111px ($site-offset) 75px ($site-offset);
+  padding: 111px ($site-offset) 102px ($site-offset);
 
   &__columns {
     display: grid;
@@ -322,3 +322,50 @@ $color-blue : #465DFF;
     text-align: center;
   }
 }
+
+
+.technologies {
+  background-color: #F5F5F5;
+  padding: 101px ($site-offset) 100px ($site-offset);
+
+  &__header {
+    display: block;
+    margin: 90px 0 0 0;
+    text-align : center;
+    font-size  : 50px;
+    font-weight: 400;
+    line-height: 58px;
+    letter-spacing: -2px;
+  }
+
+  &__desc {
+    margin:26px auto 0 auto;
+    max-width: 460px;
+    text-align : center;
+    letter-spacing: -0.56px;
+  }
+
+  &-stack {
+    all: unset;
+    margin-top: 24px;
+    display  : flex;
+    flex-wrap: wrap;
+    gap      : 10px;
+    justify-content: center;
+    margin: 100px 0 0 0;
+
+    &__item {
+      all: unset;
+      border-radius: 10px;
+      background-color: #E8E8E8;
+      min-width: 60px;
+      padding: 21px 15px 22px 15px;
+
+      font-size  : 14px;
+      line-height: normal;
+      letter-spacing: -0.56px;
+      text-align: center;
+    }
+  }
+
+}// END .technologies
