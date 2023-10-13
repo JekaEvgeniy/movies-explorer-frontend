@@ -208,8 +208,7 @@
   text-decoration: none;
 }
 
-/* FIRST SCREEN */
-.first-screen {
+.promo {
   box-sizing: border-box;
   padding-left: 70px;
   padding-right: 70px;
@@ -225,7 +224,7 @@
   color: #fff;
 }
 
-.first-screen__header {
+.promo__header {
   grid-area: header;
   margin: 0;
   max-width: 640px;
@@ -234,7 +233,7 @@
   line-height: 58px;
 }
 
-.first-screen__desc {
+.promo__desc {
   grid-area: desc;
   margin: 15px 0 0 0;
   max-width: 310px;
@@ -245,13 +244,13 @@
   opacity: 0.5;
 }
 
-.first-screen__pic {
+.promo__pic {
   grid-area: pic;
   width: 310px;
   height: 304px;
 }
 
-.first-screen__actions {
+.promo__actions {
   margin-top: auto;
 }
 
