@@ -85,7 +85,7 @@ $color-blue : #465DFF;
 
   font-family: $ff;
   color      : $color-black;
-  font-size: 14px;
+  font-size  : 14px;
   line-height: 20px;
 
   -moz-osx-font-smoothing: grayscale;
@@ -103,16 +103,16 @@ $color-blue : #465DFF;
 }
 
 .section-header {
-  display: block;
-  margin: 0;
-  padding: 0 0 23px 0 ;
+  display      : block;
+  margin       : 0;
+  padding      : 0 0 23px 0;
   border-bottom: 1px solid $color-black;
 
-  font-size  : 22px;
-  font-weight: 400;
-  line-height: normal;
+  font-size     : 22px;
+  font-weight   : 400;
+  line-height   : normal;
   letter-spacing: -0.88px;
-  color: $color-black;
+  color         : $color-black;
 }
 
 .footer {
@@ -148,7 +148,7 @@ $color-blue : #465DFF;
     &__link {
       all: unset;
       @include border-box;
-      user-select: none;
+      user-select    : none;
       text-decoration: none;
 
       &_type_text {
@@ -216,44 +216,44 @@ $color-blue : #465DFF;
 /* FIRST SCREEN */
 .first-screen {
   @include border-box;
-  display: grid;
+  display              : grid;
   grid-template-columns: auto 310px;
-  grid-template-rows: 1fr 1fr auto;
-  gap:0 64px;
-  grid-template-areas:
+  grid-template-rows   : 1fr 1fr auto;
+  gap                  : 0 64px;
+  grid-template-areas  :
     'header pic'
     'desc pic'
     'footer .';
 
   background-color: $color-blue;
-  padding: 75px ($site-offset) 75px ($site-offset);
-  min-height: 574px;
+  padding         : 75px ($site-offset) 75px ($site-offset);
+  min-height      : 574px;
   color           : $color-white;
 
   &__header {
-    grid-area: header;
+    grid-area  : header;
     margin     : 0;
-    max-width: 640px;
+    max-width  : 640px;
     font-size  : 50px;
     font-weight: 400;
     line-height: 58px;
   }
 
   &__desc {
-    grid-area: desc;
-    margin: 15px 0 0 0;
-    max-width: 310px;
+    grid-area  : desc;
+    margin     : 15px 0 0 0;
+    max-width  : 310px;
     font-size  : 13px;
     font-style : normal;
     font-weight: 400;
     line-height: normal;
-    opacity: 0.5;
+    opacity    : 0.5;
   }
 
   &__pic {
     grid-area: pic;
-    width: 310px;
-    height: 304px;
+    width    : 310px;
+    height   : 304px;
   }
 
   &__actions {
@@ -267,20 +267,20 @@ $color-blue : #465DFF;
   padding: 111px ($site-offset) 102px ($site-offset);
 
   &__columns {
-    display: grid;
+    display              : grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    margin: 70px 0 0 0;
+    gap                  : 40px;
+    margin               : 70px 0 0 0;
   }
 
   &__title {
     display: block;
-    margin: 0;
+    margin : 0;
     padding: 0;
 
-    font-size  : 20px;
-    font-weight: 400;
-    line-height: normal;
+    font-size     : 20px;
+    font-weight   : 400;
+    line-height   : normal;
     letter-spacing: -0.8px;
   }
 
@@ -288,36 +288,39 @@ $color-blue : #465DFF;
     margin: 26px 0 0 0;
   }
 
-}// END .about-project
+}
+
+// END .about-project
 
 .progressbar {
-  display: grid;
+  display                 : grid;
   // grid-template-columns: 1fr 5fr;
-  grid-template-columns: 1fr 4fr;
-  gap: 6px 0;
-  margin-top: 110px;
+  grid-template-columns   : 1fr 4fr;
+  gap                     : 6px 0;
+  margin-top              : 110px;
 
   &__line {
-    padding: 8px;
-    font-size: 14px;
+    padding   : 8px;
+    font-size : 14px;
     list-style: normal;
     text-align: center;
 
     &_bg_green {
-      background-color:$color-green;
+      background-color: $color-green;
     }
+
     &_bg_silver {
       background-color: #F2F2F2;
     }
   }
 
   &__caption {
-    padding:8px;
-    font-size: 14px;
-    font-style: normal;
+    padding    : 8px;
+    font-size  : 14px;
+    font-style : normal;
     font-weight: 500;
     line-height: 17px;
-    color: #A0A0A0;
+    color      : #A0A0A0;
 
     text-align: center;
   }
@@ -326,121 +329,182 @@ $color-blue : #465DFF;
 
 .technologies {
   background-color: #F5F5F5;
-  padding: 101px ($site-offset) 100px ($site-offset);
+  padding         : 101px ($site-offset) 100px ($site-offset);
 
   &__header {
-    display: block;
-    margin: 90px 0 0 0;
-    text-align : center;
-    font-size  : 50px;
-    font-weight: 400;
-    line-height: 58px;
+    display       : block;
+    margin        : 90px 0 0 0;
+    text-align    : center;
+    font-size     : 50px;
+    font-weight   : 400;
+    line-height   : 58px;
     letter-spacing: -2px;
   }
 
   &__desc {
-    margin:26px auto 0 auto;
-    max-width: 460px;
-    text-align : center;
+    margin        : 26px auto 0 auto;
+    max-width     : 460px;
+    text-align    : center;
     letter-spacing: -0.56px;
   }
 
   &-stack {
-    all: unset;
-    margin-top: 24px;
-    display  : flex;
-    flex-wrap: wrap;
-    gap      : 10px;
+    all            : unset;
+    margin-top     : 24px;
+    display        : flex;
+    flex-wrap      : wrap;
+    gap            : 10px;
     justify-content: center;
-    margin: 100px 0 0 0;
+    margin         : 100px 0 0 0;
 
     &__item {
-      all: unset;
-      border-radius: 10px;
+      all             : unset;
+      border-radius   : 10px;
       background-color: #E8E8E8;
-      min-width: 60px;
-      padding: 21px 15px 22px 15px;
+      min-width       : 60px;
+      padding         : 21px 15px 22px 15px;
 
-      font-size  : 14px;
-      line-height: normal;
+      font-size     : 14px;
+      line-height   : normal;
       letter-spacing: -0.56px;
-      text-align: center;
+      text-align    : center;
     }
   }
 
-}// END .technologies
+}
+
+// END .technologies
 
 
 .about-me {
-  padding: 111px ($site-offset) 100px ($site-offset);
+  padding: 111px ($site-offset) 61px ($site-offset);
 
   &-columns {
-    display: flex;
+    display        : flex;
     justify-content: space-between;
-    margin-top: 66px;
+    margin-top     : 66px;
 
     &__content {
-      display: flex;
+      display       : flex;
       flex-direction: column;
-      flex: 1;
-      width: 100%;
-      max-width: 600px;
+      flex          : 1;
+      width         : 100%;
+      max-width     : 600px;
     }
 
     &__aside {
-      flex: 0 0 auto;
+      flex : 0 0 auto;
       width: 270px;
     }
   }
 
   &__header {
     display: block;
-    margin: 0;
+    margin : 0;
 
-    font-size  : 50px;
-    font-weight: 400;
-    line-height: 58px;
+    font-size     : 50px;
+    font-weight   : 400;
+    line-height   : 58px;
     letter-spacing: -2px;
   }
 
   &__subtitle {
-    display: block;
-    margin-top: 19px;
+    display      : block;
+    margin-top   : 19px;
     margin-bottom: 0;
 
-    font-size: 18px;
+    font-size  : 18px;
     font-weight: 500;
     line-height: 20px;
   }
 
   &__text {
-    margin-top: 25px;
+    margin-top   : 25px;
     margin-bottom: 0;
 
     line-height: 22px;
   }
 
   &__actions {
-    margin-top: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+    margin-top    : auto;
+    display       : flex;
+    flex-wrap     : wrap;
+    gap           : 12px;
     padding-bottom: 1px;
   }
 
   &__action {
     margin: 0;
 
-    font-size : 14px;
-    font-weight: 500;
-    line-height: normal;
-    color: $color-black;
+    font-size      : 14px;
+    font-weight    : 500;
+    line-height    : normal;
+    color          : $color-black;
     text-decoration: none;
   }
 
   &__photo {
-    width: 270px;
-    height: 327px;
+    width        : 270px;
+    height       : 327px;
     border-radius: 10px;
   }
-}// END .about-me
+}
+
+// END .about-me
+
+
+.portfolio {
+  padding: 40px ($site-offset) 100px ($site-offset);
+
+  &__section-header {
+    display: block;
+    margin : 0;
+
+    font-size  : 18px;
+    font-weight: 400;
+    line-height: 20px;
+    color      : #A0A0A0;
+  }
+
+  &-items {
+    all: unset;
+    display       : flex;
+    flex-direction: column;
+    margin-top: 29px;
+
+    &__item {
+      all: unset;
+      border-top: 1px solid #E8E8E8;
+
+      &:first-child {
+        border-top: none;
+      }
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 0 20px;
+    padding: 20px 6px 19px 0;
+    color: $color-black;
+    text-decoration: none;
+
+    &-title {
+      flex: 1;
+      font-size     : 30px;
+      font-weight   : 400;
+      line-height   : 50px;
+      letter-spacing: -1.2px;
+    }
+    &-ico {
+      margin-top: 4px;
+      flex: 0 0 auto;
+      width: 18px;
+      height: 17px;
+    }
+  }
+
+
+
+}// END .portfolio
