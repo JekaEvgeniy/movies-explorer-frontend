@@ -115,14 +115,6 @@ $color-blue : #465DFF;
   color         : $color-black;
 }
 
-.footer {
-  @include border-box;
-  margin-top: auto;
-  padding   : 0 ($site-offset) 0 ($site-offset);
-
-  border-bottom: 1000px solid silver;
-}
-
 .header {
   @include border-box;
   display         : flex;
@@ -185,8 +177,60 @@ $color-blue : #465DFF;
 
 
 }
-
 // END .header
+
+.footer {
+  @include border-box;
+  margin-top: auto;
+  padding   : 79px ($site-offset) 20px ($site-offset);
+  background-color: #FAFAFA;
+
+  &__header {
+    all: unset;
+    display: block;
+    font-size  : 13px;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    color: #A0A0A0;
+  }
+
+  &__inside {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    border-top: 1px solid #E8E8E8;
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+
+  &__copyright {
+    margin: 0;
+    font-size: 13px;
+    line-height: normal;
+  }
+
+  &-actions {
+    &-items {
+      all: unset;
+      display: flex;
+      gap: 21px;
+
+      &__item {
+        all: unset;
+      }
+    }
+
+    &__link {
+      display: block;
+      font-size  : 13px;
+      line-height: normal;
+      color: $color-black;
+      text-decoration: none;
+    }
+  }
+}
 
 .button-stroke {
   @include border-box;
@@ -454,7 +498,7 @@ $color-blue : #465DFF;
 
 
 .portfolio {
-  padding: 40px ($site-offset) 100px ($site-offset);
+  padding: 40px ($site-offset) 106px ($site-offset);
 
   &__section-header {
     display: block;
