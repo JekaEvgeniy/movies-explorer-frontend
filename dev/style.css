@@ -411,9 +411,7 @@
   text-decoration: none;
 }
 
-.about-me__photo {
-  width: 270px;
-  height: 327px;
+.about-me__photo-img {
   border-radius: 10px;
 }
 

@@ -488,9 +488,12 @@ $color-blue : #465DFF;
   }
 
   &__photo {
-    width        : 270px;
-    height       : 327px;
-    border-radius: 10px;
+    // width        : 270px;
+    // height       : 327px;
+
+    &-img {
+      border-radius: 10px;
+    }
   }
 }
 
