@@ -303,4 +303,74 @@
   letter-spacing: -0.56px;
   text-align: center;
 }
+
+.about-me {
+  padding: 111px 70px 100px 70px;
+}
+
+.about-me-columns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 66px;
+}
+
+.about-me-columns__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  max-width: 600px;
+}
+
+.about-me-columns__aside {
+  flex: 0 0 auto;
+  width: 270px;
+}
+
+.about-me__header {
+  display: block;
+  margin: 0;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+}
+
+.about-me__subtitle {
+  display: block;
+  margin-top: 19px;
+  margin-bottom: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.about-me__text {
+  margin-top: 25px;
+  margin-bottom: 0;
+  line-height: 22px;
+}
+
+.about-me__actions {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 1px;
+}
+
+.about-me__action {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  color: #000;
+  text-decoration: none;
+}
+
+.about-me__photo {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+}
 /*# sourceMappingURL=style.css.map */
