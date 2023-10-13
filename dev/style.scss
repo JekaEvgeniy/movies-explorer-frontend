@@ -1,19 +1,16 @@
 @import url(./vendor/normalize.css);
 
-$fontUrl       : './vendor/fonts';
-$containerWidth: 1140px;
-$siteOffset    : 70px;
-$time: 0.3s;
-$ff: 'Inter', Arial, sans-serif;
+$fontUrl        : './vendor/fonts';
+$container-width: 1140px;
+$site-offset    : 70px;
+$time           : 0.3s;
+$ff             : 'Inter',
+Arial,
+sans-serif;
 $color-black: #000;
 $color-white: #fff;
 $color-green: #2BE080;
-$color-blue: #465DFF;
-
-@mixin border-box {
-  box-sizing: border-box;
-}
-
+$color-blue : #465DFF;
 
 @font-face {
   font-display: swap;
@@ -42,6 +39,28 @@ $color-blue: #465DFF;
   url("#{$fontUrl}/Inter-Black.woff?v=3.19") format("woff");
 }
 
+@mixin border-box {
+  box-sizing: border-box;
+}
+
+@mixin mq_mobile {
+  @media all and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin mq_tablet {
+  @media all and (min-width: 768px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin mq_phone {
+  @media all and (max-width: 767px) {
+    @content;
+  }
+}
+
 
 .image-contain {
   display   : block;
@@ -49,6 +68,7 @@ $color-blue: #465DFF;
   width     : 100%;
   height    : 100%;
 }
+
 .image-cover {
   display   : block;
   object-fit: cover;
@@ -80,25 +100,40 @@ $color-blue: #465DFF;
   flex: 1;
 }
 
+.section-header {
+  display: block;
+  margin: 0;
+  padding: 0 0 16px 0 ;
+  border-bottom: 1px solid $color-black;
+
+  font-size  : 22px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  color: $color-black;
+}
+
 .footer {
   @include border-box;
   margin-top: auto;
-  padding   : 0 ($siteOffset) 0 ($siteOffset);
+  padding   : 0 ($site-offset) 0 ($site-offset);
+
+  border-bottom: 1000px solid silver;
 }
 
 .header {
   @include border-box;
   display         : flex;
-  align-items: flex-start;
+  align-items     : flex-start;
   justify-content : space-between;
-  padding: 15px ($siteOffset) 18px ($siteOffset);
-  background-color:$color-blue;
+  padding         : 15px ($site-offset) 18px ($site-offset);
+  background-color: $color-blue;
 
 
   &__logo {
-    flex            : 0 0 auto;
-    width           : 38px;
-    height          : 38px;
+    flex      : 0 0 auto;
+    width     : 38px;
+    height    : 38px;
     margin-top: 3px;
   }
 
@@ -106,12 +141,13 @@ $color-blue: #465DFF;
     display    : flex;
     align-items: center;
     gap        : 30px;
-    margin-top: 6px;
+    margin-top : 6px;
 
     &__link {
-      all        : unset;
+      all: unset;
       @include border-box;
       user-select: none;
+      text-decoration: none;
 
       &_type_text {
         font-size  : 12px;
@@ -123,15 +159,15 @@ $color-blue: #465DFF;
       }
 
       &_type_btn {
-        display: block;
-        padding: 8px 20px 9px 20px;
-        height : 32px;
+        display         : block;
+        padding         : 8px 20px 9px 20px;
+        height          : 32px;
         background-color: $color-green;
         border          : none;
-        cursor : pointer;
-        user-select: none;
-        border-radius: 3px;
-        transition: background-color $time ease-in-out, color $time ease-in-out;
+        cursor          : pointer;
+        user-select     : none;
+        border-radius   : 3px;
+        transition      : background-color $time ease-in-out, color $time ease-in-out;
 
         font-family: $ff;
         font-size  : 12px;
@@ -140,9 +176,7 @@ $color-blue: #465DFF;
         text-indent: 0;
         white-space: nowrap;
         text-align : center;
-        color: $color-black;
-
-
+        color      : $color-black;
       }
     }
   }
@@ -151,3 +185,82 @@ $color-blue: #465DFF;
 }
 
 // END .header
+
+.button-stroke {
+  @include border-box;
+  display         : inline-flex;
+  padding         : 9px 19px 10px 19px;
+  height          : 36px;
+  background-color: transparent;
+  border          : 1px solid rgba($color-white, 0.6);
+  cursor          : pointer;
+  user-select     : none;
+  border-radius   : 3px;
+  transition      : background-color $time ease-in-out,
+    color $time ease-in-out;
+
+  font-family    : $ff;
+  font-size      : 12px;
+  font-weight    : 500;
+  line-height    : normal;
+  text-indent    : 0;
+  white-space    : nowrap;
+  text-align     : center;
+  color          : $color-white;
+  text-decoration: none;
+}
+
+
+/* FIRST SCREEN */
+.first-screen {
+  @include border-box;
+  display: grid;
+  grid-template-columns: auto 310px;
+  grid-template-rows: 1fr 1fr auto;
+  gap:0 64px;
+  grid-template-areas:
+    'header pic'
+    'desc pic'
+    'footer .';
+
+  background-color: $color-blue;
+  padding: 75px ($site-offset) 75px ($site-offset);
+  min-height: 574px;
+  color           : $color-white;
+
+  &__header {
+    grid-area: header;
+    margin     : 0;
+    max-width: 640px;
+    font-size  : 50px;
+    font-weight: 400;
+    line-height: 58px;
+  }
+
+  &__desc {
+    grid-area: desc;
+    margin: 15px 0 0 0;
+    max-width: 310px;
+    font-size  : 13px;
+    font-style : normal;
+    font-weight: 400;
+    line-height: normal;
+    opacity: 0.5;
+  }
+
+  &__pic {
+    grid-area: pic;
+    width: 310px;
+    height: 304px;
+  }
+
+  &__actions {
+    margin-top: auto;
+  }
+}
+
+
+
+.about-project {
+  padding: 75px ($site-offset) 75px ($site-offset);
+}// END .about-project

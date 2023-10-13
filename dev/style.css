@@ -25,30 +25,22 @@
 
 .image-contain {
   display: block;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   width: 100%;
   height: 100%;
 }
 
 .image-cover {
   display: block;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
 .page {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  box-sizing: border-box;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   min-height: 100dvh;
   background-color: #fff;
   font-family: "Inter", Arial, sans-serif;
@@ -62,62 +54,56 @@
 }
 
 .content {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
+}
+
+.section-header {
+  display: block;
+  margin: 0;
+  padding: 0 0 16px 0;
+  border-bottom: 1px solid #000;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  color: #000;
 }
 
 .footer {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   margin-top: auto;
   padding: 0 70px 0 70px;
+  border-bottom: 1000px solid silver;
 }
 
 .header {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  box-sizing: border-box;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  align-items: flex-start;
+  justify-content: space-between;
   padding: 15px 70px 18px 70px;
   background-color: #465DFF;
 }
 
 .header__logo {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
+  flex: 0 0 auto;
   width: 38px;
   height: 38px;
   margin-top: 3px;
 }
 
 .header-actions {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   gap: 30px;
   margin-top: 6px;
 }
 
 .header-actions__link {
   all: unset;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  box-sizing: border-box;
+  user-select: none;
+  text-decoration: none;
 }
 
 .header-actions__link_type_text {
@@ -136,12 +122,8 @@
   background-color: #2BE080;
   border: none;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   border-radius: 3px;
-  -webkit-transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   font-family: "Inter", Arial, sans-serif;
   font-size: 12px;
@@ -151,5 +133,75 @@
   white-space: nowrap;
   text-align: center;
   color: #000;
+}
+
+.button-stroke {
+  box-sizing: border-box;
+  display: inline-flex;
+  padding: 9px 19px 10px 19px;
+  height: 36px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  user-select: none;
+  border-radius: 3px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  text-indent: 0;
+  white-space: nowrap;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* FIRST SCREEN */
+.first-screen {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto 310px;
+  grid-template-rows: 1fr 1fr auto;
+  gap: 0 64px;
+  grid-template-areas: 'header pic' 'desc pic' 'footer .';
+  background-color: #465DFF;
+  padding: 75px 70px 75px 70px;
+  min-height: 574px;
+  color: #fff;
+}
+
+.first-screen__header {
+  grid-area: header;
+  margin: 0;
+  max-width: 640px;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 58px;
+}
+
+.first-screen__desc {
+  grid-area: desc;
+  margin: 15px 0 0 0;
+  max-width: 310px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0.5;
+}
+
+.first-screen__pic {
+  grid-area: pic;
+  width: 310px;
+  height: 304px;
+}
+
+.first-screen__actions {
+  margin-top: auto;
+}
+
+.about-project {
+  padding: 75px 70px 75px 70px;
 }
 /*# sourceMappingURL=style.css.map */
