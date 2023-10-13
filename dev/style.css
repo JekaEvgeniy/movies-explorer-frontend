@@ -102,6 +102,7 @@
   box-sizing: border-box;
   user-select: none;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .header-actions__link_type_text {

@@ -150,6 +150,7 @@ $color-blue : #465DFF;
       @include border-box;
       user-select    : none;
       text-decoration: none;
+      cursor: pointer;
 
       &_type_text {
         font-size  : 12px;
