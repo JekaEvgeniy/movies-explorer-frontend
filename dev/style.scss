@@ -220,6 +220,12 @@ $color-blue : #465DFF;
   padding-bottom: 20px;
   background-color: #FAFAFA;
 
+  @include mq_tablet {
+    padding-top: 44px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }// END mq_tablet
+
   &__header {
     all: unset;
     display: block;

@@ -175,6 +175,14 @@
   }
 }
 
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .footer {
+    padding-top: 44px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
 .footer__header {
   all: unset;
   display: block;
