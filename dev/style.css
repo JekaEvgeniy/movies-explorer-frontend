@@ -153,6 +153,11 @@
   user-select: none;
   text-decoration: none;
   cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.header-actions__link:hover {
+  opacity: 0.7;
 }
 
 .header-actions__link_type_text {
@@ -162,11 +167,6 @@
   line-height: 16px;
   color: #fff;
   font-family: "Inter", Arial, sans-serif;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.header-actions__link_type_text:hover {
-  opacity: 0.8;
 }
 
 @media all and (max-width: 767px) {
@@ -184,7 +184,6 @@
   cursor: pointer;
   user-select: none;
   border-radius: 3px;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   font-family: "Inter", Arial, sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -193,11 +192,6 @@
   white-space: nowrap;
   text-align: center;
   color: #000;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.header-actions__link_type_btn:hover {
-  opacity: 0.8;
 }
 
 @media all and (max-width: 767px) {
@@ -321,11 +315,11 @@
   line-height: normal;
   color: #000;
   text-decoration: none;
-  transition: color 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .footer-actions__link:hover {
-  color: #465DFF;
+  opacity: 0.7;
 }
 
 @media all and (max-width: 767px) {
@@ -973,11 +967,11 @@
   line-height: normal;
   color: #000;
   text-decoration: none;
-  transition: color 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .about-me__action:hover {
-  color: #465DFF;
+  opacity: 0.7;
 }
 
 .about-me__photo-img {
@@ -1070,11 +1064,11 @@
   padding: 20px 6px 19px 0;
   color: #000;
   text-decoration: none;
-  transition: color 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .portfolio__link:hover {
-  color: #465DFF;
+  opacity: 0.7;
 }
 
 .portfolio__link-title {

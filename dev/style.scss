@@ -188,6 +188,12 @@ $color-blue : #465DFF;
       text-decoration: none;
       cursor: pointer;
 
+      transition: opacity $time ease-in-out;
+
+      &:hover {
+        opacity: 0.7;
+      }
+
       &_type_text {
         font-size  : 12px;
         font-style : normal;
@@ -195,12 +201,6 @@ $color-blue : #465DFF;
         line-height: 16px;
         color      : #fff;
         font-family: $ff;
-
-        transition: opacity $time ease-in-out;
-
-        &:hover {
-          opacity: 0.8;
-        }
 
         @include mq_phone {
           font-size: 10px;
@@ -216,7 +216,6 @@ $color-blue : #465DFF;
         cursor          : pointer;
         user-select     : none;
         border-radius   : 3px;
-        transition      : background-color $time ease-in-out, color $time ease-in-out;
 
         font-family: $ff;
         font-size  : 12px;
@@ -226,12 +225,6 @@ $color-blue : #465DFF;
         white-space: nowrap;
         text-align : center;
         color      : $color-black;
-
-        transition: opacity $time ease-in-out;
-
-        &:hover {
-          opacity: 0.8;
-        }
 
         @include mq_phone {
           height: 26px;
@@ -338,10 +331,11 @@ $color-blue : #465DFF;
       color: $color-black;
       text-decoration: none;
 
-      transition: color $time ease-in-out;
+      transition: opacity $time ease-in-out;
 
       &:hover {
-        color: $color-blue;
+        // color: $color-blue;
+        opacity: 0.7;
       }
 
       @include mq_phone {
@@ -877,10 +871,11 @@ $color-blue : #465DFF;
     color          : $color-black;
     text-decoration: none;
 
-    transition: color $time ease-in-out;
+    transition: opacity $time ease-in-out;
 
     &:hover {
-      color: $color-blue;
+      // color: $color-blue;
+      opacity: 0.7;
     }
   }
 
@@ -959,10 +954,11 @@ $color-blue : #465DFF;
     padding: 20px 6px 19px 0;
     color: $color-black;
     text-decoration: none;
-    transition: color $time ease-in-out;
+    transition: opacity $time ease-in-out;
 
     &:hover {
-      color: $color-blue;
+      // color: $color-blue;
+      opacity: 0.7;
     }
     &-title {
       flex: 1;
