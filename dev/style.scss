@@ -69,6 +69,11 @@ $color-blue : #465DFF;
     padding-left: 50px;
     padding-right:50px;
   }
+
+  @include mq_phone {
+    padding-left: 18px;
+    padding-right: 18px;
+  }// END mq_phone
 }
 
 
@@ -106,6 +111,11 @@ $color-blue : #465DFF;
   -moz-text-size-adjust   : 100%;
 
   text-rendering: optimizeLegibility;
+
+  @include mq_phone {
+    font-size: 11px;
+    line-height: 16px;
+  }// END mq_phone
 }
 
 .content {
@@ -123,6 +133,12 @@ $color-blue : #465DFF;
   line-height   : normal;
   letter-spacing: -0.88px;
   color         : $color-black;
+
+  @include mq_phone {
+    padding-bottom: 28px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }// END mq_phone
 }
 
 .header {
@@ -141,6 +157,11 @@ $color-blue : #465DFF;
     padding-right: 30px;// mockup
   }// END mq_tablet
 
+  @include mq_phone {
+    padding-left: 14px;
+    padding-right: 14px;
+  }// END mq_phone
+
 
   &__logo {
     flex      : 0 0 auto;
@@ -154,6 +175,11 @@ $color-blue : #465DFF;
     align-items: center;
     gap        : 30px;
     margin-top : 6px;
+
+    @include mq_phone {
+      gap: 15px;
+      margin-top: 9px;
+    }// END mq_phone
 
     &__link {
       all: unset;
@@ -175,6 +201,10 @@ $color-blue : #465DFF;
         &:hover {
           opacity: 0.8;
         }
+
+        @include mq_phone {
+          font-size: 10px;
+        }// END mq_phone
       }
 
       &_type_btn {
@@ -202,6 +232,12 @@ $color-blue : #465DFF;
         &:hover {
           opacity: 0.8;
         }
+
+        @include mq_phone {
+          height: 26px;
+          padding: 7px 12px 7px 12px;
+          font-size: 10px;
+        }// END mq_phone
       }
     }
   }
@@ -226,6 +262,14 @@ $color-blue : #465DFF;
     padding-right: 30px;
   }// END mq_tablet
 
+  @include mq_phone {
+    background-color: transparent;
+    padding-left : 10px;
+    padding-right: 10px;
+  }
+
+  // END mq_phone
+
   &__header {
     all: unset;
     display: block;
@@ -234,6 +278,10 @@ $color-blue : #465DFF;
     line-height: normal;
     text-align: center;
     color: #A0A0A0;
+
+    @include mq_phone {
+      font-size: 12px;
+    }// END mq_phone
   }
 
   &__inside {
@@ -244,12 +292,25 @@ $color-blue : #465DFF;
     border-top: 1px solid #E8E8E8;
     padding-top: 20px;
     margin-top: 20px;
+
+    @include mq_phone {
+      margin-top: 21px;
+      padding-top: 30px;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 30px;
+    }// END mq_phone
   }
 
   &__copyright {
     margin: 0;
     font-size: 13px;
     line-height: normal;
+
+    @include mq_phone {
+      font-size: 12px;
+      color: #A0A0A0 ;
+    }// END mq_phone
   }
 
   &-actions {
@@ -257,6 +318,13 @@ $color-blue : #465DFF;
       all: unset;
       display: flex;
       gap: 21px;
+
+      @include mq_phone {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        word-spacing: -1px;
+      }// END mq_phone
 
       &__item {
         all: unset;
@@ -275,6 +343,10 @@ $color-blue : #465DFF;
       &:hover {
         color: $color-blue;
       }
+
+      @include mq_phone {
+        font-size: 12px;
+      }// END mq_phone
     }
   }
 }
@@ -347,6 +419,11 @@ $color-blue : #465DFF;
     padding-bottom: 76px;
   }// END mq_tablet
 
+  @include mq_phone {
+    padding-top: 70px;
+    padding-bottom: 30px;
+  }// END mq_phone
+
   &__header {
     grid-area  : header;
     margin     : 0;
@@ -362,6 +439,14 @@ $color-blue : #465DFF;
       font-size: 40px;
       line-height: 50px;
     }
+
+    @include mq_phone {
+      margin-top: 44px;
+      font-size  : 30px;
+      line-height: 38px;
+      letter-spacing: -1.2px;
+      text-align: center;
+    }// END mq_phone
   }
 
   &__desc {
@@ -381,12 +466,20 @@ $color-blue : #465DFF;
     @include mq_tablet {
       margin-top: 21px;
     }// END mq_tablet
+    @include mq_phone {
+      margin-top: 24px;
+    }// END mq_phone
   }
 
   &__pic {
     grid-area: pic;
     width    : 310px;
     height   : 304px;
+
+    @include mq_phone {
+      width: 210px;
+      height: 206px;
+    }// END mq_phone
   }
 
   &__actions {
@@ -395,6 +488,10 @@ $color-blue : #465DFF;
     @include mq_tablet {
       padding-top: 92px;
     }// END mq_tablet
+
+    @include mq_phone {
+      padding-top: 80px;
+    }// END mq_phone
   }
 }
 
@@ -411,6 +508,11 @@ $color-blue : #465DFF;
     padding-bottom: 83px;
   }// END mq_tablet
 
+  @include mq_phone {
+    padding-top: 71px;
+    padding-bottom: 71px;
+  }// END mq_phone
+
   &__columns {
     display              : grid;
     grid-template-columns: repeat(2, 1fr);
@@ -420,6 +522,12 @@ $color-blue : #465DFF;
     @include mq_tablet {
       gap: 30px;
     }// END mq_tablet
+
+    @include mq_phone {
+      grid-template-columns: 1fr;
+      gap: 42px 0;
+      margin-top: 46px;
+    }// END mq_phone
   }
 
   &__title {
@@ -431,6 +539,14 @@ $color-blue : #465DFF;
     font-weight   : 400;
     line-height   : normal;
     letter-spacing: -0.8px;
+
+    @include mq_phone {
+      margin-top: 15px;
+      font-size: 18px;
+      letter-spacing: -0.72px;
+      // line-height: normal;
+      line-height: 22px;
+    }// END mq_phone
   }
 
   &__text {
@@ -441,6 +557,10 @@ $color-blue : #465DFF;
       font-size: 12px;
       line-height: 18px;
     }// END mq_tablet
+
+    @include mq_phone {
+      margin-top: 15px;
+    }// END mq_phone
   }
 
 }
@@ -459,11 +579,23 @@ $color-blue : #465DFF;
     grid-template-columns : 140px auto;
   }// END mq_tablet
 
+  @include mq_phone {
+    margin-top: 60px;
+    grid-template-columns : 100px auto;
+    gap: 1px 0;
+  }// END mq_phone
+
   &__line {
     padding   : 8px;
     font-size : 14px;
     list-style: normal;
     text-align: center;
+
+    @include mq_phone {
+      padding-top: 10px;
+      padding-bottom: 9px;
+      font-size: 11px;
+    }// END mq_phone
 
     &_bg_green {
       background-color: $color-green;
@@ -483,6 +615,10 @@ $color-blue : #465DFF;
     color      : #A0A0A0;
 
     text-align: center;
+
+    @include mq_phone {
+      font-size: 11px;
+    }// END mq_phone
   }
 }
 
@@ -499,6 +635,12 @@ $color-blue : #465DFF;
     padding-bottom: 90px;
   }// END mq_tablet
 
+  @include mq_phone {
+    background-color:transparent;
+    padding-top: 59px;
+    padding-bottom: 30px;
+  }// END mq_phone
+
   &__header {
     display       : block;
     margin        : 90px 0 0 0;
@@ -511,6 +653,12 @@ $color-blue : #465DFF;
     @include mq_tablet {
       margin-top: 80px;
     }// END mq_tablet
+
+    @include mq_phone {
+      margin-top: 49px;
+      font-size: 30px;
+      letter-spacing: -1.2px;
+    }// END mq_phone
   }
 
   &__desc {
@@ -525,6 +673,13 @@ $color-blue : #465DFF;
       line-height: 18px;
       letter-spacing: -0.48px; // mockup
     }// END mq_tablet
+
+    @include mq_phone {
+      margin-top: 13px;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: -0.44px;
+    }// END mq_phone
   }
 
   &-stack {
@@ -539,6 +694,14 @@ $color-blue : #465DFF;
     @include mq_tablet {
       margin-top: 83px;
     }// END mq_tablet
+
+    @include mq_phone {
+      margin-top: 50px;
+
+      display: grid;
+      grid-template-columns: repeat(2, 84px);
+      justify-content: center;
+    }// END mq_phone
 
     &__item {
       all             : unset;
@@ -558,6 +721,15 @@ $color-blue : #465DFF;
         font-size: 12px;
         letter-spacing: -0.48px;
       }// END mq_tablet
+
+      @include mq_phone {
+        box-sizing: border-box;
+        min-width: 84px;
+        padding-bottom: 21px;
+        font-size: 12px;
+        letter-spacing: -0.48px;
+      }// END mq_phone
+
     }
   }
 
@@ -577,10 +749,21 @@ $color-blue : #465DFF;
     padding-bottom: 51px;
   }// END mq_tablet
 
+  @include mq_phone {
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 29px;
+  }// END mq_phone
+
   &-columns {
     display        : flex;
     justify-content: space-between;
     margin-top     : 66px;
+
+    @include mq_phone {
+      flex-direction: column-reverse;
+      margin-top: 60px;
+    }// END mq_phone
 
     &__content {
       display       : flex;
@@ -588,6 +771,10 @@ $color-blue : #465DFF;
       flex          : 1;
       width         : 100%;
       max-width     : 600px;
+
+      @include mq_phone {
+        margin-top: 29px;
+      }// END mq_phone
     }
 
     &__aside {
@@ -598,6 +785,11 @@ $color-blue : #465DFF;
         width: 255px;
         margin-left: 49px;
       }// END mq_tablet
+
+      @include mq_phone {
+        width: 292px;
+        height: 352px;
+      }// END mq_phone
     }
   }
 
@@ -617,6 +809,11 @@ $color-blue : #465DFF;
       line-height: 40px;
       letter-spacing: -1.6px;
     }// END mq_tablet
+
+    @include mq_phone {
+      font-size: 30px;
+      letter-spacing: -1.2px;
+    }// END mq_phone
   }
 
   &__subtitle {
@@ -633,6 +830,12 @@ $color-blue : #465DFF;
       font-size  : 12px;
       line-height: 18px;
     }// END mq_tablet
+
+    @include mq_phone {
+      margin-top: 9px;
+      font-size: 11px;
+      line-height: 16px;
+    }// END mq_phone
   }
 
   &__text {
@@ -646,6 +849,11 @@ $color-blue : #465DFF;
       font-size  : 12px;
       line-height: 18px;
     }
+
+    @include mq_phone {
+      margin-top: 20px;
+      line-height: 16px;
+    }// END mq_phone
   }
 
   &__actions {
@@ -654,6 +862,10 @@ $color-blue : #465DFF;
     flex-wrap     : wrap;
     gap           : 12px;
     padding-bottom: 1px;
+
+    @include mq_phone {
+      margin-top: 40px;
+    }// END mq_phone
   }
 
   &__action {
@@ -696,6 +908,12 @@ $color-blue : #465DFF;
   padding-top: 40px;
   padding-bottom: 106px;
 
+  @include mq_phone {
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 50px;
+  }// END mq_phone
+
   &__section-header {
     display: block;
     margin : 0;
@@ -704,6 +922,10 @@ $color-blue : #465DFF;
     font-weight: 400;
     line-height: 20px;
     color      : #A0A0A0;
+
+    @include mq_phone {
+      font-size: 14px;
+    }// END mq_phone
   }
 
   &-items {
@@ -712,9 +934,17 @@ $color-blue : #465DFF;
     flex-direction: column;
     margin-top: 29px;
 
+    @include mq_phone {
+      margin-top: 21px;
+    }// END mq_phone
+
     &__item {
       all: unset;
       border-top: 1px solid #E8E8E8;
+
+      @include mq_phone {
+        border-color: #E6E6E6;
+      }// END mq_phone
 
       &:first-child {
         border-top: none;
@@ -746,6 +976,12 @@ $color-blue : #465DFF;
         line-height: 50px;
         letter-spacing: -1.12px;
       }// END mq_tablet
+
+      @include mq_phone {
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: -0.72px;
+      }// END mq_phone
     }
     &-ico {
       margin-top: 4px;
@@ -757,6 +993,13 @@ $color-blue : #465DFF;
         width: 17px;
         height: 16px;
       }// END mq_tablet
+
+      @include mq_phone {
+        width: 11px;
+        height: 11px;
+        margin-top: 0;
+        transform: translate(2px, -2px);
+      }// END mq_phone
     }
   }
 
