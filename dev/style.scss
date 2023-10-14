@@ -64,6 +64,11 @@ $color-blue : #465DFF;
 @mixin section-offset {
   padding-left: $site-offset;
   padding-right:$site-offset;
+
+  @include mq_tablet {
+    padding-left: 50px;
+    padding-right:50px;
+  }
 }
 
 
@@ -130,6 +135,11 @@ $color-blue : #465DFF;
   padding-top: 15px;
   padding-bottom: 18px;
   background-color: $color-blue;
+
+  @include mq_tablet {
+    padding-left: 30px; // mockup
+    padding-right: 30px;// mockup
+  }// END mq_tablet
 
 
   &__logo {
@@ -315,6 +325,22 @@ $color-blue : #465DFF;
   min-height      : 574px;
   color           : $color-white;
 
+  @include mq_mobile {
+    grid-template-columns: 1fr;
+    grid-template-areas :
+    'pic'
+    'header'
+    'desc'
+    'footer';
+    justify-items: center;
+    grid-template-rows: auto;
+  }
+
+  @include mq_tablet {
+    padding-top: 140px;
+    padding-bottom: 76px;
+  }// END mq_tablet
+
   &__header {
     grid-area  : header;
     margin     : 0;
@@ -322,6 +348,14 @@ $color-blue : #465DFF;
     font-size  : 50px;
     font-weight: 400;
     line-height: 58px;
+
+    @include mq_tablet {
+      max-width: 680px;
+      margin-top: 49px;
+      text-align: center;
+      font-size: 40px;
+      line-height: 50px;
+    }
   }
 
   &__desc {
@@ -333,6 +367,14 @@ $color-blue : #465DFF;
     font-weight: 400;
     line-height: normal;
     opacity    : 0.5;
+
+    @include mq_mobile {
+      max-width: 260px;
+      text-align: center;
+    }
+    @include mq_tablet {
+      margin-top: 21px;
+    }// END mq_tablet
   }
 
   &__pic {
@@ -343,6 +385,10 @@ $color-blue : #465DFF;
 
   &__actions {
     margin-top: auto;
+
+    @include mq_tablet {
+      padding-top: 92px;
+    }// END mq_tablet
   }
 }
 
@@ -354,11 +400,20 @@ $color-blue : #465DFF;
   padding-top: 111px;
   padding-bottom: 102px;
 
+  @include mq_tablet {
+    padding-top: 91px;
+    padding-bottom: 83px;
+  }// END mq_tablet
+
   &__columns {
     display              : grid;
     grid-template-columns: repeat(2, 1fr);
     gap                  : 40px;
     margin               : 70px 0 0 0;
+
+    @include mq_tablet {
+      gap: 30px;
+    }// END mq_tablet
   }
 
   &__title {
@@ -374,6 +429,12 @@ $color-blue : #465DFF;
 
   &__text {
     margin: 26px 0 0 0;
+
+    @include mq_tablet {
+      margin-top: 22px;
+      font-size: 12px;
+      line-height: 18px;
+    }// END mq_tablet
   }
 
 }
@@ -386,6 +447,11 @@ $color-blue : #465DFF;
   grid-template-columns   : 1fr 4fr;
   gap                     : 6px 0;
   margin-top              : 110px;
+
+  @include mq_tablet {
+    margin-top: 93px;
+    grid-template-columns : 140px auto;
+  }// END mq_tablet
 
   &__line {
     padding   : 8px;
