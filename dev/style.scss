@@ -1,12 +1,12 @@
 @import url(./vendor/normalize.css);
+@import './mixins.scss';
 
 $fontUrl        : './vendor/fonts';
 $container-width: 1140px;
 $site-offset    : 70px;
 $time           : 0.3s;
-$ff             : 'Inter',
-Arial,
-sans-serif;
+$ff             : 'Inter', Arial, sans-serif;
+$ff-default: $ff;
 $color-black: #000;
 $color-white: #fff;
 $color-green: #2BE080;
@@ -39,42 +39,6 @@ $color-blue : #465DFF;
   url("#{$fontUrl}/Inter-Black.woff?v=3.19") format("woff");
 }
 
-@mixin border-box {
-  box-sizing: border-box;
-}
-
-@mixin mq_mobile {
-  @media all and (max-width: 1024px) {
-    @content;
-  }
-}
-
-@mixin mq_tablet {
-  @media all and (min-width: 768px) and (max-width: 1024px) {
-    @content;
-  }
-}
-
-@mixin mq_phone {
-  @media all and (max-width: 767px) {
-    @content;
-  }
-}
-
-@mixin section-offset {
-  padding-left: $site-offset;
-  padding-right:$site-offset;
-
-  @include mq_tablet {
-    padding-left: 50px;
-    padding-right:50px;
-  }
-
-  @include mq_phone {
-    padding-left: 18px;
-    padding-right: 18px;
-  }// END mq_phone
-}
 
 
 .image-contain {
@@ -1066,3 +1030,122 @@ $color-blue : #465DFF;
 
 
 }// END .portfolio
+
+.search {
+  @include section-offset;
+  padding-top: 55px;
+  padding-bottom: 64px;
+
+  &-form {
+    all: unset;
+
+    &__group {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #E8E8E8;
+    }
+
+    &__ico {
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      margin-left: 6px;
+      pointer-events: none;
+    }
+
+    &__input {
+      all: unset;
+      padding: 15px 74px 15px 68px; // pixel perfect
+      border: none;
+      width: 100%;
+      font-family: $ff;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: normal;
+      text-align: center;
+      color: $color-black;
+
+      @include placeholder {
+        color: #A0A0A0;
+      }
+      @include autocomplite {
+        background-color: transparent !important;
+        color           : -internal-light-dark($color-black, $color-black) !important;
+      }
+    }
+
+    &__btn {
+      all: unset;
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity $time ease-in-out;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+  }// END &-form
+
+  &-checkbox {
+    $checkbox: &;
+    display: flex;
+    justify-content: center;
+    margin-top: 29px;
+
+    &__label {
+      all: unset;
+      display: flex;
+      position: relative;
+    }
+
+    &__input {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &__ico {
+      flex: 0 0 auto;
+      position: relative;
+      width: 36px;
+      height: 20px;
+      background-color: #EBEBEB;
+
+      border-radius: 100px;
+      margin-right: 12px;
+      transition: background-color $time ease-in-out;
+
+      cursor: pointer;
+      user-select: none;
+
+      &:after {
+        display: block;
+        position: absolute;
+        top: 6px;
+        left: 6px;
+
+        width: 8px;
+        height: 8px;
+        background-color: #F5F5F5;
+        transition: background-color $time ease-in-out, transform $time ease-in-out;
+
+        border-radius: 50%;
+        content:'';
+      }
+
+      #{$checkbox}__input:checked ~ & {
+          background-color:$color-green;
+          &:after {
+            background-color:$color-white;
+            transform: translateX(16px);
+          }
+      }
+    }
+
+  }// END &-checkbox
+
+}// END .search

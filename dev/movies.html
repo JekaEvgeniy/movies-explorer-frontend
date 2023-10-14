@@ -37,6 +37,32 @@
       </header>
       <main class="content">
 
+        <section class="search">
+          <form class="search-form">
+            <div class="search-form__group">
+              <div class="search-form__ico">
+                <svg class="image-contain" xmlns="http://www.w3.org/2000/svg">
+                  <use xlink:href="./images/common/sprite.svg#search-ico"></use>
+                </svg>
+              </div>
+              <input type="text" class="search-form__input" placeholder="Фильм">
+              <button class="search-form__btn" aria-label="Поиск">
+                <svg class="image-contain" xmlns="http://www.w3.org/2000/svg">
+                  <use xlink:href="./images/common/sprite.svg#search-btn"></use>
+                </svg>
+              </button>
+            </div>
+
+            <div class="search-checkbox">
+              <label class="search-checkbox__label">
+                <input type="checkbox" class="search-checkbox__input" name="shortMovies">
+                <span class="search-checkbox__ico"></span>
+                <span class="search-checkbox__title">Короткометражки</span>
+              </label>
+            </div>
+          </form>
+        </section>
+
       </main>
       <footer class="footer">
         <h2 class="footer__header">Учебный проект Яндекс.Практикум х BeatFilm.</h2>
