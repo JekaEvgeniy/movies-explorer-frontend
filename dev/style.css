@@ -292,6 +292,7 @@
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .footer {
+    background-color: transparent;
     padding-top: 44px;
     padding-left: 30px;
     padding-right: 30px;
@@ -1219,15 +1220,18 @@
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .search {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-top: 71px;
+    padding-bottom: 77px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 
 @media all and (max-width: 767px) {
   .search {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-top: 158px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 }
 
@@ -1247,6 +1251,12 @@
   height: 34px;
   margin-left: 6px;
   pointer-events: none;
+}
+
+@media all and (max-width: 767px) {
+  .search-form__ico {
+    display: none;
+  }
 }
 
 .search-form__input {
@@ -1289,6 +1299,14 @@
   color: -internal-light-dark(#000, #000) !important;
 }
 
+@media all and (max-width: 767px) {
+  .search-form__input {
+    padding-left: 0;
+    font-size: 18px;
+    text-align: left;
+  }
+}
+
 .search-form__btn {
   all: unset;
   flex: 0 0 auto;
@@ -1303,12 +1321,24 @@
   opacity: 0.7;
 }
 
+@media all and (max-width: 767px) {
+  .search-form__btn {
+    margin-top: -1px;
+  }
+}
+
 .search-checkbox {
   display: flex;
   justify-content: center;
   margin-top: 29px;
   cursor: pointer;
   user-select: none;
+}
+
+@media all and (max-width: 767px) {
+  .search-checkbox {
+    margin-top: 44px;
+  }
 }
 
 .search-checkbox__label {
@@ -1332,6 +1362,13 @@
   border-radius: 100px;
   margin-right: 12px;
   transition: background-color 0.3s ease-in-out;
+}
+
+@media all and (max-width: 767px) {
+  .search-checkbox__ico {
+    margin-top: -2px;
+    margin-right: 13px;
+  }
 }
 
 .search-checkbox__ico:after {
@@ -1365,15 +1402,17 @@
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .movies {
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 115px;
   }
 }
 
 @media all and (max-width: 767px) {
   .movies {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 26px;
   }
 }
 
@@ -1382,6 +1421,20 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px 24px;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .movies-items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 30px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .movies-items {
+    grid-template-columns: 1fr;
+    gap: 16px 0;
+  }
 }
 
 .movies-items__item {
@@ -1464,5 +1517,21 @@
   display: block;
   padding: 0;
   margin: 0;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .movie__figure {
+    height: 190px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .movie__figure {
+    height: 168px;
+  }
+}
+
+.header {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */
