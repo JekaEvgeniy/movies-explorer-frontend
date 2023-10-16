@@ -2,6 +2,14 @@
   box-sizing: border-box;
 }
 
+
+
+@mixin mq_mobile--from {
+  @media all and (min-width: 1025px) {
+    @content;
+  }
+}
+
 @mixin mq_mobile {
   @media all and (max-width: 1024px) {
     @content;

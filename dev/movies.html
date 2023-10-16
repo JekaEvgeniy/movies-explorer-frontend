@@ -16,8 +16,23 @@
           <img class="image-contain" src="./images/header/logo.svg" loading="lazy" alt="логотип">
         </a>
 
+        <button class="header__burger" type="button" aria-label="Открыть мобильное меню">
+          <svg class="image-contain" xmlns="http://www.w3.org/2000/svg">
+            <use xlink:href="./images/common/sprite.svg#header-burger"></use>
+          </svg>
+        </button>
+
         <nav class="header-profile-nav">
+          <button class="header-profile-nav__button-close" type="button" aria-label="Закрыть мобильное меню">
+            <svg class="image-contain" xmlns="http://www.w3.org/2000/svg">
+              <use xlink:href="./images/common/sprite.svg#header-profile-nav-button-close"></use>
+            </svg>
+          </button>
           <ul class="header-profile-nav-items">
+            <li class="header-profile-nav-items__item header-profile-nav-items__item_hidden-desktop">
+              <a href="/" class="header-profile-nav__link">Главная</a>
+            </li>
+
             <li class="header-profile-nav-items__item">
               <a href="/movies" class="header-profile-nav__link header-profile-nav__link_active">Фильмы</a>
             </li>

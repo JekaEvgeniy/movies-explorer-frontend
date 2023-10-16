@@ -108,6 +108,7 @@ $color-blue : #465DFF;
 .header {
   @include border-box;
   @include section-offset;
+  position: relative;
   display         : flex;
   align-items     : flex-start;
   justify-content : space-between;
@@ -201,9 +202,24 @@ $color-blue : #465DFF;
     }// END &__link
   }// END &-actions
 
+  &__burger {
+    all: unset;
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    user-select: none;
+    cursor     : pointer;
 
+    @include mq_mobile {
+      display: block;
+    }// END mq_mobile;
+  }// END &__burger
 }
 // END .header
+
 
 .header-profile-nav {
   flex: 1;
@@ -211,59 +227,155 @@ $color-blue : #465DFF;
   margin-top : 6px;
   margin-left: 45px;
 
+  @include mq_mobile {
+    all: unset;
+    @include border-box;
+    display: flex;
+    flex-direction: column;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    min-height: 100dvh;
+    opacity: 0;
+    visibility: hidden;
+    background-color:rgba(black, 0.3);
+    pointer-events: none;
+
+    transition: opacity $time ease-in-out, visibility $time ease-in-out;
+
+    &_active {
+      pointer-events: auto;
+      opacity: 1;
+      visibility: visible;
+    }
+  }// END mq_mobile
+
   &-items {
     all: unset;
     display: flex;
     align-items: center;
     gap: 16px;
 
+    @include mq_mobile {
+      @include border-box;
+      width: 100%;
+      max-width: 520px;
+      margin-left: auto;
+      background-color: $color-white;
+      flex-direction: column;
+      flex: 1;
+      max-height: 100%;
+      overflow-y: auto;
+    }// END mq_mobile
+
+    @include mq_tablet {
+      padding-top: 159px;
+      padding-bottom: 92px;
+      gap: 28px;
+
+      @media all and (max-height: 436px) {
+        // На макете этого нет, но вдруг у пользователя старенький iphone SE ?
+        padding-top: 80px;
+        padding-bottom: 46px;
+      }
+    }// END mq_tablet
+
     &__item {
       all: unset;
 
+      &_hidden-desktop {
+        @include mq_mobile--from {
+          display: none;
+        }
+      }
+
       &_pos-right {
         margin-left: auto;
+
+        @include mq_mobile {
+          margin-left: 0;
+          margin-top: auto;
+        }// END mq_mobile
       }
     }
   }
 
   &__link {
-      @include border-box;
-      display: flex;
-      align-items: center;
-      padding-top: 1px;
-      user-select    : none;
-      text-decoration: none;
-      cursor         : pointer;
-      text-decoration: none;
-      transition: opacity $time ease-in-out;
+    @include border-box;
+    display: flex;
+    align-items: center;
+    padding-top: 1px;
+    user-select    : none;
+    text-decoration: none;
+    cursor         : pointer;
+    text-decoration: none;
+    transition: opacity $time ease-in-out;
 
-      font-size  : 13px;
-      font-style : normal;
-      font-weight: 400;
-      line-height: 18px;
-      color      : $color-black;
-      font-family: $ff;
+    font-size  : 13px;
+    font-style : normal;
+    font-weight: 400;
+    line-height: 18px;
+    color      : $color-black;
+    font-family: $ff;
 
-      &:hover {
-        opacity: 0.7;
-      }
+    &:hover {
+      opacity: 0.7;
+    }
+    &_active {
+      font-weight: 500;
+    }
+
+    @include mq_mobile {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: normal;
+
       &_active {
-        font-weight: 500;
+        text-decoration: underline;
+        text-underline-offset: 8px;
+        text-decoration-thickness: 2px;
       }
+    }// END mq_mobile
 
-      &_type-profile {
-        padding-top: 0;
-        font-size: 14px;
-        font-weight: 500;
-      }
+    &_type-profile {
+      padding-top: 0;
+      font-size: 14px;
+      font-weight: 500;
+    }
 
-      &-ico {
-        flex: 0 0 auto;
-        width: 26px;
-        height: 30px;
-        margin-left: 18px;
-      }
+    &-ico {
+      flex: 0 0 auto;
+      width: 26px;
+      height: 30px;
+      margin-left: 18px;
+
+      @include mq_tablet {
+        margin-top: 1px; // pixel perfect
+      }// END mq_tablet
+    }
   }
+
+
+  &__button-close {
+    all     : unset;
+    display : none;
+
+    position: absolute;
+    top     : 22px;
+    right   : 22px;
+    width   : 32px;
+    height  : 32px;
+    user-select: none;
+    cursor: pointer;
+
+    @include mq_mobile {
+      display: block;
+    }
+  }// END &__button-close
+
 } // .header-profile-nav
 
 
@@ -1352,5 +1464,3 @@ $color-blue : #465DFF;
         }// END mq_phone
     }
 } // END .movie
-
-

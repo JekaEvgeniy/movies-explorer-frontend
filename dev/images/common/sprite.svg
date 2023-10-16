@@ -1,4 +1,16 @@
 <svg width="0" height="0" class="hidden">
+
+  <symbol id="header-profile-nav-button-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+    <rect x="7.16064" y="9.28247" width="3" height="22" transform="rotate(-45 7.16064 9.28247)" fill="currentColor"/>
+    <rect x="22.7173" y="7.16113" width="3" height="22" transform="rotate(45 22.7173 7.16113)" fill="currentColor"/>
+  </symbol>
+
+  <symbol id="header-burger" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M36 14L8 14V11L36 11V14Z" fill="currentColor"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M36 24L8 24V21L36 21V24Z" fill="currentColor"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M36 34L8 34V31L36 31V34Z" fill="currentColor"/>
+  </symbol>
+
   <symbol id="search-ico"  viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M1 17C1 25.8366 8.16344 33 17 33C25.8366 33 33 25.8366 33 17C33 8.16344 25.8366 1 17 1C8.16344 1 1 8.16344 1 17ZM17 0C7.61116 0 0 7.61116 0 17C0 26.3888 7.61116 34 17 34C26.3888 34 34 26.3888 34 17C34 7.61116 26.3888 0 17 0Z" fill="#E8E8E8"/>
     <path fill-rule="evenodd" clip-rule="evenodd" d="M18.7927 18.2638C17.3608 19.6957 15.0392 19.6957 13.6073 18.2638C12.1754 16.8319 12.1753 14.5103 13.6073 13.0783C15.0392 11.6464 17.3608 11.6464 18.7927 13.0783C20.2246 14.5103 20.2246 16.8319 18.7927 18.2638ZM19.2331 19.6468C17.2729 21.1461 14.4573 20.9994 12.6645 19.2066C10.7118 17.254 10.7118 14.0882 12.6645 12.1355C14.6171 10.1829 17.7829 10.1829 19.7355 12.1355C21.5283 13.9283 21.6751 16.7437 20.1759 18.7039L23.7426 22.2706L22.7998 23.2134L19.2331 19.6468Z" fill="black"/>
