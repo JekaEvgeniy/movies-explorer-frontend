@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root">
+    <div class="page">
+      <header class="header">
+        <a href="index.html" class="header__logo">
+          <img class="image-contain" src="./images/header/logo.svg" loading="lazy" alt="логотип">
+        </a>
+
+        <button class="header__burger" type="button" aria-label="Открыть мобильное меню">
+          <svg class="image-contain" xmlns="http://www.w3.org/2000/svg">
+            <use xlink:href="./images/common/sprite.svg#header-burger"></use>
+          </svg>
+        </button>
+
+        <nav class="header-profile-nav">
+          <button class="header-profile-nav__button-close" type="button" aria-label="Закрыть мобильное меню">
+            <svg class="image-contain" xmlns="http://www.w3.org/2000/svg">
+              <use xlink:href="./images/common/sprite.svg#header-profile-nav-button-close"></use>
+            </svg>
+          </button>
+          <ul class="header-profile-nav-items">
+            <li class="header-profile-nav-items__item header-profile-nav-items__item_hidden-desktop">
+              <a href="/" class="header-profile-nav__link">Главная</a>
+            </li>
+
+            <li class="header-profile-nav-items__item">
+              <a href="/movies" class="header-profile-nav__link header-profile-nav__link_active">Фильмы</a>
+            </li>
+            <li class="header-profile-nav-items__item">
+              <a href="/saved-movies" class="header-profile-nav__link">Сохранённые фильмы</a>
+            </li>
+            <li class="header-profile-nav-items__item header-profile-nav-items__item_pos-right">
+              <a href="/saved-movies" class="header-profile-nav__link header-profile-nav__link_type-profile">
+                Аккаунт
+                <span class="header-profile-nav__link-ico">
+                  <svg class="image-contain" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="./images/common/sprite.svg#ico-profile"></use>
+                  </svg>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main class="content">
+
+        <section class="profile" aria-label="Личный кабинет">
+            <div class="profile__container">
+              <h1 class="profile__header">Привет, Виталий!</h1>
+
+              <form class="profile-form">
+                  <div class="profile-form__content">
+                      <div class="profile-form__content-top">
+                        <label class="profile-form__label">
+                          <span class="profile-form__title">Имя</span>
+                          <input type="text" class="profile-form__input" value="Виталий" disabled>
+                        </label>
+                        <label class="profile-form__label">
+                          <span class="profile-form__title">E-mail</span>
+                          <input type="email" inputmode="email" class="profile-form__input" value="pochta@yandex.ru" disabled>
+                        </label>
+
+                      </div><!-- END .profile-form__content-top -->
+                      <div class="profile-form__content-bottom">
+                        <div class="profile-form-actions">
+                          <p class="profile-form-actions__error-message">При обновлении профиля произошла ошибка.</p>
+                          <button type="button" class="profile-form-actions__btn profile-form-actions__btn_edit">Редактировать</button>
+                          <button type="button" class="profile-form-actions__btn profile-form-actions__btn_exit">Выйти из аккаунта</button>
+                        </div>
+                      </div><!-- END .profile-form__content-bottom -->
+                  </div><!-- END .profile-form__content -->
+              </form>
+          </div>
+        </section>
+
+      </main>
+
+    </div><!-- END page -->
+  </div><!-- END root -->
+</body>
+
+</html>
