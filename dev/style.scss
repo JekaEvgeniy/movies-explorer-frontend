@@ -216,6 +216,14 @@ $color-blue : #465DFF;
     @include mq_mobile {
       display: block;
     }// END mq_mobile;
+
+    @include mq_phone {
+      right: 15px;
+      width: 38px;
+      top  : 15px;
+      transform: scale3d(0.9, 0.999, 1); // На телефоне иконка других размеров? оО
+      // или подгружать новую иконку или через transform подгоняем
+    }// END mq_phone
   }// END &__burger
 }
 // END .header
@@ -283,6 +291,18 @@ $color-blue : #465DFF;
       }
     }// END mq_tablet
 
+    @include mq_phone {
+      padding-top   : 144px;
+      padding-bottom: 48px;
+      gap           : 24px;
+
+      @media all and (max-height: 436px) {
+        // На макете этого нет, но вдруг у пользователя старенький iphone SE ?
+        padding-top: 72px;
+        padding-bottom: 25px;
+      }
+    }// END mq_phone
+
     &__item {
       all: unset;
 
@@ -340,6 +360,12 @@ $color-blue : #465DFF;
       }
     }// END mq_mobile
 
+    @include mq_phone {
+      &_active {
+        text-underline-offset: 11px;
+      }
+    }// END mq_phone
+
     &_type-profile {
       padding-top: 0;
       font-size: 14px;
@@ -355,6 +381,10 @@ $color-blue : #465DFF;
       @include mq_tablet {
         margin-top: 1px; // pixel perfect
       }// END mq_tablet
+
+      @include mq_phone {
+        margin-top: 1px; // pixel perfect
+      }// END mq_phone
     }
   }
 
@@ -374,6 +404,10 @@ $color-blue : #465DFF;
     @include mq_mobile {
       display: block;
     }
+    @include mq_phone {
+      top: 13px;
+      right: 13px;
+    }// END mq_phone
   }// END &__button-close
 
 } // .header-profile-nav
