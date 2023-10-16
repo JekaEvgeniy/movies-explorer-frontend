@@ -1126,6 +1126,9 @@ $color-blue : #465DFF;
     justify-content: center;
     margin-top: 29px;
 
+    cursor: pointer;
+    user-select: none;
+
     &__label {
       all: unset;
       display: flex;
@@ -1148,9 +1151,6 @@ $color-blue : #465DFF;
       border-radius: 100px;
       margin-right: 12px;
       transition: background-color $time ease-in-out;
-
-      cursor: pointer;
-      user-select: none;
 
       &:after {
         display: block;

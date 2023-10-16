@@ -1307,6 +1307,8 @@
   display: flex;
   justify-content: center;
   margin-top: 29px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .search-checkbox__label {
@@ -1330,8 +1332,6 @@
   border-radius: 100px;
   margin-right: 12px;
   transition: background-color 0.3s ease-in-out;
-  cursor: pointer;
-  user-select: none;
 }
 
 .search-checkbox__ico:after {
