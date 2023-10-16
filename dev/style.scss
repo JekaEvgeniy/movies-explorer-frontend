@@ -1076,7 +1076,7 @@ $color-blue : #465DFF;
   }// END mq_tablet
 
   @include mq_phone {
-    padding-top: 158px;
+    padding-top: 84px;
     padding-left : 14px;
     padding-right: 14px;
   }
@@ -1354,6 +1354,3 @@ $color-blue : #465DFF;
 } // END .movie
 
 
-.header {
-  display: none;
-}

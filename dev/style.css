@@ -1229,7 +1229,7 @@
 
 @media all and (max-width: 767px) {
   .search {
-    padding-top: 158px;
+    padding-top: 84px;
     padding-left: 14px;
     padding-right: 14px;
   }
@@ -1529,9 +1529,5 @@
   .movie__figure {
     height: 168px;
   }
-}
-
-.header {
-  display: none;
 }
 /*# sourceMappingURL=style.css.map */
