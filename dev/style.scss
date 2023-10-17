@@ -1915,3 +1915,105 @@ $color-blue : #465DFF;
   } // END .&-form
 
 } // END ..authorization
+
+
+.page404 {
+  @include border-box;
+
+  min-height     : 100vh;
+  min-height     : 100dvh;
+  display        : flex;
+  flex-direction : column;
+  justify-content: center; // fixme: вернуть
+
+  &__container {
+    @include border-box;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: (396px + 30px * 2);
+    width    : 100%;
+
+    margin-left : auto;
+    margin-right: auto;
+    padding     : 70px 30px 45px 30px;
+    text-align: center;
+
+    @include mq_tablet {
+      // for pixel perfect
+      flex: none;
+      min-height: 703px;
+    }// END mq_tablet
+
+    @include mq_phone {
+      padding-bottom: 14px;
+    }// END mq_phone
+  }
+
+  &__content {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 90px;
+
+    @include mq_phone {
+      padding-top: 125px;
+
+      @media all and (max-height: 512px){
+        padding-top: 0px; // Для iphone SE
+      }
+    }// END mq_phone
+  }
+
+  &__header {
+    display: block;
+    margin: 0;
+    font-size : 140px;
+    font-weight: 400;
+    line-height: normal;
+
+    @include mq_phone {
+       font-size: 80px;
+    }// END mq_phone
+  }
+
+  &__caption {
+    margin: 4px 0 0 0;
+    font-size: 16px;
+
+    @include mq_phone {
+      margin-top: 10px;
+      font-size: 12px;
+    }// END mq_phone
+  }
+
+  &__link {
+    all: unset;
+    @include border-box;
+    display: block;
+
+    width  : 100%;
+    margin-top: auto;
+    padding: 13px 12px 15px 12px;
+    height : 45px;
+
+    font-family: $ff;
+    font-size  : 14px;
+    line-height: normal;
+    font-weight: 500;
+    color      : #FF6838;
+    text-align : center;
+    user-select: none;
+    cursor     : pointer;
+    transition : opacity $time ease-in-out;
+
+    @include mq_phone {
+      font-size: 12px;
+    }// END mq_phone
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+
+} // END .page404
