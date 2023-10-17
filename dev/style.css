@@ -1939,6 +1939,7 @@
 @media all and (max-width: 767px) {
   .authorization-form {
     margin-top: 80px;
+    min-height: 497px;
   }
 }
 

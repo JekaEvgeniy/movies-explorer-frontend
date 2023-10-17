@@ -1743,6 +1743,7 @@ $color-blue : #465DFF;
       }// END mq_tablet
       @include mq_phone {
         margin-top: 80px; // pixel perfect
+        min-height: 497px; // pixel perfect Форма с логином.
       }// END mq_phone
 
       &__content {
