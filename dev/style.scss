@@ -1523,13 +1523,23 @@ $color-blue : #465DFF;
   justify-content: center; // fixme: вернуть
 
   &__container {
-      max-width: 410px;
+    @include border-box;
+      max-width: (410px + 30px * 2);
       width: 100%;
 
       margin-left: auto;
       margin-right: auto;
-      padding-top: 74px;
-      padding-bottom: 100px;
+      padding: 74px 30px 100px 30px;
+      // padding-top: 74px;
+      // padding-bottom: 100px;
+
+      @include mq_phone {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding-top: 70px;
+        padding-bottom: 33px;
+      }// END mq_phone
   }
 
   &__header {
@@ -1548,10 +1558,26 @@ $color-blue : #465DFF;
       flex-direction: column;
       margin-top: 107px;
 
+      @include mq_tablet {
+        margin-top: 80px;
+      }// END mq_tablet
+      @include mq_phone {
+        margin-top: 64px;
+        flex: 1;
+      }// END mq_phone
+
       &__content {
         display: flex;
         flex-direction: column;
         min-height: 353px;
+
+        @include mq_tablet {
+          min-height: 343px;
+        }// END mq_tablet
+        @include mq_phone {
+          min-height: auto;
+          flex: 1;
+        }// END mq_phone
 
           &-top {
 
@@ -1633,6 +1659,10 @@ $color-blue : #465DFF;
           &:hover {
             opacity: 0.7;
           }
+
+          @include mq_phone {
+            font-size: 12px;
+          }// END mq_phone
 
           &_exit {
             color: #FF004D;

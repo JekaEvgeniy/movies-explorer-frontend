@@ -1718,12 +1718,22 @@
 }
 
 .profile__container {
-  max-width: 410px;
+  box-sizing: border-box;
+  max-width: 470px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 74px;
-  padding-bottom: 100px;
+  padding: 74px 30px 100px 30px;
+}
+
+@media all and (max-width: 767px) {
+  .profile__container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-top: 70px;
+    padding-bottom: 33px;
+  }
 }
 
 .profile__header {
@@ -1743,10 +1753,36 @@
   margin-top: 107px;
 }
 
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .profile-form {
+    margin-top: 80px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .profile-form {
+    margin-top: 64px;
+    flex: 1;
+  }
+}
+
 .profile-form__content {
   display: flex;
   flex-direction: column;
   min-height: 353px;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .profile-form__content {
+    min-height: 343px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .profile-form__content {
+    min-height: auto;
+    flex: 1;
+  }
 }
 
 .profile-form__content-bottom {
@@ -1819,6 +1855,12 @@
 
 .profile-form-actions__btn:hover {
   opacity: 0.7;
+}
+
+@media all and (max-width: 767px) {
+  .profile-form-actions__btn {
+    font-size: 12px;
+  }
 }
 
 .profile-form-actions__btn_exit {
