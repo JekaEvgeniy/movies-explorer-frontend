@@ -1673,3 +1673,219 @@ $color-blue : #465DFF;
   } // END .&-form
 
 } // END ..profile
+
+/*  ###
+    ### authorization
+    ###
+*/
+.authorization {
+  @include border-box;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // f ixme: вернуть
+
+  &__container {
+    @include border-box;
+      max-width: (396px + 30px * 2);
+      width: 100%;
+
+      margin-left: auto;
+      margin-right: auto;
+      padding: 70px 30px 70px 30px;
+
+      @include mq_phone {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding-top: 70px;
+        padding-bottom: 33px;
+      }// END mq_phone
+  }
+
+  &__logo {
+      display: block;
+    width: 38px;
+    height:38px;
+    margin-bottom: 40px;
+
+
+  } // END .&__logo
+
+  &__header {
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: normal;
+  } // END .&__header
+
+  &-form {
+      all: unset;
+      display: flex;
+      flex-direction: column;
+      margin-top: 40px;
+
+      @include mq_tablet {
+
+      }// END mq_tablet
+      @include mq_phone {
+
+      }// END mq_phone
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+        min-height: 353px;
+
+        @include mq_tablet {
+          min-height: 343px;
+        }// END mq_tablet
+        @include mq_phone {
+          min-height: auto;
+          flex: 1;
+        }// END mq_phone
+
+          &-top {
+
+          } // END .&-top
+
+          &-bottom {
+              margin-top: auto;
+              padding-top: 50px;
+          } // END .&-bottom
+      } // END .&__content
+
+      &__label {
+          all: unset;
+          @include border-box;
+          margin-top: 0px;
+          display: flex;
+          flex-direction: column;
+      } // END .&__label
+
+      &__title {
+        font-size: 10px;
+        line-height: normal;
+        color: #A0A0A0;
+      }
+
+      &__input {
+        all: unset;
+        @include border-box;
+        display: block;
+        padding: 15px 15px 15px 15px;
+        margin-top: 10px;
+        border-radius: 8px;
+        background-color: #F9F9F9;
+
+        font-family: $ff;
+        font-size: 13px;
+        line-height: normal;
+        font-weight: 400;
+        color: $color-black;
+        text-align: left;
+
+        &[disabled] {
+
+        }
+
+        &_invalid {
+          color: #EE3465;
+          @include placeholder {
+            color: #EE3465;
+          }
+        }
+      } // END .&__input
+
+      &__error-message {
+        display: block;
+        margin : 11px 0 0 0;
+        min-height: 9px;
+
+        font-size  : 10px;
+        line-height: 10px;
+        color      : #EE3465;
+        transition: opacity $time ease-in-out;
+
+        &:empty {
+          opacity: 0;
+        }
+      }
+
+      &-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 2px 0;
+
+        &__error-message {
+          display: block;
+          margin : 0;
+          min-height: 18px;
+
+          font-size  : 11px;
+          color      : #FF004C;
+          line-height: 18px;
+          text-align : center;
+        }
+
+        &__btn {
+          all: unset;
+          @include border-box;
+          display: block;
+          width: 100%;
+          padding: 13px 12px 15px 12px;
+          height: 45px;
+
+          font-family: $ff;
+          font-size: 14px;
+          line-height: normal;
+          font-weight: 500;
+          color: $color-white;
+          text-align: center;
+          user-select: none;
+          cursor: pointer;
+          transition: opacity $time ease-in-out;
+          &:hover {
+            opacity: 0.7;
+          }
+
+          &[disabled],
+          &_disabled {
+            background-color: #F8F8F8;
+            color: #C2C2C2;
+            pointer-events: none;
+          }
+
+          &_orange {
+            background-color: #FF6838;
+          }
+        }
+
+        &__caption {
+          margin: 14px 0 0 0;
+          font-size: 14px;
+          line-height: normal;
+          text-align: center;
+          color: #A0A0A0;
+
+          &-link {
+            margin-left: 3px; // pixel perfect
+            text-decoration: none;
+            color: #FF6838;
+            cursor: pointer;
+            transition: opacity $time ease-in-out;
+
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
+      }
+
+  } // END .&-form
+
+} // END ..authorization
