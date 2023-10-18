@@ -10,4 +10,7 @@
 
 @import url(./components/SectionHeader/SectionHeader.css);
 
-@import url(./components/Login/Login.css);
+@import url(./components/Login/Login.css); /* Register + Login */
+
+/* Главгая страница */
+@import url(./components/Promo/Promo.css);
