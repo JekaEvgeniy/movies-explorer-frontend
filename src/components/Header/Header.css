@@ -1,5 +1,7 @@
 .header {
   box-sizing     : border-box;
+  position       : relative;
+  z-index        : 1;
   padding-left   : 70px;
   padding-right  : 70px;
   position       : relative;
@@ -38,9 +40,9 @@
   }
 }
 
-.header_theme_blue {
+/* .header_theme_blue {
   background-color: #465DFF;
-}
+} */
 
 .header__logo {
   flex      : 0 0 auto;

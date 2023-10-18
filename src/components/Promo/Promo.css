@@ -1,5 +1,6 @@
 .promo {
   box-sizing           : border-box;
+  position             : relative;
   padding-left         : 70px;
   padding-right        : 70px;
   display              : grid;
@@ -15,6 +16,18 @@
   min-height      : 574px;
   color           : #fff;
 }
+
+.promo:before {
+  position        : absolute;
+  bottom          : 100%;
+  left            : 0;
+  right           : 0;
+  height          : 74px;
+  background-color: #465DFF;
+  content         : '';
+  pointer-events  : none;
+}
+
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
   .promo {

@@ -6,9 +6,12 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import {arrMovies} from '../../utils/arrMovies'
 import Movies from "../Movies/Movies";
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 
 function App() {
+
   return (
     <div className="app">
 
@@ -17,7 +20,11 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/movies" element={
-          <Movies list={arrMovies} />
+          <>
+            <Header isPageMovies />
+            <Movies list={arrMovies} />
+            <Footer />
+          </>
         } />
 
       </Routes>
