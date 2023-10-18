@@ -20,10 +20,19 @@ function App() {
         <Route exact path="/" element={<Main />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
+
         <Route path="/movies" element={
           <>
             <Header isPageMovies />
             <Movies list={arrMovies} />
+            <Footer />
+          </>
+        } />
+
+        <Route path="/saved-movies" element={
+          <>
+            <Header isPageMovies />
+            <Movies list={arrMovies} isSaveMovies />
             <Footer />
           </>
         } />
