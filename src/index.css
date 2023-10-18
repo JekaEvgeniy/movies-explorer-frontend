@@ -20,3 +20,8 @@
 @import url(./components/Techs/Techs.css);
 @import url(./components/AboutMe/AboutMe.css);
 @import url(./components/Portfolio/Portfolio.css);
+
+/* Страница с фильмами */
+@import url(./components/Movies/Movies.css);
+@import url(./components/MoviesCardList/MoviesCardList.css);
+@import url(./components/MoviesCard/MoviesCard.css);
