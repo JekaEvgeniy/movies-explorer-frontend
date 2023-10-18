@@ -33,3 +33,8 @@ Frontend https://dip.nomoredomainsrocks.ru/
 ## Чеклист
 * [Ссылка на чеклист backend](https://code.s3.yandex.net/web-developer/static/new-program/web-diploma-criteria-2.0/index.html)
 * [Ссылка на чеклист frontend](https://code.s3.yandex.net/web-developer/static/new-program/web-diploma-criteria-2.0/checklist_jsx_diplom.pdf)
+
+
+/*
+https://www.codementor.io/@packt/using-the-link-and-navlink-components-to-navigate-to-a-route-rieqipp42
+*/
