@@ -21,7 +21,7 @@ function Header({ ...props }) {
       }
 
       {
-        props.isPageMovies && (
+       (props.isPageMovies || props.isPageProfile) && (
           <>
           <HeaderBurger />
           <HeaderProfileNav />

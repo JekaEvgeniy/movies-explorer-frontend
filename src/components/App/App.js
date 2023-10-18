@@ -8,6 +8,7 @@ import {arrMovies} from '../../utils/arrMovies'
 import Movies from "../Movies/Movies";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Profile from '../Profile/Profile';
 
 
 function App() {
@@ -24,6 +25,13 @@ function App() {
             <Header isPageMovies />
             <Movies list={arrMovies} />
             <Footer />
+          </>
+        } />
+
+        <Route path="/profile" element={
+          <>
+            <Header isPageProfile />
+            <Profile />
           </>
         } />
 
