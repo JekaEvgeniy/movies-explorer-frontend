@@ -10,30 +10,36 @@ export const arrMovies = [
     image: image1,
     owner: 123,
     movieId: 1,
+    isLiked: false,
   },
   {
     image: image2,
     owner: 456,
     movieId: 2,
+    isLiked: true,
   },
   {
     image: image3,
     owner: 456,
     movieId: 3,
+    isLiked: true,
   },
   {
     image: image4,
     owner: 456,
     movieId: 4,
+    isLiked: false,
   },
   {
     image: image5,
     owner: 456,
     movieId: 5,
+    isLiked: false,
   },
   {
     image: image6,
     owner: 123,
     movieId: 6,
+    isLiked: false,
   },
 ]

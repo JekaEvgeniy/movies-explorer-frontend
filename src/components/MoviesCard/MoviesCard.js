@@ -1,6 +1,15 @@
 import React from "react";
 
 function MoviesCard(props) {
+  const isLiked = props.card.isLiked;
+  let button;
+
+  if (isLiked) {
+    button = <button className="movie__button-save movie__button-save_active" type="button" name="button" aria-label="Удилть из избранного"></button>;
+  } else {
+    button = <button className="movie__button-save" type="button" name="button" aria-label="Добавить в избранное"></button>;
+  }
+
   return (
     <li className="movies-items__item" key={props.movieId}>
       <article className="movie">
@@ -10,7 +19,7 @@ function MoviesCard(props) {
             <p className="movie__duration">1ч 47м</p>
           </div>
           <div className="movie__actions">
-            <button className="movie__button-save" type="button" name="button" aria-label="Добавить в избранное"></button>
+            {button}
           </div>
         </div>
         <figure className="movie__figure">
