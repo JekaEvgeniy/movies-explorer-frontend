@@ -110,7 +110,17 @@
   font-weight: 400;
   color      : #000;
   text-align : right;
+  transition : padding-right 0.3s ease-in-out;
 }
+
+
+
+.profile-form__input:focus {
+/* box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08); */
+/* background-color: #f3f3f3; */
+  padding-right: 4px;
+}
+
 
 .profile-form-actions {
   display       : flex;

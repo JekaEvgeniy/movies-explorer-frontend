@@ -15,7 +15,6 @@ function HeaderProfileNav({ isOpen, setIsMenuOpened }){
         <li className="header-profile-nav-items__item header-profile-nav-items__item_hidden-desktop">
           <NavLink to="/"
             className="header-profile-nav__link"
-            activeClassName="active"
             onClick={() => setIsMenuOpened(false)}>Главная</NavLink>
         </li>
 
