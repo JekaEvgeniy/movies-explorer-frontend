@@ -1,6 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 
 function Profile(){
+
+  const [formValue, setFormValue] = useState({
+    email: 'pochta@yandex.ru',
+    firstName: 'Виталий'
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormValue({
+      ...formValue,
+      [name]: value
+    });
+  }
+
   return (
     <section className="profile" aria-label="Личный кабинет">
       <div className="profile__container">
@@ -11,11 +26,12 @@ function Profile(){
             <div className="profile-form__content-top">
               <label className="profile-form__label">
                 <span className="profile-form__title">Имя</span>
-                <input type="text" className="profile-form__input" value="Виталий"  />
+                <input onChange={handleChange} type="text" className="profile-form__input" name="firstName" value={formValue.firstName}  />
               </label>
               <label className="profile-form__label">
                 <span className="profile-form__title">E-mail</span>
-                <input type="email" inputMode="email" className="profile-form__input" value="pochta@yandex.ru" disabled />
+                <input onChange={handleChange} type="email" inputMode="email" className="profile-form__input" name="email"
+                  value={formValue.email} disabled />
               </label>
 
             </div>
