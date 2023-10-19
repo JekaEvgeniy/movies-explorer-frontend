@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Sprite from '../../images/common/sprite.svg';
 
 function HeaderProfileNav({ isOpen, setIsMenuOpened }){
@@ -13,20 +13,25 @@ function HeaderProfileNav({ isOpen, setIsMenuOpened }){
       </button>
       <ul className="header-profile-nav-items">
         <li className="header-profile-nav-items__item header-profile-nav-items__item_hidden-desktop">
-          <Link to="/" className="header-profile-nav__link"
-            onClick={() => setIsMenuOpened(false)}>Главная</Link>
+          <NavLink to="/"
+            className="header-profile-nav__link"
+            activeClassName="active"
+            onClick={() => setIsMenuOpened(false)}>Главная</NavLink>
         </li>
 
         <li className="header-profile-nav-items__item">
-          <Link to="/movies" className="header-profile-nav__link header-profile-nav__link_active"
-            onClick={() => setIsMenuOpened(false)}>Фильмы</Link>
+          <NavLink to="/movies"
+            className={({ isActive }) => isActive ? "header-profile-nav__link header-profile-nav__link_active" : "header-profile-nav__link"}
+            onClick={() => setIsMenuOpened(false)}>Фильмы</NavLink>
         </li>
         <li className="header-profile-nav-items__item">
-          <Link to="/saved-movies" className="header-profile-nav__link"
-            onClick={() => setIsMenuOpened(false)}>Сохранённые фильмы</Link>
+          <NavLink to="/saved-movies"
+            className={({ isActive }) => isActive ? "header-profile-nav__link header-profile-nav__link_active" : "header-profile-nav__link"}
+            onClick={() => setIsMenuOpened(false)}>Сохранённые фильмы</NavLink>
         </li>
         <li className="header-profile-nav-items__item header-profile-nav-items__item_pos-right">
-          <Link to="/profile" className="header-profile-nav__link header-profile-nav__link_type-profile"
+          <NavLink  to="/profile"
+            className="header-profile-nav__link header-profile-nav__link_type-profile"
             onClick={() => setIsMenuOpened(false)}>
             Аккаунт
             <span className="header-profile-nav__link-ico">
@@ -34,7 +39,7 @@ function HeaderProfileNav({ isOpen, setIsMenuOpened }){
                 <use href={`${Sprite}#ico-profile`}></use>
               </svg>
             </span>
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </nav>
