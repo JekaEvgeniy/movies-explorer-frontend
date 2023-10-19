@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { useState } from 'react';
+
 import Navigation from "../Navigation/Navigation";
 
 import HeaderBurger from '../HeaderBurger/HeaderBurger';
@@ -8,6 +10,9 @@ import HeaderProfileNav from '../HeaderProfileNav/HeaderProfileNav';
 import headerLogo from '../../images/header/logo.svg'
 
 function Header({ ...props }) {
+
+  const [isMenuOpened, setIsMenuOpened] = useState(false);
+
   return (
     <header className="header header_theme_blue">
       <Link to="/" className="header__logo">
@@ -23,8 +28,8 @@ function Header({ ...props }) {
       {
        (props.isPageMovies || props.isPageProfile) && (
           <>
-          <HeaderBurger />
-          <HeaderProfileNav />
+            <HeaderBurger setIsMenuOpened={setIsMenuOpened} />
+            <HeaderProfileNav isOpen={isMenuOpened} setIsMenuOpened={setIsMenuOpened}  />
           </>
         )
       }
