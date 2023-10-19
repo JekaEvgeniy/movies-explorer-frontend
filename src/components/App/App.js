@@ -9,6 +9,7 @@ import Movies from "../Movies/Movies";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Profile from '../Profile/Profile';
+import Page404 from '../Page404/Page404';
 
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
             <Profile />
           </>
         } />
+
+        <Route path="*" element={<Page404 />} />
 
       </Routes>
 
