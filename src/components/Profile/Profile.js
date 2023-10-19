@@ -15,7 +15,7 @@ function Profile(){
               </label>
               <label class="profile-form__label">
                 <span class="profile-form__title">E-mail</span>
-                <input type="email" inputmode="email" class="profile-form__input" value="pochta@yandex.ru" disabled />
+                <input type="email" inputMode="email" class="profile-form__input" value="pochta@yandex.ru" disabled />
               </label>
 
             </div>

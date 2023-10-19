@@ -19,7 +19,7 @@ function Login() {
             <div className="authorization-form__content-top">
               <label className="authorization-form__label">
                 <span className="authorization-form__title">E-mail</span>
-                <input type="email" inputmode="email" className="authorization-form__input" placeholder="Введите email" required />
+                <input type="email" inputMode="email" className="authorization-form__input" placeholder="Введите email" required />
                   <span className="authorization-form__error-message"></span>
               </label>
               <label className="authorization-form__label">

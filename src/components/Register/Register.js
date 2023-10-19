@@ -18,12 +18,12 @@ function Register() {
             <div className="authorization-form__content-top">
               <label className="authorization-form__label">
                 <span className="authorization-form__title">Имя</span>
-                <input type="text" className="authorization-form__input" minlength="2" maxlength="30" placeholder="Введите имя" required />
+                <input type="text" className="authorization-form__input" minLength="2" maxLength="30" placeholder="Введите имя" required />
                 <span className="authorization-form__error-message"></span>
               </label>
               <label className="authorization-form__label">
                 <span className="authorization-form__title">E-mail</span>
-                <input type="email" inputmode="email" className="authorization-form__input" placeholder="Введите email" required />
+                <input type="email" inputMode="email" className="authorization-form__input" placeholder="Введите email" required />
                 <span className="authorization-form__error-message"></span>
               </label>
               <label className="authorization-form__label">
