@@ -4,11 +4,19 @@ function MoviesCard(props) {
   const isLiked = props.card.isLiked;
   let button;
 
-  if (isLiked) {
-    button = <button className="movie__button-save movie__button-save_active" type="button" name="button" aria-label="Удилть из избранного"></button>;
-  } else {
-    button = <button className="movie__button-save" type="button" name="button" aria-label="Добавить в избранное"></button>;
+  if (props.isSaveMovies ){
+    // console.log('Мы находимся на странице saved-movies');
+    button = <button className="movie__button-remove" type="button" name="button" aria-label="Удилть из избранного"></button>;
+  }else {
+    // console.log('Мы находимся на странице movies');
+    if (isLiked) {
+      button = <button className="movie__button-save movie__button-save_active" type="button" name="button" aria-label="Удилть из избранного"></button>;
+    } else {
+      button = <button className="movie__button-save" type="button" name="button" aria-label="Добавить в избранное"></button>;
+    }
   }
+
+
 
   return (
     <li className="movies-items__item" key={props.movieId}>

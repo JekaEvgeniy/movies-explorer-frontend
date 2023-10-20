@@ -19,6 +19,7 @@ function MoviesCardList({...props}){
     return (
       props.list.filter(item => item.isLiked === true ).map((item) => (
         <MoviesCard
+          isSaveMovies={props.isSaveMovies}
           key={item.movieId}
           card={item}
         />
