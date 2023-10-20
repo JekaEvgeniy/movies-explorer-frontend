@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Link } from "react-router-dom";
 
 function Profile(){
 
@@ -39,7 +40,7 @@ function Profile(){
               <div className="profile-form-actions">
                 <p className="profile-form-actions__error-message">При обновлении профиля произошла ошибка.</p>
                 <button type="button" className="profile-form-actions__btn profile-form-actions__btn_edit">Редактировать</button>
-                <button type="button" className="profile-form-actions__btn profile-form-actions__btn_exit">Выйти из аккаунта</button>
+                <Link to="/" className="profile-form-actions__btn profile-form-actions__btn_exit">Выйти из аккаунта</Link>
               </div>
             </div>
           </div>
