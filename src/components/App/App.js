@@ -6,6 +6,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import {arrMovies} from '../../utils/arrMovies'
 import Movies from "../Movies/Movies";
+import SearchForm from "../SearchForm/SearchForm";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Profile from '../Profile/Profile';
@@ -25,6 +26,7 @@ function App() {
         <Route path="/movies" element={
           <>
             <Header isPageMovies />
+            <SearchForm />
             <Movies list={arrMovies} />
             <Footer />
           </>
@@ -33,6 +35,7 @@ function App() {
         <Route path="/saved-movies" element={
           <>
             <Header isPageMovies />
+            <SearchForm />
             <Movies list={arrMovies} isSaveMovies />
             <Footer />
           </>
