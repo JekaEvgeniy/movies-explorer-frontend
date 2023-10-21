@@ -14,7 +14,7 @@ function AboutMe(){
           <p className="about-me__text">Живу в Ярославле, закончил факультет "прикладная информатика в экономике" МЭСИ. Люблю горы, треккинг, хайкинг, сплавляться на байдарках. Также люблю слушать музыку, от которой аж мурашки по коже.</p>
 
           <div className="about-me__actions">
-            <a href="https://github.com/JekaEvgeniy" target="_blank" className="about-me__action">Github</a>
+            <a href="https://github.com/JekaEvgeniy" target="_blank" className="about-me__action" rel="noreferrer">Github</a>
           </div>
         </div>
         <aside className="about-me-columns__aside">
