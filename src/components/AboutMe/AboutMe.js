@@ -19,7 +19,7 @@ function AboutMe(){
         </div>
         <aside className="about-me-columns__aside">
           <picture className="about-me__photo">
-            <img className="about-me__photo-img image-cover" src={Photo} loading="lazy" alt="" />
+            <img className="about-me__photo-img image-cover" src={Photo} loading="lazy" alt="Евгений - автор этого чуда" />
           </picture>
         </aside>
       </div>
