@@ -4,7 +4,7 @@ import Sprite from '../../images/common/sprite.svg';
 function SearchForm(){
   return (
     <section className="search">
-      <form className="search-form">
+      <form className="search-form" name="search">
         <div className="search-form__group">
           <div className="search-form__ico">
             <svg aria-hidden="true" className="image-contain" xmlns="http://www.w3.org/2000/svg">

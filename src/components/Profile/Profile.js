@@ -22,7 +22,7 @@ function Profile(){
       <div className="profile__container">
         <h1 className="profile__header">Привет, Виталий!</h1>
 
-        <form className="profile-form">
+        <form className="profile-form" name="profile">
           <div className="profile-form__content">
             <div className="profile-form__content-top">
               <label className="profile-form__label">

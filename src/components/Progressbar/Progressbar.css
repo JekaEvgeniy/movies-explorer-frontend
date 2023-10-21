@@ -21,6 +21,7 @@
 }
 
 .progress-bar__line {
+  margin: 0;
   padding   : 8px;
   font-size : 14px;
   list-style: normal;
@@ -44,6 +45,7 @@
 }
 
 .progress-bar__caption {
+  margin: 0;
   padding    : 8px;
   font-size  : 14px;
   font-style : normal;

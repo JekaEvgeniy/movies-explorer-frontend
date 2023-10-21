@@ -14,7 +14,7 @@ function Login() {
 
           <h1 className="authorization__header">Рады видеть!</h1>
 
-          <form className="authorization-form">
+          <form className="authorization-form" name="authorization">
             <div className="authorization-form__content">
               <div className="authorization-form__content-top">
                 <label className="authorization-form__label">

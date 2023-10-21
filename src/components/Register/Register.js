@@ -14,7 +14,7 @@ function Register() {
 
           <h1 className="authorization__header">Добро пожаловать!</h1>
 
-          <form className="authorization-form">
+          <form className="authorization-form" name="registration">
             <div className="authorization-form__content">
               <div className="authorization-form__content-top">
                 <label className="authorization-form__label">
