@@ -7,13 +7,13 @@ function SearchForm(){
       <form className="search-form">
         <div className="search-form__group">
           <div className="search-form__ico">
-            <svg className="image-contain" xmlns="http://www.w3.org/2000/svg">
+            <svg aria-hidden="true" className="image-contain" xmlns="http://www.w3.org/2000/svg">
               <use href={`${Sprite}#search-ico`}></use>
             </svg>
           </div>
           <input type="text" className="search-form__input" placeholder="Фильм" />
           <button className="search-form__btn" aria-label="Поиск">
-            <svg className="image-contain" xmlns="http://www.w3.org/2000/svg">
+            <svg aria-hidden="true" className="image-contain" xmlns="http://www.w3.org/2000/svg">
               <use href={`${Sprite}#search-btn`}></use>
             </svg>
           </button>

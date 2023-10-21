@@ -7,7 +7,7 @@ function HeaderProfileNav({ isOpen, setIsMenuOpened }){
   return (
     <nav className={`header-profile-nav ${isOpen ? 'header-profile-nav_active' : ''}`}>
       <button className="header-profile-nav__button-close" onClick={() => setIsMenuOpened(false)}  type="button" aria-label="Закрыть мобильное меню">
-        <svg className="image-contain" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" className="image-contain" xmlns="http://www.w3.org/2000/svg">
           <use href={`${Sprite}#header-profile-nav-button-close`}></use>
         </svg>
       </button>
@@ -34,7 +34,7 @@ function HeaderProfileNav({ isOpen, setIsMenuOpened }){
             onClick={() => setIsMenuOpened(false)}>
             Аккаунт
             <span className="header-profile-nav__link-ico">
-              <svg className="image-contain" xmlns="http://www.w3.org/2000/svg">
+              <svg aria-hidden="true" className="image-contain" xmlns="http://www.w3.org/2000/svg">
                 <use href={`${Sprite}#ico-profile`}></use>
               </svg>
             </span>

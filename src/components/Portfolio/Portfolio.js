@@ -11,7 +11,7 @@ function Portfolio(){
           <a href="https://jekaevgeniy.github.io/russian-travel/index.html" className="portfolio__link" target="_blank" rel="noreferrer">
             <span className="portfolio__link-title">Статичный сайт</span>
             <span className="portfolio__link-ico">
-              <svg className="image-contain" xmlns="http://www.w3.org/2000/svg">
+              <svg aria-hidden="true" className="image-contain" xmlns="http://www.w3.org/2000/svg">
                 <use href={`${Sprite}#portfolio-arrow`}></use>
               </svg>
             </span>
@@ -21,7 +21,7 @@ function Portfolio(){
           <a href="https://jekaevgeniy.github.io/russian-travel/index.html" className="portfolio__link" target="_blank" rel="noreferrer">
             <span className="portfolio__link-title">Адаптивный сайт</span>
             <span className="portfolio__link-ico">
-              <svg className="image-contain" xmlns="http://www.w3.org/2000/svg">
+              <svg aria-hidden="true" className="image-contain" xmlns="http://www.w3.org/2000/svg">
                 <use href={`${Sprite}#portfolio-arrow`}></use>
               </svg>
             </span>
@@ -31,7 +31,7 @@ function Portfolio(){
           <a href="https://jekaevgeniy.github.io/mesto/index.html" className="portfolio__link" target="_blank" rel="noreferrer">
             <span className="portfolio__link-title">Одностраничное приложение</span>
             <span className="portfolio__link-ico">
-              <svg className="image-contain" xmlns="http://www.w3.org/2000/svg">
+              <svg aria-hidden="true" className="image-contain" xmlns="http://www.w3.org/2000/svg">
                 <use href={`${Sprite}#portfolio-arrow`}></use>
               </svg>
             </span>
