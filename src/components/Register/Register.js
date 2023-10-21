@@ -29,7 +29,7 @@ function Register() {
                 </label>
                 <label className="authorization-form__label">
                   <span className="authorization-form__title">Пароль</span>
-                  <input type="password" className="authorization-form__input authorization-form__input_invalid" placeholder="Введите пароль" required />
+                  <input type="password" className="authorization-form__input authorization-form__input_invalid" placeholder="Введите пароль" minLength="4" maxLength="30" required />
                   <span className="authorization-form__error-message">Что-то пошло не так...</span>
                 </label>
 

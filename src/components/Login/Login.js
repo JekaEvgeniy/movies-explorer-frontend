@@ -24,7 +24,7 @@ function Login() {
                 </label>
                 <label className="authorization-form__label">
                   <span className="authorization-form__title">Пароль</span>
-                  <input type="password" className="authorization-form__input" placeholder="Введите пароль" required />
+                  <input type="password" className="authorization-form__input" placeholder="Введите пароль" required minLength="4" maxLength="30" />
                     <span className="authorization-form__error-message"></span>
                 </label>
 
