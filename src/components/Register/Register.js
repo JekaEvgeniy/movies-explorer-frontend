@@ -37,7 +37,7 @@ function Register() {
             <div className="authorization-form__content-bottom">
               <div className="authorization-form-actions">
                 <p className="authorization-form-actions__error-message"></p>
-                <button type="button" className="authorization-form-actions__btn authorization-form-actions__btn_orange">Зарегистрироваться</button>
+                <button type="button" className="authorization-form-actions__btn authorization-form-actions__btn_theme_accent">Зарегистрироваться</button>
                 <p className="authorization-form-actions__caption">
                   Уже зарегистрированы? <a className="authorization-form-actions__caption-link" href="/signin">Войти</a>
                 </p>

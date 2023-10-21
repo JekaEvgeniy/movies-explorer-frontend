@@ -39,8 +39,8 @@ function Profile(){
             <div className="profile-form__content-bottom">
               <div className="profile-form-actions">
                 <p className="profile-form-actions__error-message">При обновлении профиля произошла ошибка.</p>
-                <button type="button" className="profile-form-actions__btn profile-form-actions__btn_edit">Редактировать</button>
-                <Link to="/" className="profile-form-actions__btn profile-form-actions__btn_exit">Выйти из аккаунта</Link>
+                <button type="button" className="profile-form-actions__btn profile-form-actions__btn_type_edit">Редактировать</button>
+                <Link to="/" className="profile-form-actions__btn profile-form-actions__btn_type_exit">Выйти из аккаунта</Link>
               </div>
             </div>
           </div>
