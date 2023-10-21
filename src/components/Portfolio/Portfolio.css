@@ -1,0 +1,132 @@
+.portfolio {
+  padding-left  : 70px;
+  padding-right : 70px;
+  padding-top   : 40px;
+  padding-bottom: 106px;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .portfolio {
+    padding-left : 50px;
+    padding-right: 50px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .portfolio {
+    padding-left : 18px;
+    padding-right: 18px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .portfolio {
+    padding-left  : 14px;
+    padding-right : 14px;
+    padding-bottom: 50px;
+  }
+}
+
+.portfolio__section-header {
+  display    : block;
+  margin     : 0;
+  font-size  : 18px;
+  font-weight: 400;
+  line-height: 20px;
+  color      : #A0A0A0;
+}
+
+@media all and (max-width: 767px) {
+  .portfolio__section-header {
+    font-size: 14px;
+  }
+}
+
+.portfolio-items {
+  all           : unset;
+  display       : flex;
+  flex-direction: column;
+  margin-top    : 29px;
+}
+
+@media all and (max-width: 767px) {
+  .portfolio-items {
+    margin-top: 21px;
+  }
+}
+
+.portfolio-items__item {
+  all       : unset;
+  border-top: 1px solid #E8E8E8;
+}
+
+@media all and (max-width: 767px) {
+  .portfolio-items__item {
+    border-color: #E6E6E6;
+  }
+}
+
+.portfolio-items__item:first-child {
+  border-top: none;
+}
+
+.portfolio__link {
+  display        : flex;
+  align-items    : center;
+  gap            : 0 20px;
+  padding        : 20px 6px 19px 0;
+  color          : #000;
+  text-decoration: none;
+  transition     : opacity 0.3s ease-in-out;
+}
+
+.portfolio__link:hover {
+  opacity: 0.7;
+}
+
+.portfolio__link-title {
+  flex          : 1;
+  font-size     : 30px;
+  font-weight   : 400;
+  line-height   : 50px;
+  letter-spacing: -1.2px;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .portfolio__link-title {
+    font-size     : 28px;
+    line-height   : 50px;
+    letter-spacing: -1.12px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .portfolio__link-title {
+    font-size     : 18px;
+    line-height   : 28px;
+    letter-spacing: -0.72px;
+  }
+}
+
+.portfolio__link-ico {
+  margin-top: 4px;
+  flex      : 0 0 auto;
+  width     : 18px;
+  height    : 17px;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .portfolio__link-ico {
+    width : 17px;
+    height: 16px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .portfolio__link-ico {
+    width     : 11px;
+    height    : 11px;
+    margin-top: 0;
+    transform : translate(2px, -2px);
+  }
+}

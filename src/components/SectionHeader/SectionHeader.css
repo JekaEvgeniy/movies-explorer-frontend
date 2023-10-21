@@ -1,0 +1,19 @@
+.section-header {
+  display       : block;
+  margin        : 0;
+  padding       : 0 0 23px 0;
+  border-bottom : 1px solid #000;
+  font-size     : 22px;
+  font-weight   : 400;
+  line-height   : normal;
+  letter-spacing: -0.88px;
+  color         : #000;
+}
+
+@media all and (max-width: 767px) {
+  .section-header {
+    padding-bottom: 28px;
+    font-size     : 18px;
+    letter-spacing: -0.72px;
+  }
+}

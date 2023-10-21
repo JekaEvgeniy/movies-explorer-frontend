@@ -1,0 +1,26 @@
+.movies {
+  padding-left : 70px;
+  padding-right: 70px;
+  margin-top   : 54px;
+  margin-bottom: 80px;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .movies {
+    padding-left : 30px;
+    padding-right: 30px;
+    margin-bottom: 115px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .movies {
+    padding-left : 10px;
+    padding-right: 10px;
+    margin-top   : 26px;
+  }
+}
+
+.movies__footer-actions {
+  margin-top: 80px;
+}

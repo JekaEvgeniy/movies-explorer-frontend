@@ -1,0 +1,126 @@
+.footer {
+  box-sizing      : border-box;
+  padding-left    : 70px;
+  padding-right   : 70px;
+  margin-top      : auto;
+  padding-top     : 79px;
+  padding-bottom  : 20px;
+  background-color: #FAFAFA;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .footer {
+    padding-left : 50px;
+    padding-right: 50px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .footer {
+    padding-left : 18px;
+    padding-right: 18px;
+  }
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .footer {
+    background-color: transparent;
+    padding-top     : 44px;
+    padding-left    : 30px;
+    padding-right   : 30px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .footer {
+    background-color: transparent;
+    padding-left    : 10px;
+    padding-right   : 10px;
+  }
+}
+
+.footer__header {
+  all        : unset;
+  display    : block;
+  font-size  : 13px;
+  font-weight: 400;
+  line-height: normal;
+  text-align : center;
+  color      : #A0A0A0;
+}
+
+@media all and (max-width: 767px) {
+  .footer__header {
+    font-size: 12px;
+  }
+}
+
+.footer__inside {
+  display        : flex;
+  justify-content: space-between;
+  align-items    : flex-start;
+  border-top     : 1px solid #E8E8E8;
+  padding-top    : 20px;
+  margin-top     : 20px;
+}
+
+@media all and (max-width: 767px) {
+  .footer__inside {
+    margin-top    : 21px;
+    padding-top   : 30px;
+    flex-direction: column-reverse;
+    align-items   : center;
+    gap           : 30px;
+  }
+}
+
+.footer__copyright {
+  margin     : 0;
+  font-size  : 13px;
+  line-height: normal;
+}
+
+@media all and (max-width: 767px) {
+  .footer__copyright {
+    font-size: 12px;
+    color    : #A0A0A0;
+  }
+}
+
+.footer-actions-items {
+  all    : unset;
+  display: flex;
+  gap    : 21px;
+}
+
+@media all and (max-width: 767px) {
+  .footer-actions-items {
+    flex-direction: column;
+    align-items   : center;
+    gap           : 12px;
+    word-spacing  : -1px;
+  }
+}
+
+.footer-actions-items__item {
+  all: unset;
+}
+
+.footer-actions__link {
+  display        : block;
+  font-size      : 13px;
+  line-height    : normal;
+  color          : #000;
+  text-decoration: none;
+  transition     : opacity 0.3s ease-in-out;
+}
+
+.footer-actions__link:hover {
+  opacity: 0.7;
+}
+
+@media all and (max-width: 767px) {
+  .footer-actions__link {
+    font-size: 12px;
+  }
+}
