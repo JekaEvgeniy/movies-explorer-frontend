@@ -19,15 +19,19 @@ function App() {
     <div className="app">
 
       <Routes>
+
         <Route exact path="/" element={<Main />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
 
+
         <Route path="/movies" element={
           <>
             <Header isPageMovies />
-            <SearchForm />
-            <Movies list={arrMovies} />
+            <main className="content">
+              <SearchForm />
+              <Movies list={arrMovies} />
+            </main>
             <Footer />
           </>
         } />
@@ -35,8 +39,10 @@ function App() {
         <Route path="/saved-movies" element={
           <>
             <Header isPageMovies />
-            <SearchForm />
-            <Movies list={arrMovies} isSaveMovies />
+            <main className="content">
+              <SearchForm />
+              <Movies list={arrMovies} isSaveMovies />
+            </main>
             <Footer />
           </>
         } />
@@ -44,7 +50,9 @@ function App() {
         <Route path="/profile" element={
           <>
             <Header isPageProfile />
-            <Profile />
+            <main className="content">
+              <Profile />
+            </main>
           </>
         } />
 
