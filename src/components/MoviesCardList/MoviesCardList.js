@@ -8,7 +8,7 @@ function MoviesCardList({...props}){
     return (
        props.list.map((item) => (
         <MoviesCard
-          key={item.movieId}
+          key={item.id}
           card={item}
         />
       ))
@@ -20,7 +20,7 @@ function MoviesCardList({...props}){
       props.list.filter(item => item.isLiked === true ).map((item) => (
         <MoviesCard
           isSaveMovies={props.isSaveMovies}
-          key={item.movieId}
+          key={item.id}
           card={item}
         />
       ))

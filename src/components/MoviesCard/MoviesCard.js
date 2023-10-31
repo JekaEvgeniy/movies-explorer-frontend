@@ -2,6 +2,29 @@ import React from "react";
 
 function MoviesCard(props) {
   const isLiked = props.card.isLiked;
+  const movieTitle = props.card.nameRU;
+  const movieDuration = props.card.duration;
+  const moviePath = props.card.image.url;
+  // console.log(`moviePath ${moviePath}`);
+  const movieUrl = `https://api.nomoreparties.co/${moviePath}`;
+
+
+  function convertTimeDuration(value) {
+    if (! value ){
+      console.warn('Нет value!');
+      return;
+    }
+
+    let result = '';
+    const hours = Math.floor(value / 60);
+    const minutes = value % 60;
+
+    if (hours > 0) result += `${hours}ч `;
+    if (minutes > 0) result += ` ${minutes}м`;
+
+    return result;
+  }
+
   let button;
 
   if (props.isSaveMovies ){
@@ -16,22 +39,20 @@ function MoviesCard(props) {
     }
   }
 
-
-
   return (
-    <li className="movies-items__item" key={props.movieId}>
+    <li className="movies-items__item" key={props.id}>
       <article className="movie">
         <div className="movie__header">
           <div className="movie__group">
-            <h2 className="movie__title">33 слова о дизайне</h2>
-            <p className="movie__duration">1ч 47м</p>
+            <h2 className="movie__title">{movieTitle}</h2>
+            <p className="movie__duration">{convertTimeDuration(movieDuration)}</p>
           </div>
           <div className="movie__actions">
             {button}
           </div>
         </div>
         <figure className="movie__figure">
-          <img className="movie__image image-cover" src={props.card.image} loading="lazy" alt="Заголовок" />
+          <img className="movie__image image-cover" src={movieUrl} loading="lazy" alt={movieTitle} />
         </figure>
       </article>
     </li>

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from "react-router-dom";
+
+import { getMovies } from '../../utils/Api';
 
 import Main from "../Main/Main";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-import {arrMovies} from '../../utils/arrMovies'
+import { arrMovies } from '../../utils/arrMovies'
 import Movies from "../Movies/Movies";
 import SearchForm from "../SearchForm/SearchForm";
 import Header from '../Header/Header';
@@ -14,6 +16,30 @@ import Page404 from '../Page404/Page404';
 
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(true); // FIXME: default FALSE
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+
+
+    if (loggedIn) {
+      const token = localStorage.getItem('jwt');
+      Promise.all([getMovies() ])
+        .then(([items]) => {
+          // if (token) {
+            if (items.length) {
+              console.log(items[0]);
+              setMovies(items);
+            }
+          // }
+        })
+        .catch((err) => console.log(`Ошибка promise.all: ${err}`));
+    }
+
+  }, [loggedIn]);
+
+
 
   return (
     <div className="app">
@@ -30,7 +56,7 @@ function App() {
             <Header isPageMovies />
             <main className="content">
               <SearchForm />
-              <Movies list={arrMovies} />
+              <Movies list={movies} />
             </main>
             <Footer />
           </>
