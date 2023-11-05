@@ -20,7 +20,8 @@
 }
 
 .movies-items__item {
-  all      : unset;
-  min-width: 0;
+  all           : unset;
+  min-width     : 0;
+  display       : flex;
+  flex-direction: column;
 }
-

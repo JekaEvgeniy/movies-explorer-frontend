@@ -1,5 +1,5 @@
 
-const getMovies = () => {
+const apiMovies = () => {
   return fetch('https://api.nomoreparties.co/beatfilm-movies', {
     method: 'GET',
     headers: {
@@ -14,4 +14,4 @@ const checkResponse = (res) => {
   return Promise.reject(`error: ${res}`);
 }
 
-export { getMovies };
+export { apiMovies };

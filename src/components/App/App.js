@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from "react-router-dom";
 
-import { getMovies } from '../../utils/Api';
+import { apiMovies } from '../../utils/Api';
 
 import Main from "../Main/Main";
 import Login from "../Login/Login";
@@ -25,7 +25,7 @@ function App() {
 
     if (loggedIn) {
       const token = localStorage.getItem('jwt');
-      Promise.all([getMovies() ])
+      Promise.all([apiMovies() ])
         .then(([items]) => {
           // if (token) {
             if (items.length) {

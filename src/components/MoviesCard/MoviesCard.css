@@ -1,4 +1,7 @@
 .movie {
+  display         : flex;
+  flex-direction  : column;
+  flex            : 1;
   padding         : 0;
   margin          : 0;
   background-color: #FDFDFD;
@@ -80,6 +83,7 @@
 }
 
 .movie__figure {
+  flex   : 1;
   display: block;
   padding: 0;
   margin : 0;
