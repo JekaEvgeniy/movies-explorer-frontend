@@ -7,6 +7,7 @@ function MoviesCardList({ ...props }) {
   // const [screenWidth, setScreenWidth] = useState(window.clientWidth || document.documentElement.clientWidth);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth || document.documentElement.clientWidth);
   const [renderMovies, setRenderMovies] = useState([]);
+  const [visibleButtonMore, setVisibleButtonMore] = useState(true);
 
 
   React.useEffect(() => {
@@ -44,6 +45,8 @@ function MoviesCardList({ ...props }) {
       } else {
         setRenderMovies(items);
       }
+    } else {
+      setVisibleButtonMore(false);
     }
 
   }, [props.list, screenWidth]);
@@ -60,6 +63,17 @@ function MoviesCardList({ ...props }) {
     const count = (screenWidth >= 1024) ? 3 : 2;
     console.log(`click >>> handleButtonMore(); count = ${count}`);
     setRenderMovies(props.list.slice(0, renderMovies.length + count ) );
+
+    // Когда загрузили все карточки, то нужно скрывать кнопку "Показать еще";
+    toggleButtonMore();
+  }
+
+  function toggleButtonMore(){
+    if (renderMovies.length >= props.list.length) {
+      setVisibleButtonMore(false);
+    } else {
+      setVisibleButtonMore(true);
+    }
   }
 
   function allMovies() {
@@ -73,7 +87,7 @@ function MoviesCardList({ ...props }) {
             {movieCard}
           </ul>
 
-          {!props.isSaveMovies && renderMovies?.length && (
+          {!props.isSaveMovies && visibleButtonMore && (
             <div className="movies__footer-actions">
               <button className="button-silver" type="button" onClick={handleButtonMore}>Ещё</button>
             </div>
