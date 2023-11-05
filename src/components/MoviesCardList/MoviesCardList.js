@@ -34,7 +34,7 @@ function MoviesCardList({ ...props }) {
     if (items) {
       const itemsAmount = items.length;
       // console.log(`itemsAmount = ${itemsAmount}`);
-      console.log(`MoviesCardList.js >>> screenWidth = ${screenWidth}`);
+      // console.log(`MoviesCardList.js >>> screenWidth = ${screenWidth}`);
 
       if (itemsAmount > 3 && screenWidth >= 1024) {
         setRenderMovies(items.slice(0, 12));
@@ -46,7 +46,7 @@ function MoviesCardList({ ...props }) {
         setRenderMovies(items);
       }
     } else {
-      setVisibleButtonMore(false);
+      toggleButtonMore();
     }
 
   }, [props.list, screenWidth]);
@@ -61,7 +61,7 @@ function MoviesCardList({ ...props }) {
 
   function handleButtonMore(){
     const count = (screenWidth >= 1024) ? 3 : 2;
-    console.log(`click >>> handleButtonMore(); count = ${count}`);
+    // console.log(`click >>> handleButtonMore(); count = ${count}`);
     setRenderMovies(props.list.slice(0, renderMovies.length + count ) );
 
     // Когда загрузили все карточки, то нужно скрывать кнопку "Показать еще";
@@ -69,15 +69,24 @@ function MoviesCardList({ ...props }) {
   }
 
   function toggleButtonMore(){
+    // Когда загрузили все карточки, то нужно скрывать кнопку "Показать еще";
     if (renderMovies.length >= props.list.length) {
-      setVisibleButtonMore(false);
+      hiddenBtnMore();
     } else {
-      setVisibleButtonMore(true);
+      visibleBtnMore();
     }
   }
 
+  function hiddenBtnMore(){
+    setVisibleButtonMore(false);
+  };
+
+  function visibleBtnMore(){
+    setVisibleButtonMore(true);
+  }
+
   function allMovies() {
-    console.log(`renderMovies?.length = ${renderMovies?.length}`);
+    // console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}`);
 
     const checkItems = movieCard.length && movieCard.length > 0;
     if (checkItems) {

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies({ ...props }) {
-
 
   return (
     <section className="movies" id="movies" aria-label="Фильмотека">
