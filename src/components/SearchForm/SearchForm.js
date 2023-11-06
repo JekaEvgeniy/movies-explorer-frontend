@@ -26,6 +26,9 @@ function SearchForm({ ...props }) {
           </button>
         </div>
 
+        {/* <div className="search-form__message">Нужно ввести ключевое слово</div> */}
+        <div className="search-form__message"></div>
+
         <div className="search-checkbox">
           <label className="search-checkbox__label">
             <input type="checkbox" className="search-checkbox__input"

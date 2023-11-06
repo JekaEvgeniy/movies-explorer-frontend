@@ -115,16 +115,18 @@
 }
 
 .search-checkbox {
-  display        : flex;
-  justify-content: center;
-  margin-top     : 29px;
-  cursor         : pointer;
-  user-select    : none;
+  display           : flex;
+  justify-content   : center;
+  /* margin-top     : 29px; */
+  margin-top        : 0px;
+  cursor            : pointer;
+  user-select       : none;
 }
 
 @media all and (max-width: 767px) {
   .search-checkbox {
-    margin-top: 44px;
+    /* margin-top: 44px; */
+    margin-top: 15px;
   }
 }
 
@@ -178,4 +180,15 @@
 .search-checkbox__input:checked~.search-checkbox__ico:after {
   background-color: #fff;
   transform       : translateX(16px);
+}
+
+
+.search-form__message {
+  display    : block;
+  margin-top : 9px;
+  font-size  : 10px;
+  line-height: 10px;
+  min-height : 20px;
+  color      : #EE3465;
+  /*на UI font-size 11 , а на макете "Добро пожаловать" fz10 oO  */
 }
