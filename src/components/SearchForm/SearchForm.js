@@ -31,10 +31,12 @@ function SearchForm({ ...props }) {
             <input type="checkbox" className="search-checkbox__input"
               name="shortMovies"
               checked={props.shortMovies === 'on' ? true : false}
+              value={props.shortMovies === 'on' ? 'on' : 'off'}
               onChange={props.handleChangeShorts}
             />
             <span className="search-checkbox__ico"></span>
             <span className="search-checkbox__title">Короткометражки</span>
+            {/* <span className="search-checkbox__title">Короткометражки{props.shortMovies === 'on' ? 'on' : 'off'}</span> */}
           </label>
         </div>
       </form>
