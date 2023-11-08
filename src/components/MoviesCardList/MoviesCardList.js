@@ -2,6 +2,12 @@ import React, { useState } from "react";
 
 import MoviesCard from '../MoviesCard/MoviesCard';
 
+
+/*
+  https://ru.react.js.org/docs/conditional-rendering.html
+*/
+
+
 function MoviesCardList({ ...props }) {
 
   // const [screenWidth, setScreenWidth] = useState(window.clientWidth || document.documentElement.clientWidth);
@@ -10,6 +16,8 @@ function MoviesCardList({ ...props }) {
   const [visibleButtonMore, setVisibleButtonMore] = useState(true);
   const [numberElementsDisplay, setNumberElementsDisplay] = useState(0); // количество отображаемых элементов
   const [numberElementsAdd, setNumberElementsAdd] = useState(0); // количество добавляемых элементов
+  const [visibleMovies, setVisibleMovies] = useState(true);
+
 
   /**
     * Ширина >1024px — 3 в ряд и 4 ряда карточек (3*4). Кнопка «Ещё» загружает 3 карточки
@@ -39,7 +47,7 @@ function MoviesCardList({ ...props }) {
   });
 
   React.useEffect(() => {
-    if (screenWidth >= 1024){
+    if (screenWidth >= 1024) {
       setNumberElementsDisplay(12);
       setNumberElementsAdd(3);
     } else if (screenWidth >= 768 && screenWidth < 1024) {
@@ -56,7 +64,7 @@ function MoviesCardList({ ...props }) {
     console.log(`items = ${items}`);
     if (items && items.length) {
       console.log(`items.length = ${items.length}`);
-
+      setVisibleMovies(true);
       setRenderMovies(props.list.slice(0, numberElementsDisplay));
 
       if (items.length <= numberElementsDisplay) {
@@ -67,6 +75,7 @@ function MoviesCardList({ ...props }) {
 
     } else {
       console.log('>>> нет элементов');
+      setVisibleMovies(false);
       hiddenBtnMore();
     }
 
@@ -80,7 +89,7 @@ function MoviesCardList({ ...props }) {
   });
 
 
-  function handleButtonMore(){
+  function handleButtonMore() {
     // Когда загрузили все карточки, то нужно скрывать кнопку "Показать еще";
     // const count = (screenWidth >= 1024) ? 3 : 2;
     // setRenderMovies(props.list.slice(0, renderMovies.length + count ) );
@@ -91,24 +100,38 @@ function MoviesCardList({ ...props }) {
     }
   }
 
-  function hiddenBtnMore(){
+  function hiddenBtnMore() {
     setVisibleButtonMore(false);
   };
 
-  function visibleBtnMore(){
+  function visibleBtnMore() {
     setVisibleButtonMore(true);
   }
 
   function allMovies() {
 
     const checkItems = movieCard.length && movieCard.length > 0;
-    if (checkItems) {
-      console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}; movieCard.length = ${movieCard.length} `);
+    // console.warn(`checkItems = ${checkItems}`);
+    console.log('renderMovies => ', renderMovies);
+    console.log('<= renderMovies => ');
+
+    console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}; movieCard.length = ${movieCard.length} `);
+
+    if (checkItems){
       return (
         <>
-          <ul className="movies-items">
-            {movieCard}
-          </ul>
+          {
+            visibleMovies && (
+              <ul className="movies-items">
+                {movieCard}
+              </ul>
+            )
+          }
+          {
+            !visibleMovies && (
+              <p className="movies__message movies__message_error">Ничего не найдено</p>
+            )
+          }
 
           {!props.isSaveMovies && visibleButtonMore && (
             <div className="movies__footer-actions">
@@ -117,26 +140,14 @@ function MoviesCardList({ ...props }) {
           )}
         </>
       );
-    } else {
-      return (
-        <>
-          {!props.isSaveMovies && (
-            <p className="movies__message movies__message_error">Ничего не найдено</p>
-          )}
-        </>
-      );
+    }else {
+
     }
 
+
+
+
   }
-
-
-
-
-
-
-
-
-
 
   function likeMovies() {
     return (
