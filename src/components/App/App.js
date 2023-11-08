@@ -104,7 +104,10 @@ function App() {
   function filterShortMovies(movies) {
     if (movies !== null && movies.length > 0){
       // console.log('movies.length = ' + movies.length);
-      return movies.filter((item) => item.duration <= 40);
+      const getShortMovies = movies.filter((item) => item.duration <= 40);
+      // console.log(`getShortMovies =`, getShortMovies);
+      // localStorage.setItem('movies', JSON.stringify(getShortMovies));
+      return getShortMovies;
     }
   };
 

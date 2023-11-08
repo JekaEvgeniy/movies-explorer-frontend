@@ -65,6 +65,7 @@ function MoviesCardList({ ...props }) {
     // console.log(`items = ${items}`);
     // console.log(`items.length = ${items.length}`);
     if (items && items.length) {
+      console.log('????');
       setVisibleMovies(true);
       setIsNotFound(false);
       setRenderMovies(props.list.slice(0, numberElementsDisplay));
@@ -120,7 +121,7 @@ function MoviesCardList({ ...props }) {
     // console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}; movieCard.length = ${movieCard.length} `);
 
     // console.log(`visibleMovies = ${visibleMovies}`);
-    // console.log(`props.setIsNotFound = ${isNotFound}`);
+    //console.log(`props.setIsNotFound = ${isNotFound}`);
     // console.log(`!visibleMovies || isNotFound ==== > ${!visibleMovies || isNotFound}`);
 
     if (checkItems){
@@ -152,7 +153,6 @@ function MoviesCardList({ ...props }) {
       let localStorageMovies = JSON.parse(localStorage.getItem('movies'));
       if (localStorageMovies ){
         if (! localStorageMovies.length) {
-
           return (
             <>
               <p className="movies__message movies__message_error">Ничего не найдено</p>
