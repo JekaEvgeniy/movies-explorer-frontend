@@ -158,7 +158,10 @@ function App() {
             handleSetFilteredMovies(items, searchQuery, shortMovies);
           }
         })
-        .catch((err) => console.error(`Ошибка promise.all: ${err}`))
+        .catch((err) => {
+          console.error(`Ошибка promise.all: ${err}`);
+          setIsSearchError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        })
         .finally(function () {
           // выполнится, когда операция завершилась успехом или ошибкой
           setIsLoadingMovies(false);
@@ -232,11 +235,23 @@ function App() {
           <>
             <Header isPageMovies />
             <main className="content">
-              <SearchForm />
+
+              <SearchForm
+                isSearchError={isSearchError}
+                searchQuery={searchQuery}
+                handleSubmit={handleSubmit}
+                handleChangeShorts={handleChangeShorts}
+                shortMovies={shortMovies}
+                handleChangeSearch={handleChangeSearch}
+              />
               <Movies
+                isSaveMovies
+                setIsNotFound={setIsNotFound}
                 isLoadingMovies={isLoadingMovies}
-                list={filteredMovies} isSaveMovies
-               />
+                list={filteredMovies}
+              />
+
+
             </main>
             <Footer />
           </>
