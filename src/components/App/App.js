@@ -37,21 +37,17 @@ function App() {
 
   useEffect(() => {
     /**
-     * 1. Если при загрузке страницы поиск не выполнялся, то фильмы не показываем.
+     * Т: Если при загрузке страницы поиск не выполнялся, то фильмы не показываем.
      */
 
-    // console.warn(`searchQuery = ${searchQuery}`);
+    const searchQuery = localStorage.getItem('searchQuery') || '';
 
-    if (searchQuery) {
-      const arr = filterMovies(movies, searchQuery, shortMovies);
-      setFilteredMovies(arr);
-    } else {
-      //console.log(`searchQuery = ${searchQuery} >>> Если пользователь ещё ничего не искал, блока с карточками на странице нет.`);
+    setSearchQuery(searchQuery);
 
-      const arr = JSON.parse(localStorage.getItem('movies'));
-      setShortMovies(localStorage.getItem('shortMovies'));
-      setFilteredMovies(shortMovies === 'on' ? filterShortMovies(arr) : arr);
-    }
+    const arr = JSON.parse(localStorage.getItem('movies'));
+    setShortMovies(localStorage.getItem('shortMovies'));
+    setFilteredMovies(shortMovies === 'on' ? filterShortMovies(arr) : arr);
+
   }, [shortMovies, movies]); // searchQuery
 
   // https://stackoverflow.com/questions/56356900/way-to-determine-checkbox-checked-in-react-usestate
@@ -78,7 +74,7 @@ function App() {
     */
     const moviesList = filterMovies(movies, query);
 
-    console.log('moviesList => ', moviesList);
+    // console.log('moviesList => ', moviesList);
 
     setFilteredMovies(checkbox === 'on' ? filterShortMovies(moviesList) : moviesList);
     localStorage.setItem('movies', JSON.stringify(moviesList));
@@ -86,7 +82,7 @@ function App() {
 
   function filterShortMovies(movies) {
     if (movies !== null && movies.length > 0){
-      console.log('movies.length = ' + movies.length);
+      // console.log('movies.length = ' + movies.length);
       return movies.filter((item) => item.duration <= 40);
     }
   };
@@ -152,7 +148,7 @@ function App() {
     // console.log(`movies`, movies);
 
     if (movies !== null && movies.length > 0) {
-      const films = movies;
+      // const films = movies;
       // const films = JSON.parse(movies);
 
       filteredMoviesArray = movies.filter((item) => {

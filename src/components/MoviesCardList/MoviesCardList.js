@@ -37,7 +37,7 @@ function MoviesCardList({ ...props }) {
     function handleResize() {
 
       const screenWidth = window.innerWidth || document.documentElement.clientWidth;
-      console.log(`screenWidth = ${screenWidth}`);
+      // console.log(`screenWidth = ${screenWidth}`);
       setScreenWidth(screenWidth);
     }
 
@@ -61,9 +61,9 @@ function MoviesCardList({ ...props }) {
 
   React.useEffect(() => {
     const items = props.list;
-    console.log(`items = ${items}`);
+    // console.log(`items = ${items}`);
+    // console.log(`items.length = ${items.length}`);
     if (items && items.length) {
-      console.log(`items.length = ${items.length}`);
       setVisibleMovies(true);
       setRenderMovies(props.list.slice(0, numberElementsDisplay));
 
@@ -74,7 +74,7 @@ function MoviesCardList({ ...props }) {
       };
 
     } else {
-      console.log('>>> нет элементов');
+      // console.log('>>> нет элементов');
       setVisibleMovies(false);
       hiddenBtnMore();
     }
@@ -112,10 +112,9 @@ function MoviesCardList({ ...props }) {
 
     const checkItems = movieCard.length && movieCard.length > 0;
     // console.warn(`checkItems = ${checkItems}`);
-    console.log('renderMovies => ', renderMovies);
-    console.log('<= renderMovies => ');
-
-    console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}; movieCard.length = ${movieCard.length} `);
+    // console.log('renderMovies => ', renderMovies);
+    // console.log('<= renderMovies => ');
+    // console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}; movieCard.length = ${movieCard.length} `);
 
     if (checkItems){
       return (
