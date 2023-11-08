@@ -160,8 +160,8 @@ function App() {
         })
         .catch((err) => console.error(`Ошибка promise.all: ${err}`))
         .finally(function () {
-          setIsLoadingMovies(false);
           // выполнится, когда операция завершилась успехом или ошибкой
+          setIsLoadingMovies(false);
         })
         ;
     }
