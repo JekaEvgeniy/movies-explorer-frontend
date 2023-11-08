@@ -53,8 +53,8 @@ function MoviesCardList({ ...props }) {
 
   React.useEffect(() => {
     const items = props.list;
-
-    if (items) {
+    console.log(`items = ${items}`);
+    if (items && items.length) {
       console.log(`items.length = ${items.length}`);
 
       setRenderMovies(props.list.slice(0, numberElementsDisplay));
@@ -66,6 +66,7 @@ function MoviesCardList({ ...props }) {
       };
 
     } else {
+      console.log('>>> нет элементов');
       hiddenBtnMore();
     }
 
@@ -102,7 +103,7 @@ function MoviesCardList({ ...props }) {
 
     const checkItems = movieCard.length && movieCard.length > 0;
     if (checkItems) {
-      // console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}; movieCard.length = ${movieCard.length} `);
+      console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}; movieCard.length = ${movieCard.length} `);
       return (
         <>
           <ul className="movies-items">
@@ -120,7 +121,7 @@ function MoviesCardList({ ...props }) {
       return (
         <>
           {!props.isSaveMovies && (
-            <h2>Нет элементов!</h2>
+            <p className="movies__message movies__message_error">Ничего не найдено</p>
           )}
         </>
       );

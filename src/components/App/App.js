@@ -28,7 +28,10 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [shortMovies, setShortMovies] = useState(localStorage.getItem('shortMovies') === 'on' ? 'on' : 'off');
 
-  const [isLoadingMovies, setIsLoadingMovies] = React.useState(false);
+  const [isLoadingMovies, setIsLoadingMovies] = useState(false);
+
+  const [isSearchError, setIsSearchError] = useState('');
+
 
   const localStorageMovies = localStorage.getItem('movies');
 
@@ -75,7 +78,7 @@ function App() {
     */
     const moviesList = filterMovies(movies, query);
 
-    // console.log('moviesList => ', moviesList);
+    console.log('moviesList => ', moviesList);
 
     setFilteredMovies(checkbox === 'on' ? filterShortMovies(moviesList) : moviesList);
     localStorage.setItem('movies', JSON.stringify(moviesList));
@@ -92,18 +95,22 @@ function App() {
     /**
      * Если пользователь ещё ничего не искал, блока с карточками на странице нет.
     */
-    // FIXME: Сделать проверку на отправку пустой строки!
-    // console.log('>>> handleSubmit >>>');
     e.preventDefault();
 
     console.log(`handleSubmit() >>> val || searchText = ${searchQuery}`);
     if (!searchQuery) {
+      // FIXME: Сделать проверку на отправку пустой строки!
       console.error('handleSubmit >>> input.val пустой');
+      setIsSearchError('Нужно ввести ключевое слово');
+
+
+
       return;
     }
 
-    console.log(`searchQuery >>>> ${searchQuery}`);
+    //console.log(`searchQuery >>>> ${searchQuery}`);
 
+    setIsSearchError('');
     setIsLoadingMovies(true);
     setSearchQuery(searchQuery);
 
@@ -113,18 +120,20 @@ function App() {
     // console.log(`handleSubmit >>> movies = ${movies}`);
 
     if (movies.length) {
+      console.log('app.js >>> movies.length = ' + movies.length);
       setIsLoadingMovies(false);
       handleSetFilteredMovies(movies, searchQuery, shortMovies);
     } else {
+      console.log('app.js >>> ! movies.length');
       console.log('handleSubmit >>> Подгружаем фильмы >>> loading ... ...');
       Promise.all([apiMovies()])
         .then(([items]) => {
           if (items.length) {
 
-            if (!localStorage.hasOwnProperty('moviesAll')) {
+            //if (!localStorage.hasOwnProperty('moviesAll')) {
               // Записываем в localStorage все фильмы
               // localStorage.setItem('moviesAll', JSON.stringify(items)); // fixme: Удалить
-            }
+            //}
             setMovies(items);
 
             // console.warn(items)
@@ -180,6 +189,7 @@ function App() {
             <Header isPageMovies />
             <main className="content">
               <SearchForm
+                isSearchError={isSearchError}
                 searchQuery={searchQuery}
                 handleSubmit={handleSubmit}
                 handleChangeShorts={handleChangeShorts}

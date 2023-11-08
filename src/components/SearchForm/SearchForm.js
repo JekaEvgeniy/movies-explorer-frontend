@@ -26,8 +26,7 @@ function SearchForm({ ...props }) {
           </button>
         </div>
 
-        {/* <div className="search-form__message">Нужно ввести ключевое слово</div> */}
-        <div className="search-form__message"></div>
+        <div className="search-form__message">{props.isSearchError}</div>
 
         <div className="search-checkbox">
           <label className="search-checkbox__label">
@@ -39,7 +38,6 @@ function SearchForm({ ...props }) {
             />
             <span className="search-checkbox__ico"></span>
             <span className="search-checkbox__title">Короткометражки</span>
-            {/* <span className="search-checkbox__title">Короткометражки{props.shortMovies === 'on' ? 'on' : 'off'}</span> */}
           </label>
         </div>
       </form>

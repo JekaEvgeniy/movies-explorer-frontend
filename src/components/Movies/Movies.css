@@ -24,3 +24,11 @@
 .movies__footer-actions {
   margin-top: 80px;
 }
+
+
+.movies__message {
+  text-align: center;
+}
+.movies__message_error {
+  color: #EE3465;
+}
