@@ -17,6 +17,7 @@ function MoviesCardList({ ...props }) {
   const [numberElementsDisplay, setNumberElementsDisplay] = useState(0); // количество отображаемых элементов
   const [numberElementsAdd, setNumberElementsAdd] = useState(0); // количество добавляемых элементов
   const [visibleMovies, setVisibleMovies] = useState(true);
+  const [isNotFound, setIsNotFound] = useState('');
 
 
   /**
@@ -65,6 +66,7 @@ function MoviesCardList({ ...props }) {
     // console.log(`items.length = ${items.length}`);
     if (items && items.length) {
       setVisibleMovies(true);
+      setIsNotFound(false);
       setRenderMovies(props.list.slice(0, numberElementsDisplay));
 
       if (items.length <= numberElementsDisplay) {
@@ -74,8 +76,9 @@ function MoviesCardList({ ...props }) {
       };
 
     } else {
-      // console.log('>>> нет элементов');
+      console.log('>>> нет элементов');
       setVisibleMovies(false);
+      setIsNotFound(true);
       hiddenBtnMore();
     }
 
@@ -116,6 +119,10 @@ function MoviesCardList({ ...props }) {
     // console.log('<= renderMovies => ');
     // console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}; movieCard.length = ${movieCard.length} `);
 
+    // console.log(`visibleMovies = ${visibleMovies}`);
+    // console.log(`props.setIsNotFound = ${isNotFound}`);
+    // console.log(`!visibleMovies || isNotFound ==== > ${!visibleMovies || isNotFound}`);
+
     if (checkItems){
       return (
         <>
@@ -127,7 +134,7 @@ function MoviesCardList({ ...props }) {
             )
           }
           {
-            !visibleMovies && (
+            (!visibleMovies || isNotFound) && (
               <p className="movies__message movies__message_error">Ничего не найдено</p>
             )
           }
@@ -139,13 +146,23 @@ function MoviesCardList({ ...props }) {
           )}
         </>
       );
-    }else {
+    } else {
+
+      console.log('Пользователь что-то искал и решил обновить страницу, но элементов нет. => показывем сообщение об ошибке.');
+      let localStorageMovies = JSON.parse(localStorage.getItem('movies'));
+      if (localStorageMovies ){
+        if (! localStorageMovies.length) {
+
+          return (
+            <>
+              <p className="movies__message movies__message_error">Ничего не найдено</p>
+            </>
+          );
+
+        }
+      }
 
     }
-
-
-
-
   }
 
   function likeMovies() {

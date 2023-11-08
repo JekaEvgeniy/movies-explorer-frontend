@@ -31,22 +31,34 @@ function App() {
   const [isLoadingMovies, setIsLoadingMovies] = useState(false);
 
   const [isSearchError, setIsSearchError] = useState('');
-
-
-  const localStorageMovies = localStorage.getItem('movies');
+  const [isNotFound, setIsNotFound] = useState(false);
 
   useEffect(() => {
     /**
-     * Т: Если при загрузке страницы поиск не выполнялся, то фильмы не показываем.
+     * ТЗ: Если при загрузке страницы поиск не выполнялся, то фильмы не показываем.
      */
 
     const searchQuery = localStorage.getItem('searchQuery') || '';
 
     setSearchQuery(searchQuery);
-
+    const checkOldSearch = !!localStorage.getItem('searchQuery');
     const arr = JSON.parse(localStorage.getItem('movies'));
+
     setShortMovies(localStorage.getItem('shortMovies'));
     setFilteredMovies(shortMovies === 'on' ? filterShortMovies(arr) : arr);
+
+    // if (checkOldSearch && ! arr?.length ){
+    //   console.log(`Если пользователь что-то искал и не нашел, а потом обновлил страницу - показывем сообщение об ошибке.`);
+    //   setIsNotFound(true);
+    //   console.log(`isNotFound 0 = ${isNotFound}`);
+    // } else {
+    //   console.log('23');
+    //   setIsNotFound(false);
+    // }
+    // console.log(`isNotFound 1 = ${isNotFound}`);
+
+    setIsLoadingMovies(false);
+
 
   }, [shortMovies, movies]); // searchQuery
 
@@ -74,7 +86,16 @@ function App() {
     */
     const moviesList = filterMovies(movies, query);
 
-    // console.log('moviesList => ', moviesList);
+    console.log('moviesList => ', moviesList);
+
+    if (! moviesList.length ){
+      // Нет ни одного фильма отвечающему запросу
+      setIsNotFound(true);
+    }else {
+      setIsNotFound(false);
+    }
+
+    console.log(`isNotFound 2 = ${isNotFound}`);
 
     setFilteredMovies(checkbox === 'on' ? filterShortMovies(moviesList) : moviesList);
     localStorage.setItem('movies', JSON.stringify(moviesList));
@@ -99,8 +120,6 @@ function App() {
       console.error('handleSubmit >>> input.val пустой');
       setIsSearchError('Нужно ввести ключевое слово');
 
-
-
       return;
     }
 
@@ -117,11 +136,12 @@ function App() {
 
     if (movies.length) {
       console.log('app.js >>> movies.length = ' + movies.length);
-      setIsLoadingMovies(false);
       handleSetFilteredMovies(movies, searchQuery, shortMovies);
+      setIsLoadingMovies(false);
     } else {
       console.log('app.js >>> ! movies.length');
       console.log('handleSubmit >>> Подгружаем фильмы >>> loading ... ...');
+
       Promise.all([apiMovies()])
         .then(([items]) => {
           if (items.length) {
@@ -138,14 +158,19 @@ function App() {
             handleSetFilteredMovies(items, searchQuery, shortMovies);
           }
         })
-        .catch((err) => console.error(`Ошибка promise.all: ${err}`)); // "[object Obj"... is not valid JSON
+        .catch((err) => console.error(`Ошибка promise.all: ${err}`))
+        .finally(function () {
+          setIsLoadingMovies(false);
+          // выполнится, когда операция завершилась успехом или ошибкой
+        })
+        ;
     }
   }
 
   function filterMovies(movies) {
     let filteredMoviesArray = [];
 
-    // console.log(`movies`, movies);
+    console.log(`movies`, movies);
 
     if (movies !== null && movies.length > 0) {
       // const films = movies;
@@ -192,7 +217,12 @@ function App() {
                 shortMovies={shortMovies}
                 handleChangeSearch={handleChangeSearch}
               />
-              <Movies list={filteredMovies} />
+              <Movies
+                setIsNotFound={setIsNotFound}
+                isLoadingMovies={isLoadingMovies}
+                list={filteredMovies}
+              />
+
             </main>
             <Footer />
           </>
@@ -203,7 +233,10 @@ function App() {
             <Header isPageMovies />
             <main className="content">
               <SearchForm />
-              <Movies list={filteredMovies} isSaveMovies />
+              <Movies
+                isLoadingMovies={isLoadingMovies}
+                list={filteredMovies} isSaveMovies
+               />
             </main>
             <Footer />
           </>
