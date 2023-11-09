@@ -28,7 +28,7 @@ https://artzolin.ru/javascript-theory/javascript-form-validation/?ysclid=loq82sd
 https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
 */
 
-function Register() {
+function Register({...props}) {
   const navigate = useNavigate();
 
   const {
@@ -40,6 +40,9 @@ function Register() {
   });
 
   const handleRegisterSubmit = (data) => {
+
+    props.setIsVisibleLoader(true);
+
     auth
     // .register({ name, email, password })
       .register(data.name, data.email, data.password)
@@ -59,10 +62,16 @@ function Register() {
                 navigate('/movies');
               }
             })
-            .catch((err) => { console.log(`При регистрации пользователя произошла ошибка. ${err}`) });
+            .catch((err) => { console.log(`При регистрации пользователя произошла ошибка. ${err}`) })
+            .finally(() => {
+              props.setIsVisibleLoader(false);
+            });
         }
       })
-      .catch((err) => { console.log(`При регистрации пользователя произошла ошибка. ${err}`) });
+      .catch((err) => { console.log(`При регистрации пользователя произошла ошибка. ${err}`) })
+      .finally(() => {
+        props.setIsVisibleLoader(false);
+      });
   };
 
   // const [formValue, setFormValue] = useState({
@@ -98,116 +107,116 @@ function Register() {
   // }
 
   return (
-    <main className="content">
-      <section className="authorization">
-        <div className="authorization__container">
-          <Link to="/" className="authorization__logo">
-            <img className="image-contain" src={headerLogo} loading="lazy" alt="логотип" />
-          </Link>
 
-          <h1 className="authorization__header">Добро пожаловать!</h1>
+    <section className="authorization">
+      <div className="authorization__container">
+        <Link to="/" className="authorization__logo">
+          <img className="image-contain" src={headerLogo} loading="lazy" alt="логотип" />
+        </Link>
 
-          <form
-            onSubmit={handleSubmit(handleRegisterSubmit)}
-            className="authorization-form"
-            name="registration"
-          >
-            <div className="authorization-form__content">
-              <div className="authorization-form__content-top">
-                <label className="authorization-form__label">
-                  <span className="authorization-form__title">Имя</span>
-                  <input
-                    {...register('name', {
-                      required: 'Поле обязательно к заполнению',
-                      minLength: {
-                        value: 2,
-                        message: 'Минимум 2 символа',
-                      },
-                      maxLength: {
-                        value: 30,
-                        message: 'Максимум 30 символов'
-                      },
-                    })}
-                    type="text"
-                    className={`authorization-form__input ${errors?.name ? 'authorization-form__input_invalid' : '' }`}
-                    minLength="2"
-                    maxLength="30"
-                    placeholder="Введите имя"
-                    required
-                  />
-                  <span className="authorization-form__error-message">
-                    {errors?.name && ( errors?.name?.message || "Пожалуйста, введите правильное имя" )}
-                  </span>
-                </label>
-                <label className="authorization-form__label">
-                  <span className="authorization-form__title">E-mail</span>
-                  <input
-                    {...register("email", {
-                      required: "Обязательно укажите e-mail",
-                      pattern: {
-                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                        message: "Введите e-mail в формате example@gmail.com",
-                      },
-                    })}
-                    type="email"
-                    inputMode="email"
-                    className={`authorization-form__input ${errors?.email ? 'authorization-form__input_invalid' : ''}`}
-                    placeholder="Введите email"
-                    required
-                  />
-                  <span className="authorization-form__error-message">
-                    {errors?.email && (errors?.email?.message || "Пожалуйста, введите правильно адрес электронной почты")}
-                  </span>
-                </label>
-                <label className="authorization-form__label">
-                  <span className="authorization-form__title">Пароль</span>
-                  <input
-                    {...register("password", {
-                      required: "Поле обязательно для заполнения",
-                      minLength: {
-                        value: 4,
-                        message: 'Минимум 4 символа',
-                      },
-                      maxLength: {
-                        value: 30,
-                        message: 'Максимум 30 символов'
-                      },
-                    })}
-                    // onChange={handleChange}
-                    // value={formValue.password}
-                    type="password"
-                    className={`authorization-form__input ${errors?.password ? 'authorization-form__input_invalid' : ''}`}
-                    placeholder="Введите пароль"
-                    minLength="4"
-                    maxLength="30"
-                    required
-                  />
-                  <span className="authorization-form__error-message">
-                    {errors?.password && ( errors?.password?.message || "Пожалуйста, введите правильно пароль")}
-                  </span>
-                </label>
+        <h1 className="authorization__header">Добро пожаловать!</h1>
 
-              </div>
+        <form
+          onSubmit={handleSubmit(handleRegisterSubmit)}
+          className="authorization-form"
+          name="registration"
+        >
+          <div className="authorization-form__content">
+            <div className="authorization-form__content-top">
+              <label className="authorization-form__label">
+                <span className="authorization-form__title">Имя</span>
+                <input
+                  {...register('name', {
+                    required: 'Поле обязательно к заполнению',
+                    minLength: {
+                      value: 2,
+                      message: 'Минимум 2 символа',
+                    },
+                    maxLength: {
+                      value: 30,
+                      message: 'Максимум 30 символов'
+                    },
+                  })}
+                  type="text"
+                  className={`authorization-form__input ${errors?.name ? 'authorization-form__input_invalid' : '' }`}
+                  minLength="2"
+                  maxLength="30"
+                  placeholder="Введите имя"
+                  required
+                />
+                <span className="authorization-form__error-message">
+                  {errors?.name && ( errors?.name?.message || "Пожалуйста, введите правильное имя" )}
+                </span>
+              </label>
+              <label className="authorization-form__label">
+                <span className="authorization-form__title">E-mail</span>
+                <input
+                  {...register("email", {
+                    required: "Обязательно укажите e-mail",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Введите e-mail в формате example@gmail.com",
+                    },
+                  })}
+                  type="email"
+                  inputMode="email"
+                  className={`authorization-form__input ${errors?.email ? 'authorization-form__input_invalid' : ''}`}
+                  placeholder="Введите email"
+                  required
+                />
+                <span className="authorization-form__error-message">
+                  {errors?.email && (errors?.email?.message || "Пожалуйста, введите правильно адрес электронной почты")}
+                </span>
+              </label>
+              <label className="authorization-form__label">
+                <span className="authorization-form__title">Пароль</span>
+                <input
+                  {...register("password", {
+                    required: "Поле обязательно для заполнения",
+                    minLength: {
+                      value: 4,
+                      message: 'Минимум 4 символа',
+                    },
+                    maxLength: {
+                      value: 30,
+                      message: 'Максимум 30 символов'
+                    },
+                  })}
+                  // onChange={handleChange}
+                  // value={formValue.password}
+                  type="password"
+                  className={`authorization-form__input ${errors?.password ? 'authorization-form__input_invalid' : ''}`}
+                  placeholder="Введите пароль"
+                  minLength="4"
+                  maxLength="30"
+                  required
+                />
+                <span className="authorization-form__error-message">
+                  {errors?.password && ( errors?.password?.message || "Пожалуйста, введите правильно пароль")}
+                </span>
+              </label>
 
-              <div className="authorization-form__content-bottom">
-                <div className="authorization-form-actions">
-                  {/* <p className="authorization-form-actions__error-message">При обновлении профиля произошла ошибка.</p> */}
-                  <button
-                    type="submit"
-                    className="authorization-form-actions__btn authorization-form-actions__btn_theme_accent"
-                    disabled={!isValid}
-                  >Зарегистрироваться</button>
-                  <p className="authorization-form-actions__caption">
-                    Уже зарегистрированы?
-                    <Link className="authorization-form-actions__caption-link" to="/signin">Войти</Link>
-                  </p>
-                </div>
+            </div>
+
+            <div className="authorization-form__content-bottom">
+              <div className="authorization-form-actions">
+                {/* <p className="authorization-form-actions__error-message">При обновлении профиля произошла ошибка.</p> */}
+                <button
+                  type="submit"
+                  className="authorization-form-actions__btn authorization-form-actions__btn_theme_accent"
+                  disabled={!isValid}
+                >Зарегистрироваться</button>
+                <p className="authorization-form-actions__caption">
+                  Уже зарегистрированы?
+                  <Link className="authorization-form-actions__caption-link" to="/signin">Войти</Link>
+                </p>
               </div>
             </div>
-          </form>
-        </div>
-      </section>
-    </main>
+          </div>
+        </form>
+      </div>
+    </section>
+
   )
 }
 

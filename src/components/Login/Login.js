@@ -5,7 +5,7 @@ import * as auth from '../../utils/Auth';
 
 import headerLogo from '../../images/header/logo.svg';
 
-function Login() {
+function Login({...props}) {
   const navigate = useNavigate();
 
   const {
@@ -17,6 +17,8 @@ function Login() {
   });
 
   const handleLoginSubmit = (data) => {
+    props.setIsVisibleLoader(true);
+
     auth
       .authorize(data.email, data.password)
       .then((res) => {
@@ -25,7 +27,10 @@ function Login() {
           navigate('/movies');
         }
       })
-      .catch((err) => console.log("Ошибка", err));
+      .catch((err) => console.log("Ошибка", err))
+      .finally(() => {
+        props.setIsVisibleLoader(false);
+      });
   };
 
   // const handleSubmit = (e) => {
@@ -52,7 +57,6 @@ function Login() {
 
 
   return (
-    <main className="content">
       <section className="authorization">
         <div className="authorization__container">
           <Link to="/" className="authorization__logo">
@@ -132,7 +136,6 @@ function Login() {
           </form>
         </div>
       </section>
-    </main>
   );
 }
 

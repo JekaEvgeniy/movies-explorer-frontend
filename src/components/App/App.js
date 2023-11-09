@@ -322,8 +322,26 @@ function App() {
         />
 
 
-        <Route path="/signup" element={<Register />} />
-        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={
+          <>
+            <main className="content">
+              <Register setIsVisibleLoader={setIsVisibleLoader} />
+              {isVisibleLoader && (
+                <Preloader currentPosition="fullscreen" />
+              )}
+            </main>
+          </>
+        } />
+        <Route path="/signin" element={
+          <>
+            <main className="content">
+              <Login setIsVisibleLoader={setIsVisibleLoader}  />
+              {isVisibleLoader && (
+                <Preloader currentPosition="fullscreen" />
+              )}
+            </main>
+          </>
+        } />
 
 
         <Route path="/movies" element={
