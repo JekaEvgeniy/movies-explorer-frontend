@@ -25,7 +25,6 @@ class Api {
     this._cardLikes = this._url + '/cards/cardId/likes';
 
     this._userUrl = this._url + '/users/me';
-    this._userAvatarUrl = this._url + '/users/me/avatar';
 
     this._defaultHeaders = { 'Content-Type': 'application/json' };
   }
@@ -97,39 +96,44 @@ class Api {
   * Работаем с инфополем
   */
 
-  // getUserInfo() {
-  //   return fetch(this._userUrl, {
-  //     method: "GET",
-  //     // headers: this._headers,
-  //     // credentials: 'include',
-  //     // headers: {
-  //     //   authorization: `Bearer ${localStorage.getItem('jwt')}`
-  //     // },
-  //     headers: this._injectAuth(this._defaultHeaders),
-  //   })
-  //     .then(this._checkResponse)
-  //     .catch((err) => {
-  //       console.error(`Ошибка! Ошибка при получении данных о пользователе: ${err}`);
-  //     })
-  // }
+  getUserInfo() {
+    return fetch(this._userUrl, {
+      method: "GET",
+      // headers: this._headers,
+      // credentials: 'include',
+      // headers: {
+      //   authorization: `Bearer ${localStorage.getItem('jwt')}`
+      // },
+      headers: this._injectAuth(this._defaultHeaders),
+    })
+      .then(this._checkResponse)
+      .catch((err) => {
+        console.error(`Ошибка! Ошибка при получении данных о пользователе: ${err}`);
+      })
+  }
 
-  // setUserInfo({ name, about }) {
-  //   return fetch(`${this._url}/users/me`, {
-  //     // credentials: 'include',
-  //     method: 'PATCH',
-  //     // headers: this._headers,
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       authorization: `Bearer ${localStorage.getItem('jwt')}`
-  //     },
-  //     // headers: this._injectAuth(this._defaultHeaders),
-  //     body: JSON.stringify({ name, about }),
-  //   })
-  //     .then(this._checkResponse)
-  //     .catch((err) => {
-  //       console.error('Ошибка! Ошибка при Добавлении новых данных о пользователе', err);
-  //     })
-  // }
+  // setUserInfo({ name, email }) {
+  setUserInfo( data ) {
+    return fetch(`${this._url}/users/me`, {
+      // credentials: 'include',
+      method: 'PATCH',
+      // headers: this._headers,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('jwt')}`
+      },
+      // headers: this._injectAuth(this._defaultHeaders),
+      // body: JSON.stringify({ name, email }),
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email
+      }),
+    })
+      .then(this._checkResponse)
+      .catch((err) => {
+        console.error('Ошибка! Ошибка при Добавлении новых данных о пользователе', err);
+      })
+  }
 
   // setUserAvatar(data) {
   //   const url = `${this._url}/users/me/avatar`;

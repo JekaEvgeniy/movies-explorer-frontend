@@ -89,3 +89,26 @@
   background: #2BE080;
   animation : preloader-inside-red 1s ease-in-out infinite;
 }
+
+.preloader_position_fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
+  user-select: none;
+}
+
+.preloader_position_fixed:before {
+  position: absolute;
+  background-color: #fff;
+  top  : 0;
+  left : 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1px);
+  opacity: 0.6;
+  content:'';
+}

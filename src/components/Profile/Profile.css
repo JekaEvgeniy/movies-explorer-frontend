@@ -113,7 +113,10 @@
   transition : padding-right 0.3s ease-in-out;
 }
 
-
+.profile-form__input[disabled] {
+  pointer-events: none;
+  user-select: none;
+}
 
 .profile-form__input:focus {
 /* box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08); */
@@ -150,6 +153,18 @@
   user-select: none;
   cursor     : pointer;
   transition : opacity 0.3s ease-in-out;
+}
+
+.profile-form-actions__btn_theme_accent {
+  box-sizing : border-box;
+  background-color: #3456F3;
+  width      : 100%;
+  padding    : 13px 12px 15px 12px;
+  height     : 45px;
+  font-size  : 14px;
+  font-weight: 500;
+  color      : #fff;
+  text-align : center;
 }
 
 .profile-form-actions__btn:hover {

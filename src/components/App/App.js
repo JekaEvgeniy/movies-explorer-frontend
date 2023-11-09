@@ -24,7 +24,6 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
-  const [email, setEmail] = useState(null);
 
   const navigate = useNavigate();
 
@@ -43,6 +42,26 @@ function App() {
 
   const [isSearchError, setIsSearchError] = useState('');
   const [isNotFound, setIsNotFound] = useState(false);
+  const [isVisibleLoader, setIsVisibleLoader] = useState(false); // Лоадер поверх всех элементов
+
+  useEffect(() => {
+    if (loggedIn) {
+      const token = localStorage.getItem('jwt');
+
+      Promise.all([api.getUserInfo()])
+        .then(([info]) => {
+          console.log('setCurrentUser info ===> ', info);
+
+          if (token) {
+            setCurrentUser(info);
+          }
+        })
+        .catch((err) => console.log(`Ошибка promise.all: ${err}`));
+    }
+
+    // console.log(`useEffect >>> loggedIn = ${loggedIn}`);
+
+  }, [loggedIn]);
 
   useEffect(() => {
     /**
@@ -73,8 +92,36 @@ function App() {
 
   }, [shortMovies, movies]); // searchQuery
 
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    // console.log(`jwt token = ${token}`);
+
+    if (token) {
+      auth.checkToken(token)
+        .then(user => {
+          setLoggedIn(true);
+          handleLogin(user);
+
+          // navigate('/');
+        })
+        .catch((err) => {
+          // console.error(`front> >>> APP.js >>> useEffect`);
+          console.error(err);
+        });
+    }
+  }, [navigate]);
+
   const handleLogin = () => {
     setLoggedIn(true);
+  }
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    console.log('handleLogout>>>>');
+    localStorage.clear();
+    navigate('/');
+    setLoggedIn(false);
   }
 
   // const handleRegister = ({ email, password }) => {
@@ -97,49 +144,20 @@ function App() {
   //     });
   // }
 
-  useEffect(() => {
-    if (loggedIn) {
-      const token = localStorage.getItem('jwt');
+  // const handleProfileUpdate = (userData) => {
+  //   console.log('run >>> handleProfileUpdate(data)', userData)
+  //   console.log(userData);
+  //   api
+  //     .setUserInfo(userData)
+  //     .then((updateUserData) => {
 
-      // Promise.all([api.getUserInfo(), api.getCards()])
-      //   .then(([info, cards]) => {
+  //       setCurrentUser(updateUserData.data);
+  //       // closeAllPopups();
+  //     })
+  //     .catch(err => console.error(err));
+  // };
 
-      //     if (token) {
-      //       setEmail(info.email);
-      //       // console.log(`setCurrentUser ===> `);
-      //       setCurrentUser(info);
-      //       // handleUpdateUser(info);
-      //       // handleUpdateAvatar(info);
-      //       if (cards.length) {
-      //         setCards(cards);
-      //       }
-      //     }
-      //   })
-      //   .catch((err) => console.log(`Ошибка promise.all: ${err}`));
-    }
 
-    console.log(`useEffect >>> loggedIn = ${loggedIn}`);
-
-  }, [loggedIn]);
-
-  useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    console.log(`jwt token = ${token}`);
-
-    if (token) {
-      auth.checkToken(token)
-        .then(user => {
-          setLoggedIn(true);
-          handleLogin(user);
-
-          // navigate('/');
-        })
-        .catch((err) => {
-          console.error(`front> >>> APP.js >>> useEffect`);
-          console.error(err);
-        });
-    }
-  }, [navigate]);
 
 
 
@@ -361,7 +379,15 @@ function App() {
           <>
             <Header isPageProfile />
             <main className="content">
-              <Profile />
+              <Profile
+                setCurrentUser={setCurrentUser}
+                handleLogout={handleLogout}
+                setIsVisibleLoader={setIsVisibleLoader}
+                // handleProfileUpdate={handleProfileUpdate}
+              />
+              {isVisibleLoader && (
+                <Preloader currentPosition="fullscreen" />
+              )}
             </main>
           </>
         } />
