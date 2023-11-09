@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 
-import { apiMovies } from '../../utils/Api';
+import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
+
+import { apiMovies, api } from '../../utils/Api';
+import * as auth from '../../utils/Auth';
 
 import Main from "../Main/Main";
 import Login from "../Login/Login";
@@ -15,13 +18,21 @@ import Profile from '../Profile/Profile';
 import Page404 from '../Page404/Page404';
 import Preloader from '../Preloader/Preloader';
 
-
-/*
-  error: react-dom.development.js:86 Warning: Received the string `true` for the boolean attribute `checked`. Although this works, it will not work as expected if you pass the string "false". Did you mean checked={true}?
-*/
-// const [shortMovies, setShortMovies] = useState( localStorage.getItem('shortMovies') || false );
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
+  const [email, setEmail] = useState(null);
+
+  const navigate = useNavigate();
+
+  // https://reactrouter.com/en/main/hooks/use-navigate
+  // ERROR useNavigate() may be used only in the context of a <Router> component.
+  // https://bobbyhadz.com/blog/react-usenavigate-may-be-used-only-in-context-of-router
+
+
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
 
@@ -61,6 +72,79 @@ function App() {
 
 
   }, [shortMovies, movies]); // searchQuery
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  }
+
+  // const handleRegister = ({ email, password }) => {
+
+  //   auth.register(email, password)
+  //     .then((res) => {
+  //       localStorage.setItem("jwt", res.token);
+  //       console.log('handleRegiste>>> res.token = ' + res.token);
+
+  //       // setCurrentUser(res);
+  //       // handleUpdateUser(res);
+  //       // handleUpdateAvatar(res);
+
+  //       setLoggedIn(true);
+  //       navigate('/');
+  //     })
+  //     .catch(err => {
+  //       console.err(`front> >>> APP.js >>> handleRegister()`);
+  //       console.error(err);
+  //     });
+  // }
+
+  useEffect(() => {
+    if (loggedIn) {
+      const token = localStorage.getItem('jwt');
+
+      // Promise.all([api.getUserInfo(), api.getCards()])
+      //   .then(([info, cards]) => {
+
+      //     if (token) {
+      //       setEmail(info.email);
+      //       // console.log(`setCurrentUser ===> `);
+      //       setCurrentUser(info);
+      //       // handleUpdateUser(info);
+      //       // handleUpdateAvatar(info);
+      //       if (cards.length) {
+      //         setCards(cards);
+      //       }
+      //     }
+      //   })
+      //   .catch((err) => console.log(`Ошибка promise.all: ${err}`));
+    }
+
+    console.log(`useEffect >>> loggedIn = ${loggedIn}`);
+
+  }, [loggedIn]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    console.log(`jwt token = ${token}`);
+
+    if (token) {
+      auth.checkToken(token)
+        .then(user => {
+          setLoggedIn(true);
+          handleLogin(user);
+
+          // navigate('/');
+        })
+        .catch((err) => {
+          console.error(`front> >>> APP.js >>> useEffect`);
+          console.error(err);
+        });
+    }
+  }, [navigate]);
+
+
+
+
+
 
   // https://stackoverflow.com/questions/56356900/way-to-determine-checkbox-checked-in-react-usestate
   function handleChangeShorts(e) {
@@ -202,11 +286,24 @@ function App() {
 
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className="app">
 
       <Routes>
 
-        <Route exact path="/" element={<Main />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <>
+              <Main
+                loggedIn={loggedIn}
+              />
+            </>
+          }
+        />
+
+
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
 
@@ -274,7 +371,12 @@ function App() {
       </Routes>
 
     </div>
-  );
+    </CurrentUserContext.Provider>
+
+  ); // END return
+
+
+
 }
 
 export default App;

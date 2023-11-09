@@ -132,6 +132,11 @@
   cursor     : pointer;
 }
 
+.header__burger_color_white {
+  color: #fff;
+}
+
+
 @media all and (max-width: 1024px) {
   .header__burger {
     display: block;
@@ -276,6 +281,15 @@
 
 .header-profile-nav__link_active {
   font-weight: 500;
+}
+
+@media all and (min-width: 1025px) {
+  .header-profile-nav__link_color_white {
+    color: #fff;
+  }
+  .header-profile-nav__link_color_white .header-profile-nav__link-ico {
+    color: #000000;
+  }
 }
 
 @media all and (max-width: 1024px) {

@@ -13,15 +13,34 @@ function Header({ ...props }) {
 
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
+  // console.log(`props.isPageMovies || props.isPageProfile = ${props.isPageMovies || props.isPageProfile}`);
+
   return (
-    <header className="header header_theme_blue">
+    <header className="header header_theme_blue" data-example={props.loggedIn}>
       <Link to="/" className="header__logo">
         <img className="image-contain" src={headerLogo} loading="lazy" alt="логотип" />
       </Link>
 
       {
-        props.isPageIndex && (
-          <Navigation />
+        props.loggedIn ? (
+          <>
+            <HeaderBurger
+              isPageIndex={props.isPageIndex}
+              setIsMenuOpened={setIsMenuOpened}
+            />
+            <HeaderProfileNav
+              isPageIndex={props.isPageIndex}
+              isOpen={isMenuOpened}
+              setIsMenuOpened={setIsMenuOpened}
+            />
+          </>
+
+        ) : (
+          props.isPageIndex ? (
+            <Navigation />
+          ):(
+            ''
+          )
         )
       }
 

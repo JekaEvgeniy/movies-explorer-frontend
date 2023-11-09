@@ -149,7 +149,7 @@ function MoviesCardList({ ...props }) {
       );
     } else {
 
-      console.log('Пользователь что-то искал и решил обновить страницу, но элементов нет. => показывем сообщение об ошибке.');
+      // console.log('Пользователь что-то искал и решил обновить страницу, но элементов нет. => показывем сообщение об ошибке.');
       let localStorageMovies = JSON.parse(localStorage.getItem('movies'));
       if (localStorageMovies ){
         if (! localStorageMovies.length) {

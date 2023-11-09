@@ -1,9 +1,56 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
+import * as auth from '../../utils/Auth';
 
 import headerLogo from '../../images/header/logo.svg';
 
 function Login() {
+  const navigate = useNavigate();
+
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({
+    mode: 'onBlur',
+  });
+
+  const handleLoginSubmit = (data) => {
+    auth
+      .authorize(data.email, data.password)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          navigate('/movies');
+        }
+      })
+      .catch((err) => console.log("Ошибка", err));
+  };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const { email, password } = formValue;
+  //   auth.authorize({ email, password })
+  //     .then(data => {
+
+  //       if (data.token) {
+  //         localStorage.setItem('jwt', data.token);
+  //         // api.setToken(data.token);
+
+  //         handleLogin();
+
+  //         navigate('/');
+  //       }
+
+  //     })
+  //     .catch((err) => {
+  //       // console.error(err);
+  //       handleInfoTooltip('error');
+  //     });
+  // }
+
+
   return (
     <main className="content">
       <section className="authorization">
@@ -14,28 +61,70 @@ function Login() {
 
           <h1 className="authorization__header">Рады видеть!</h1>
 
-          <form className="authorization-form" name="authorization">
+          <form
+            onSubmit={handleSubmit(handleLoginSubmit)}
+            className="authorization-form"
+            name="authorization"
+          >
             <div className="authorization-form__content">
               <div className="authorization-form__content-top">
                 <label className="authorization-form__label">
                   <span className="authorization-form__title">E-mail</span>
-                  <input type="email" inputMode="email" className="authorization-form__input" placeholder="Введите email" required />
-                    <span className="authorization-form__error-message"></span>
+                  <input
+                    {...register("email", {
+                      required: "Поле email обязательно для заполнения",
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Введите e-mail в формате example@gmail.com",
+                      },
+                    })}
+                    type="email"
+                    inputMode="email"
+                    className={`authorization-form__input ${errors?.email ? 'authorization-form__input_invalid' : ''}`}
+                    placeholder="Введите email"
+                    required
+                  />
+                  <span className="authorization-form__error-message">
+                    {errors?.email && ( errors?.email?.message || "Пожалуйста, введите правильно адрес электронной почты")}
+                  </span>
                 </label>
                 <label className="authorization-form__label">
                   <span className="authorization-form__title">Пароль</span>
-                  <input type="password" className="authorization-form__input" placeholder="Введите пароль" required minLength="4" maxLength="30" />
-                    <span className="authorization-form__error-message"></span>
+                  <input
+                    {...register("password", {
+                      required: 'Поле обязательно к заполнению',
+                      minLength: {
+                        value: 4,
+                        message: 'Минимум 4 символа',
+                      },
+                      maxLength: {
+                        value: 30,
+                        message: 'Максимум 30 символов'
+                      },
+                    })}
+                    type="password"
+                    className="authorization-form__input"
+                    placeholder="Введите пароль"
+                    required
+                    minLength="4"
+                    maxLength="30"
+                  />
+                  <span className="authorization-form__error-message">
+                    {errors?.password && ( errors?.password?.message || "Ошибка при заполнении пароля" )}
+                  </span>
                 </label>
 
               </div>
 
               <div className="authorization-form__content-bottom">
                 <div className="authorization-form-actions">
-                  <p className="authorization-form-actions__error-message"></p>
-                  <button type="button" className="authorization-form-actions__btn authorization-form-actions__btn_theme_accent">Войти</button>
+                  <button
+                    type="submit"
+                    className="authorization-form-actions__btn authorization-form-actions__btn_theme_accent"
+                    disabled={!isValid}
+                  >Войти</button>
                   <p className="authorization-form-actions__caption">
-                    Ещё не зарегистрированы? <a className="authorization-form-actions__caption-link" href="/signup">Регистрация</a>
+                    Ещё не зарегистрированы? <Link className="authorization-form-actions__caption-link" to="/signup">Регистрация</Link>
                   </p>
                 </div>
               </div>

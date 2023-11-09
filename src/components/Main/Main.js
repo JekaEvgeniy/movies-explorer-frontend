@@ -8,10 +8,10 @@ import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 
-function Main() {
+function Main({...props}) {
   return (
     <>
-      <Header isPageIndex />
+      <Header isPageIndex loggedIn={props.loggedIn} />
       <main className="content">
         <Promo />
         <AboutProject />
