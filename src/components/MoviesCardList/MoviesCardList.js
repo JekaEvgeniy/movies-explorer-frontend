@@ -19,6 +19,9 @@ function MoviesCardList({ ...props }) {
   const [visibleMovies, setVisibleMovies] = useState(true);
   const [isNotFound, setIsNotFound] = useState('');
 
+  if (props.list ){
+    // console.log(`MoviesCardList >>> props.list.length =`, props.list.length);
+  }
 
   /**
     * Ширина >1024px — 3 в ряд и 4 ряда карточек (3*4). Кнопка «Ещё» загружает 3 карточки
@@ -61,14 +64,20 @@ function MoviesCardList({ ...props }) {
   }, [screenWidth]);
 
   React.useEffect(() => {
+    // console.log(`isPageSaveMovies = ${props.isPageSaveMovies}`);
+
     const items = props.list;
-    // console.log(`items = ${items}`);
-    // console.log(`items.length = ${items.length}`);
     if (items && items.length) {
-      console.log('????');
+      // console.log('????');
       setVisibleMovies(true);
       setIsNotFound(false);
       setRenderMovies(props.list.slice(0, numberElementsDisplay));
+
+      if (! props.isPageSaveMovies){
+        setRenderMovies(props.list.slice(0, numberElementsDisplay));
+      }else {
+        setRenderMovies(props.list.slice());
+      }
 
       if (items.length <= numberElementsDisplay) {
         hiddenBtnMore(false);
@@ -77,7 +86,7 @@ function MoviesCardList({ ...props }) {
       };
 
     } else {
-      console.log('>>> нет элементов');
+      // console.log('>>> нет элементов');
       setVisibleMovies(false);
       setIsNotFound(true);
       hiddenBtnMore();
@@ -85,18 +94,80 @@ function MoviesCardList({ ...props }) {
 
   }, [props.list, numberElementsDisplay]);
 
-  const movieCard = renderMovies.map((item) => {
-    return <MoviesCard
-      key={item.id}
-      card={item}
-    />
-  });
+  function getSavedMovieCard(arr, id) {
+    return arr.find((item) => {
+      // console.log(`item.movieId === id = ${item.movieId === id}`);
+      return item.movieId === id;
+    });
+  };
+
+
+  let movieCard;
+  if (! props.isPageSaveMovies) {
+    movieCard = renderMovies.map((item) => {
+      const likedMovieCard = getSavedMovieCard(props.savedMovies, item.id);
+      const likedMovieId = likedMovieCard ? likedMovieCard._id : null;
+
+      return <MoviesCard
+        isPageSaveMovies={props.isPageSaveMovies}
+        key={item.id}
+        // card={item}
+        card={{ ...item, _id: likedMovieId }}
+        liked={likedMovieCard ? true : false}
+        onLike={props.onLike}
+        onDelete={props.onDelete}
+      />
+    });
+
+  } else {
+    console.log('props.savedMovies = ', props.savedMovies);
+
+    if ( props.savedMovies ){
+      movieCard = renderMovies.map((item) => {
+        const likedMovieCard = getSavedMovieCard(props.savedMovies, item.id);
+        const likedMovieId = likedMovieCard ? likedMovieCard._id : null;
+
+        return <MoviesCard
+          isPageSaveMovies={props.isPageSaveMovies}
+          key={item._id}
+          // card={item}
+          card={{ ...item, _id: likedMovieId }}
+          liked={true}
+          onDelete={props.onDelete}
+        />
+
+      });
+    }
+    // if ( 1 ){
+    //   movieCard = props.savedMovies.map((item) => {
+
+    //     return <MoviesCard
+    //       isPageSaveMovies={props.isPageSaveMovies}
+    //       key={item._id}
+    //       // card={item}
+    //       card={{ ...item, _id: item._id }}
+    //       liked={true}
+    //       onDelete={props.onDelete}
+    //     />
+
+    //   });
+    // }
+  }
+
+
+    // console.log(`item.id = ${item.id}`);
+
+    // if (props.isPageSaveMovies && ! likedMovieCard){
+    //   // Если мы находимся на странице /saved-movies, то отрисовывать не лайкнутые карточки не нужно!
+    //   return;
+    // }
+
+
+
 
 
   function handleButtonMore() {
     // Когда загрузили все карточки, то нужно скрывать кнопку "Показать еще";
-    // const count = (screenWidth >= 1024) ? 3 : 2;
-    // setRenderMovies(props.list.slice(0, renderMovies.length + count ) );
 
     setRenderMovies(props.list.slice(0, renderMovies.length + numberElementsAdd));
     if (renderMovies.length >= props.list.length - numberElementsAdd) {
@@ -115,7 +186,7 @@ function MoviesCardList({ ...props }) {
   function allMovies() {
 
     const checkItems = movieCard.length && movieCard.length > 0;
-    // console.warn(`checkItems = ${checkItems}`);
+    console.log(`checkItems = ${checkItems}`);
     // console.log('renderMovies => ', renderMovies);
     // console.log('<= renderMovies => ');
     // console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}; movieCard.length = ${movieCard.length} `);
@@ -140,7 +211,7 @@ function MoviesCardList({ ...props }) {
             )
           }
 
-          {!props.isSaveMovies && visibleButtonMore && (
+          {!props.isPageSaveMovies && visibleButtonMore && (
             <div className="movies__footer-actions">
               <button className="button-silver" type="button" onClick={handleButtonMore}>Ещё</button>
             </div>
@@ -149,7 +220,7 @@ function MoviesCardList({ ...props }) {
       );
     } else {
 
-      // console.log('Пользователь что-то искал и решил обновить страницу, но элементов нет. => показывем сообщение об ошибке.');
+      console.log('Пользователь что-то искал и решил обновить страницу, но элементов нет. => показывем сообщение об ошибке.');
       let localStorageMovies = JSON.parse(localStorage.getItem('movies'));
       if (localStorageMovies ){
         if (! localStorageMovies.length) {
@@ -166,22 +237,26 @@ function MoviesCardList({ ...props }) {
   }
 
   function likeMovies() {
-    return (
-      renderMovies.filter(item => item.isLiked === true).map((item) => (
-        <MoviesCard
-          isSaveMovies={props.isSaveMovies}
-          key={item.id}
-          card={item}
-        />
-      ))
-    );
+    // return (
+    //   renderMovies.filter(item => item.isLiked === true).map((item) => (
+    //     <MoviesCard
+    //       isPageSaveMovies={props.isPageSaveMovies}
+    //       key={item.id}
+    //       card={item}
+    //       // onLike={props.onLike}
+    //       onDelete={props.onDelete}
+    //     />
+    //   ))
+    // );
   }
 
-  if (props.isSaveMovies) {
-    // return likeMovies();
+
+  if (props.isPageSaveMovies) {
+    return allMovies();
   } else {
     return allMovies();
   }
+
 }
 
 export default MoviesCardList;

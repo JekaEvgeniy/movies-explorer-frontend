@@ -1,12 +1,24 @@
 import React from "react";
 
 function MoviesCard(props) {
-  const isLiked = props.card.isLiked;
-  const movieTitle = props.card.nameRU;
-  const movieDuration = props.card.duration;
-  const moviePath = props.card.image.url;
-  // console.log(`moviePath ${moviePath}`);
-  const movieUrl = `https://api.nomoreparties.co/${moviePath}`;
+  const card = props.card;
+  const isLiked = props.liked;
+  const movieTitle = card.nameRU;
+  const movieDuration = card.duration;
+  const moviePath = card.image.url || card.image;
+
+  // Когда мы на странице избранного, пути у изображении другие оО
+  const movieUrl = props.isPageSaveMovies ? moviePath : `https://api.nomoreparties.co/${moviePath}`;
+  // const movieUrl = `https://api.nomoreparties.co/${moviePath}`;
+
+  function handleLikeClick() {
+    console.log(`handleLikeClick>>>`);
+    props.onLike(card);
+  };
+  function handleDeleteClick() {
+    console.log(`handleDeleteClick>>>`);
+    props.onDelete(card);
+  };
 
 
   function convertTimeDuration(value) {
@@ -27,15 +39,18 @@ function MoviesCard(props) {
 
   let button;
 
-  if (props.isSaveMovies ){
+  if (props.isPageSaveMovies ){
     // console.log('Мы находимся на странице saved-movies');
-    button = <button className="movie__button-remove" type="button" name="button" aria-label="Удилть из избранного"></button>;
+
+    button = <button className="movie__button-remove" type="button" name="button" aria-label="Удалить из избранного" onClick={handleDeleteClick}></button>;
   }else {
     // console.log('Мы находимся на странице movies');
+
     if (isLiked) {
-      button = <button className="movie__button-save movie__button-save_active" type="button" name="button" aria-label="Удилть из избранного"></button>;
+      button = <button className="movie__button-save movie__button-save_active" type="button" name="button" aria-label="Удалить из избранного" onClick={handleDeleteClick}></button>;
     } else {
-      button = <button className="movie__button-save" type="button" name="button" aria-label="Добавить в избранное"></button>;
+      // console.log(`isLiked = ${isLiked}`);
+      button = <button className="movie__button-save" type="button" name="button" aria-label="Добавить в избранное" onClick={handleLikeClick}></button>;
     }
   }
 

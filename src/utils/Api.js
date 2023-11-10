@@ -20,9 +20,9 @@ class Api {
     this._url = url;
     this._headers = headers;
 
-    this._cardsUrl = this._url + '/cards';
-    this._cardID = this._url + '/cards/';
-    this._cardLikes = this._url + '/cards/cardId/likes';
+    this._cardsUrl = this._url + '/movies';
+    // this._cardID = this._url + '/movies/';
+    // this._cardLikes = this._url + '/movies/cardId/likes';
 
     this._userUrl = this._url + '/users/me';
 
@@ -49,48 +49,81 @@ class Api {
   * Работаем с карточками
   */
 
-  // addLike(data) {
-  //   // console.log(`${this._url}/cards/${data._id}`);
+  getUsersMovies() {
+    return fetch(this._cardsUrl, {
+      // headers: {
+      //   authorization: this._token,
+      // },
+      // credentials: 'include',
+      headers: this._injectAuth(this._defaultHeaders),
+    })
+      .then(res => {
+        // console.log('res2', res);
 
-  //   return fetch(`${this._url}/cards/${data._id}/likes`, {
-  //     // credentials: 'include',
-  //     // headers: this._headers,
-  //     // headers: {
-  //     //   authorization: `Bearer ${localStorage.getItem('jwt')}`
-  //     // },
-  //     headers: this._injectAuth(this._defaultHeaders),
-  //     method: 'PUT',
-  //   })
-  //     .then(this._checkResponse)
-  //     .catch((err) => {
-  //       console.error('Ошибка! Ошибка лайка карточки');
-  //     })
-  // }
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка getUsersMovies(): ${res.status}`);
+      })
+  };
 
-  // removeLike(data) {
-  //   return fetch(`${this._url}/cards/${data._id}/likes`, {
-  //     // credentials: 'include',
-  //     // headers: this._headers,
-  //     // headers: {
-  //     //   authorization: `Bearer ${localStorage.getItem('jwt')}`
-  //     // },
-  //     headers: this._injectAuth(this._defaultHeaders),
-  //     method: 'DELETE',
-  //   })
-  //     .then(this._checkResponse)
-  //     .catch((err) => {
-  //       console.error('Ошибка! Ошибка дизлайка карточки');
-  //     })
-  // }
 
-  // toggleLike(data, isLiked) {
-  //   if (isLiked) {
-  //     return this.removeLike(data);
-  //   } else {
-  //     return this.addLike(data);
-  //   }
-  // }
+  saveNewMovie({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    nameRU,
+    nameEN,
+    thumbnail,
+    id,
+  }) {
+    console.log(
+      `api.js >>> saveNewMovie >>> country = ${country}; director = ${director}; duration = ${duration}; year = ${year}; description = ${description}; image = ${`https://api.nomoreparties.co${image.url}`}; trailerLink = ${trailerLink}; nameRU = ${nameRU}; nameEN = ${nameEN}; thumbnail = ${`https://api.nomoreparties.co${image.url}`}; id = ${id};
+      `
+    );
 
+    return fetch(this._cardsUrl, {
+      method: 'POST',
+      headers: this._injectAuth(this._defaultHeaders),
+      body: JSON.stringify({
+        country: country || '',
+        director: director || '',
+        duration: duration || '',
+        year: year || '',
+        description: description || '',
+        image: `https://api.nomoreparties.co${image.url}` || '',
+        trailerLink: trailerLink || '',
+        thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}` || `https://api.nomoreparties.co${image.url}` || '',
+        movieId: id,
+        // movieId: movieId,
+        nameRU: nameRU || '',
+        nameEN: nameEN || '',
+      })
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка saveNewMovie: ${res.status}`);
+      })
+  };
+
+  deleteMovie(movieId) {
+    return fetch(`${this._cardsUrl}/${movieId}`, {
+      method: 'DELETE',
+      headers: this._injectAuth(this._defaultHeaders),
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+  };
 
   /*
   * Работаем с инфополем
@@ -134,28 +167,6 @@ class Api {
         console.error('Ошибка! Ошибка при Добавлении новых данных о пользователе', err);
       })
   }
-
-  // setUserAvatar(data) {
-  //   const url = `${this._url}/users/me/avatar`;
-
-  //   return fetch(url, {
-  //     // credentials: 'include',
-  //     method: 'PATCH',
-  //     // headers: this._headers,
-  //     // headers: {
-  //     //   'Content-Type': 'application/json',
-  //     //   authorization: `Bearer ${localStorage.getItem('jwt')}`
-  //     // },
-  //     headers: this._injectAuth(this._defaultHeaders),
-  //     body: JSON.stringify({
-  //       avatar: data.avatar
-  //     }),
-  //   })
-  //     .then(this._checkResponse)
-  //     .catch((err) => {
-  //       console.error('Ошибка! Ошибка при Добавлении новых данных о пользователе', err);
-  //     })
-  // }
 }
 
 const api = new Api({

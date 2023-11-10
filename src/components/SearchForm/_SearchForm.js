@@ -3,7 +3,12 @@ import Sprite from '../../images/common/sprite.svg';
 
 function SearchForm({ ...props }) {
 
-  // const checkPageSavedMovies = !!props.isPageSaveMovies;
+  const checkPageSavedMovies = props.isPageSaveMovies;
+  console.log(`checkPageSavedMovies = ${checkPageSavedMovies}`);
+  let inputDepending = checkPageSavedMovies ? props.saveSearchQuery : props.searchQuery
+  let changeDepending = checkPageSavedMovies ? props.handleChangeSavedSearch : props.handleChangeSearch;
+  let shortMoviesDepending = checkPageSavedMovies ? props.shortSaveMovies : props.shortMovies;
+  let onChangeDepending = checkPageSavedMovies ? props.handleChangeSaveShorts : props.handleChangeShorts;
 
   return (
     <section className="search">
@@ -18,8 +23,8 @@ function SearchForm({ ...props }) {
             type="text"
             className="search-form__input"
             placeholder="Фильм"
-            onChange={props.handleChangeSearch}
-            value={props.searchQuery}
+            onChange={changeDepending}
+            value={inputDepending}
           />
           <button type='submit' className="search-form__btn" aria-label="Поиск">
             <svg aria-hidden="true" className="image-contain" xmlns="http://www.w3.org/2000/svg">
@@ -34,9 +39,9 @@ function SearchForm({ ...props }) {
           <label className="search-checkbox__label">
             <input type="checkbox" className="search-checkbox__input"
               name="shortMovies"
-              checked={props.shortMovies === 'on' ? true : false}
-              value={props.shortMovies === 'on' ? 'on' : 'off'}
-              onChange={props.handleChangeShorts}
+              checked={shortMoviesDepending === 'on' ? true : false}
+              value={shortMoviesDepending === 'on' ? 'on' : 'off'}
+              onChange={onChangeDepending}
             />
             <span className="search-checkbox__ico"></span>
             <span className="search-checkbox__title">Короткометражки</span>
