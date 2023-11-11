@@ -30,6 +30,7 @@ https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in
 
 function Register({...props}) {
   const navigate = useNavigate();
+  const [messageError, setMessageError] = useState(false);
 
   const {
     register,
@@ -57,17 +58,18 @@ function Register({...props}) {
               data.password
             )
             .then((res) => {
-
-              // console.log(`REGISTER.JS >>> res.token = ${res.token}`);
-
               if (res.token) {
+                setMessageError(false);
                 localStorage.setItem('jwt', res.token);
                 // props.handleRegister();
                 console.log(`>>> !!! navigate('/movies')`);
                 navigate('/movies'); // ТЗ: Если запрос успешен, пользователь сразу авторизуется и будет перенаправлен на страницу «Фильмы».
               }
             })
-            .catch((err) => { console.log(`При регистрации пользователя произошла ошибка. ${err}`) })
+            .catch((err) => {
+              console.log(`При регистрации пользователя произошла ошибка. ${err}`)
+              setMessageError(true);
+            })
             .finally(() => {
               props.setIsVisibleLoader(false);
             });
@@ -205,7 +207,12 @@ function Register({...props}) {
 
             <div className="authorization-form__content-bottom">
               <div className="authorization-form-actions">
-                {/* <p className="authorization-form-actions__error-message">При обновлении профиля произошла ошибка.</p> */}
+                  {messageError && (
+                    <>
+                      <p className="authorization-form-actions__error-message">Переданы некорректные данные</p>
+                    </>
+                  )}
+
                 <button
                   type="submit"
                   className="authorization-form-actions__btn authorization-form-actions__btn_theme_accent"

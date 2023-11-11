@@ -11,6 +11,7 @@ function Profile({ ...props }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
+  const [messageError, setMessageError] = useState(false);
 
   const [enabledEditMode, setEnableEditMode] = useState(true); // Внизу имеется кнопка для редактирования полей формы.
   // const [isVisibleButtonSave, setIsVisibleButtonSave] = useState(false);
@@ -20,7 +21,8 @@ function Profile({ ...props }) {
     formState: { errors, isValid },
     handleSubmit,
   } = useForm({
-    mode: 'onBlur',
+    // mode: 'onBlur',
+    mode: 'onChange',
   });
 
   useEffect(() => {
@@ -54,10 +56,14 @@ function Profile({ ...props }) {
       .setUserInfo(userData)
       .then((updateUserData) => {
         props.setCurrentUser(updateUserData.data);
+        setMessageError(false);
         setEnableEditMode(true);
         // closeAllPopups();
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.error(err);
+        setMessageError(true);
+      })
       .finally(() => {
         props.setIsVisibleLoader(false);
       });
@@ -135,10 +141,9 @@ function Profile({ ...props }) {
             </div>
             <div className="profile-form__content-bottom">
               <div className="profile-form-actions">
-                { (errors?.name || errors?.email) && (
+                {messageError && (
                   <p className="profile-form-actions__error-message">При обновлении профиля произошла ошибка.</p>
                 )}
-
                 {
                  enabledEditMode ? (
                   <>
@@ -154,7 +159,9 @@ function Profile({ ...props }) {
                     >Выйти из аккаунта</button>
                   </>
                   ) : (
-                    <button type="submit" className="profile-form-actions__btn profile-form-actions__btn_theme_accent">Сохранить</button>
+                    <button type="submit"
+                      disabled={!isValid}
+                      className="profile-form-actions__btn profile-form-actions__btn_theme_accent">Сохранить</button>
                   )
                 }
 

@@ -8,6 +8,8 @@ import headerLogo from '../../images/header/logo.svg';
 function Login({...props}) {
   const navigate = useNavigate();
 
+  const [messageError, setMessageError] = useState(false);
+
   const [formValue, setFormValue] = useState({
     email: '',
     password: ''
@@ -32,14 +34,18 @@ function Login({...props}) {
           localStorage.setItem("jwt", res.token);
           props.handleLogin();
 
-          console.log(`>>> !!! navigate('/movies')`);
+          // console.log(`>>> !!! navigate('/movies')`);
+          setMessageError(false);
           navigate('/movies');
 
           // кнопка «Войти» становится активной
           // После этого происходит редирект настраницу «Фильмы».
         }
       })
-      .catch((err) => console.log("Ошибка", err))
+      .catch((err) => {
+        setMessageError(true);
+        console.log("Ошибка", err);
+      })
       .finally(() => {
         props.setIsVisibleLoader(false);
       });
@@ -150,7 +156,11 @@ function Login({...props}) {
 
               <div className="authorization-form__content-bottom">
                 <div className="authorization-form-actions">
-                  {/* <p className="authorization-form-actions__error-message">Переданы некорректные данные</p> */}
+                {messageError && (
+                  <>
+                    <p className="authorization-form-actions__error-message">Переданы некорректные данные</p>
+                  </>
+                )}
 
                   <button
                     type="submit"
