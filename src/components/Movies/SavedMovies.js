@@ -24,9 +24,9 @@ function SavedMovies({ ...props }) {
     if (arr.length) {
       setSavedMovies(arr);
     }
-    console.log(searchSavedQuery)
-    console.log(shortSavedMovies)
-    console.log('arr = ', arr);
+    // console.log(searchSavedQuery)
+    // console.log(shortSavedMovies)
+    // console.log('arr = ', arr);
 
     const newArr = sortMovies(arr, searchSavedQuery, shortSavedMovies, checkIsSavedPageMovies)
     // console.log(newArr)
@@ -44,11 +44,11 @@ function SavedMovies({ ...props }) {
     // setIsSearchError('');
     // setIsLoadingMovies(true);
     setSearchSavedQuery(searchSavedQuery);
-    console.log(`handleSubmit searchSavedQuery = ${searchSavedQuery}`);
+    // console.log(`handleSubmit searchSavedQuery = ${searchSavedQuery}`);
 
     let movies = savedMovies;
     if (movies?.length && movies?.length !== 0) {
-      console.log('movies', movies)
+      // console.log('movies', movies);
       handleSortMovies(movies, searchSavedQuery, shortSavedMovies);
       setIsLoadingMovies(false);
     }
@@ -59,7 +59,7 @@ function SavedMovies({ ...props }) {
 
   function handleSavedCheckbox(e) {
     const val = e.target.checked;
-    console.log(`val = ${val}`);
+    // console.log(`val = ${val}`);
 
     if (val) {
       setShortSavedMovies('on');
@@ -100,27 +100,29 @@ function SavedMovies({ ...props }) {
   // }, [searchSavedQuery, shortSavedMovies, list]);
 
   return (
-    <section className="movies" id="movies" aria-label="Фильмотека">
-      <SearchForm
-        savedMoviesPage={true}
+    <main className="content">
+      <section className="movies" id="movies" aria-label="Фильмотека">
+        <SearchForm
+          savedMoviesPage={true}
 
-        searchQuery={searchSavedQuery}
-        handleSubmit={handleSubmit}
-        shortMovies={shortSavedMovies}
-        handleCheckbox={handleSavedCheckbox}
-        handleChangeValue={handleChangeSavedValue}
-      />
+          searchQuery={searchSavedQuery}
+          handleSubmit={handleSubmit}
+          shortMovies={shortSavedMovies}
+          handleCheckbox={handleSavedCheckbox}
+          handleChangeValue={handleChangeSavedValue}
+        />
 
-      <MoviesCardList
-        isPageSaveMovies={props.isPageSaveMovies}
+        <MoviesCardList
+          isPageSaveMovies={props.isPageSaveMovies}
 
-        list={filteredSavedMovies}
-        setIsNotFound={props.setIsNotFound}
-        savedMovies={props.savedMoviesList}
+          list={filteredSavedMovies}
+          setIsNotFound={props.setIsNotFound}
+          savedMovies={props.savedMoviesList}
 
-        onDelete={props.onDeleteClick}
-      />
-    </section>
+          onDelete={props.onDeleteClick}
+        />
+      </section>
+    </main>
   );
 };
 

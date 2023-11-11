@@ -12,11 +12,11 @@ function MoviesCard(props) {
   // const movieUrl = `https://api.nomoreparties.co/${moviePath}`;
 
   function handleLikeClick() {
-    console.log(`handleLikeClick>>>`);
+    // console.log(`handleLikeClick>>>`);
     props.onLike(card);
   };
   function handleDeleteClick() {
-    console.log(`handleDeleteClick>>>`);
+    // console.log(`handleDeleteClick>>>`);
     props.onDelete(card);
   };
 

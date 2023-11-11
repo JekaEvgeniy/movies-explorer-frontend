@@ -36,7 +36,8 @@ function Register({...props}) {
     formState: { errors, isValid },
     handleSubmit,
   } = useForm({
-    mode: 'onBlur',
+    // mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const handleRegisterSubmit = (data) => {
@@ -56,10 +57,13 @@ function Register({...props}) {
               data.password
             )
             .then((res) => {
-              console.log(`REGISTER.JS >>> res.token = ${res.token}`);
+
+              // console.log(`REGISTER.JS >>> res.token = ${res.token}`);
+
               if (res.token) {
                 localStorage.setItem('jwt', res.token);
-                navigate('/');
+                // props.handleRegister();
+                navigate('/movies'); // ТЗ: Если запрос успешен, пользователь сразу авторизуется и будет перенаправлен на страницу «Фильмы».
               }
             })
             .catch((err) => { console.log(`При регистрации пользователя произошла ошибка. ${err}`) })
@@ -107,7 +111,7 @@ function Register({...props}) {
   // }
 
   return (
-
+    <main className="content">
     <section className="authorization">
       <div className="authorization__container">
         <Link to="/" className="authorization__logo">
@@ -135,9 +139,6 @@ function Register({...props}) {
                     maxLength: {
                       value: 30,
                       message: 'Максимум 30 символов'
-                    },
-                    onChange: (e) => {
-                      console.log(e);
                     },
                   })}
                   type="text"
@@ -219,7 +220,7 @@ function Register({...props}) {
         </form>
       </div>
     </section>
-
+  </main>
   )
 }
 

@@ -35,7 +35,7 @@ function Movies({ ...props }) {
     // console.log('3. handleChangeValue');
     let val = e.target.value;
     setSearchQuery(val);
-    console.log(`handleChangeValue >>> val = ${val}`);
+    // console.log(`handleChangeValue >>> val = ${val}`);
   }
 
   function handleSortMovies(movies, query, checkbox) {

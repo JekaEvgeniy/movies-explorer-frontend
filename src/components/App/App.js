@@ -49,24 +49,7 @@ function App() {
         .catch((err) => console.log(`Ошибка promise.all: ${err}`));
     }
 
-    // console.log(`useEffect >>> loggedIn = ${loggedIn}`);
-
   }, [loggedIn]);
-
-  // useEffect(() => {
-  //   /**
-  //    * ТЗ: Если при загрузке страницы поиск не выполнялся, то фильмы не показываем.
-  //    */
-  //   console.log('userEffect => [shortSavedMovies]');
-  //   setSearchQuery(savedSearchQuery);
-  //   const arr = savedMovies;
-
-  //   setShortMovies(savedMovies);
-  //   setFilteredMovies(shortSavedMovies === 'on' ? filterShortMovies(arr) : arr);
-
-  //   setIsLoadingMovies(false);
-
-  // }, [shortSavedMovies, savedMovies]); // searchQuery
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
@@ -75,16 +58,12 @@ function App() {
     if (token) {
       auth.checkToken(token)
         .then(user => {
-          // console.log('user', user);
           setLoggedIn(true);
           handleLogin(user);
-
-          // console.log('/')
 
           // navigate('/movies');
         })
         .catch((err) => {
-          // console.error(`front> >>> APP.js >>> useEffect`);
           console.error(err);
         });
     }
@@ -113,7 +92,9 @@ function App() {
 
   const handleLogout = (e) => {
     e.preventDefault();
+
     console.log('handleLogout>>>>');
+
     localStorage.clear();
     navigate('/');
     setLoggedIn(false);
@@ -122,25 +103,24 @@ function App() {
 
 
   function handleSaveMovie(movie) {
-    console.log(`>>> click handleSaveMovie >>>`);
+    // console.log(`>>> click handleSaveMovie >>>`);
 
     // let currentMovie = movie.currentTarget.closest('.movie');
-    let currentMovie = movie;
-    console.log('currentMovie >>> ', currentMovie);
+    // let currentMovie = movie;
+    // console.log('currentMovie >>> ', currentMovie);
 
     api
-      .saveNewMovie(currentMovie)
+      .saveNewMovie(movie)
       .then(newMovie => {
         setSavedMovies([newMovie, ...savedMovies]);
-        console.log('>>> app.js handleSaveMovie(movie) ');
+        // console.log('>>> app.js handleSaveMovie(movie) ');
       })
       .catch(err => console.log(`handleSaveMovie.catch >>>> err = ${err}`))
   };
 
   function handleDeleteMovie(movie) {
-    console.log(`>>> click handleDeleteMovie >>>`);
-    console.log('handleDeleteMovie movie', movie);
-
+    // console.log(`>>> click handleDeleteMovie >>>`);
+    // console.log('handleDeleteMovie movie', movie);
     api
       .deleteMovie(movie._id)
       // .deleteMovie(movie.movieId)
@@ -148,13 +128,7 @@ function App() {
 
         const newMoviesList = savedMovies.filter((m) => m._id === movie._id ? false : true);
         setSavedMovies(newMoviesList);
-        console.log('newMoviesList', newMoviesList);
-
-        if (newMoviesList.length){
-
-        }
-
-
+        // console.log('newMoviesList', newMoviesList);
       })
       .catch(err => console.log(err))
   };
@@ -165,90 +139,83 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <div className="app">
+      <div className="app">
 
-      <Routes>
-        <Route path="/signup" element={
-          <>
-            <main className="content">
-                <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} />
-              {isVisibleLoader && (
-                <Preloader currentPosition="fullscreen" />
-              )}
-            </main>
-          </>
-        } />
-
-        <Route path="/signin" element={
-          <>
-            <main className="content">
-                <Login setIsVisibleLoader={setIsVisibleLoader} handleLogin={handleLogin}  />
-              {isVisibleLoader && (
-                <Preloader currentPosition="fullscreen" />
-              )}
-            </main>
-          </>
-        } />
-
-        <Route
-          exact
-          path="/"
-          element={
+        <Routes>
+          <Route path="/signup" element={
             <>
-              <Main
-                loggedIn={loggedIn}
-              />
+              <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} />
+              {isVisibleLoader && (
+                <Preloader currentPosition="fullscreen" />
+              )}
             </>
-          }
-        />
+          } />
 
-            <Route path="/movies" element={
+          <Route path="/signin" element={
+            <>
+              <main className="content">
+                <Login setIsVisibleLoader={setIsVisibleLoader} handleLogin={handleLogin} />
+                {isVisibleLoader && (
+                  <Preloader currentPosition="fullscreen" />
+                )}
+              </main>
+            </>
+          } />
+
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <Main
+                  loggedIn={loggedIn}
+                />
+              </>
+            }
+          />
+        </Routes>
+
+        <Routes>
+          <Route
+            path="/movies"
+            element={
               <>
                 <Header isPageMovies />
-                <main className="content">
-                  {/* <SearchForm
-                isSearchError={isSearchError}
-                searchQuery={searchQuery}
-                handleSubmit={handleSubmit}
-                handleCheckbox={handleCheckbox}
-                shortMovies={shortMovies}
-                handleChangeValue={handleChangeValue}
-              /> */}
-                  <Movies
-                    // setIsNotFound={setIsNotFound}
-                    loggedIn={loggedIn}
-                    savedMoviesList={savedMovies}
-                    // list={filteredMovies}
-                    onLikeClick={handleSaveMovie}
-                    onDeleteClick={handleDeleteMovie}
-                  />
-
-                </main>
+                <ProtectedRoute
+                  element={Movies}
+                  loggedIn={loggedIn}
+                  savedMoviesList={savedMovies}
+                  // list={filteredMovies}
+                  onLikeClick={handleSaveMovie}
+                  onDeleteClick={handleDeleteMovie}
+                />
                 <Footer />
               </>
-            } />
+            }
+          />
 
-
-
-            <Route path="/saved-movies" element={
+          <Route
+            path="/saved-movies"
+            element={
               <>
                 <Header isPageMovies />
-                <main className="content">
-                  <SavedMovies
-                    isPageSaveMovies
-                    // setIsNotFound={setIsNotFound}
+                <SavedMovies
+                  element={Movies}
+                  isPageSaveMovies
+                  // setIsNotFound={setIsNotFound}
 
-                    savedMoviesList={savedMovies}
-                    // list={savedMovies}
-                    onDeleteClick={handleDeleteMovie}
-                  />
-
-                </main>
+                  savedMoviesList={savedMovies}
+                  // list={savedMovies}
+                  onDeleteClick={handleDeleteMovie}
+                />
                 <Footer />
               </>
-            } />
+            }
+          />
 
-            <Route path="/profile" element={
+          <Route
+            path="/profile"
+            element={
               <>
                 <Header isPageProfile />
                 <main className="content">
@@ -256,53 +223,19 @@ function App() {
                     setCurrentUser={setCurrentUser}
                     handleLogout={handleLogout}
                     setIsVisibleLoader={setIsVisibleLoader}
-                  // handleProfileUpdate={handleProfileUpdate}
                   />
                   {isVisibleLoader && (
                     <Preloader currentPosition="fullscreen" />
                   )}
                 </main>
+                <Footer />
               </>
-            } />
+            }
+          />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
 
-        <Route path="*" element={<Page404 />} />
-      </Routes>
-
-
-          {/* <Route path="/saved-movies" element={
-          <>
-            <Header isPageMovies />
-            <main className="content">
-              <SearchForm
-                isPageSaveMovies
-                isSearchError={isSearchError}
-                searchQuery={savedSearchQuery}
-                handleSubmit={handleSubmit}
-                handleCheckbox={handleChangeSavedShorts}
-                shortMovies={shortMovies}
-                handleChangeValue={handleChangeSavedSearch}
-              />
-                <Movies
-                  isPageSaveMovies
-                  setIsNotFound={setIsNotFound}
-                  isLoadingMovies={isLoadingMovies}
-
-                  // savedMoviesList={savedMovies}
-                  // onLikeClick={handleSaveMovie}
-                  // list={savedMovies}
-                  savedMoviesList={savedMovies}
-                  list={filteredMovies}
-                  onDeleteClick={handleDeleteMovie}
-                />
-
-            </main>
-            <Footer />
-          </>
-        } /> */}
-
-
-
-    </div>
+      </div>
     </CurrentUserContext.Provider>
 
   ); // END return

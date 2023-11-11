@@ -18,7 +18,8 @@ function Login({...props}) {
     formState: { errors, isValid },
     handleSubmit,
   } = useForm({
-    mode: 'onBlur',
+    // mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const handleLoginSubmit = (data) => {

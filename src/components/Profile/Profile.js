@@ -165,6 +165,7 @@ function Profile({ ...props }) {
         </form>
       </div>
     </section>
+
   );
 }
 
