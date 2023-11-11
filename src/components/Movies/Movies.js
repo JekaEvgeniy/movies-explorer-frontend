@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { sortMovies, filterSortShortMovies } from '../../utils/Common';
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
@@ -6,49 +7,20 @@ import { apiMovies, api } from '../../utils/Api';
 
 function Movies({ ...props }) {
 
-  const [movies, setMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = React.useState([]);
-
   const [searchQuery, setSearchQuery] = useState('');
   const [shortMovies, setShortMovies] = useState(localStorage.getItem('shortMovies') === 'on' ? 'on' : 'off');
+
+  const [filteredMovies, setFilteredMovies] = React.useState([]);
+  const [allMovies, setAllMovies] = React.useState([]);
+
 
   const [isSearchError, setIsSearchError] = useState('');
   const [isNotFound, setIsNotFound] = useState(false);
 
   const [isLoadingMovies, setIsLoadingMovies] = useState(false);
 
-  useEffect(() => {
-    console.log('1');
-    /**
-     * ТЗ: Если при загрузке страницы поиск не выполнялся, то фильмы не показываем.
-     */
-    const searchQuery = localStorage.getItem('searchQuery') || '';
-
-    setSearchQuery(searchQuery);
-    const checkOldSearch = !!localStorage.getItem('searchQuery');
-    const arr = JSON.parse(localStorage.getItem('movies'));
-
-    setShortMovies(localStorage.getItem('shortMovies'));
-    setFilteredMovies(shortMovies === 'on' ? filterShortMovies(arr) : arr);
-
-    // if (checkOldSearch && ! arr?.length ){
-    //   console.log(`Если пользователь что-то искал и не нашел, а потом обновлил страницу - показывем сообщение об ошибке.`);
-    //   setIsNotFound(true);
-    //   console.log(`isNotFound 0 = ${isNotFound}`);
-    // } else {
-    //   console.log('23');
-    //   setIsNotFound(false);
-    // }
-    // console.log(`isNotFound 1 = ${isNotFound}`);
-
-    setIsLoadingMovies(false);
-
-
-  }, [shortMovies, movies]); // searchQuery
-
   // https://stackoverflow.com/questions/56356900/way-to-determine-checkbox-checked-in-react-usestate
-  function handleChangeShorts(e) {
-    console.log('2');
+  function handleCheckbox(e) {
     const val = e.target.checked;
     if (val) {
       localStorage.setItem('shortMovies', 'on')
@@ -59,22 +31,18 @@ function Movies({ ...props }) {
     }
   }
 
-  function handleChangeSearch(e) {
-    console.log('3');
+  function handleChangeValue(e) {
+    // console.log('3. handleChangeValue');
     let val = e.target.value;
-    console.log(`handleChangeSearch >>> val = ${val}`);
     setSearchQuery(val);
+    console.log(`handleChangeValue >>> val = ${val}`);
   }
 
-  function handleSetFilteredMovies(movies, query, checkbox) {
-    console.log('4');
-    /**
-      * Как только запрос сделан, данные передаются в стейт-переменную и блок появляется.
-      * Для отрисовки данных воспользуйтесь хуком.
-    */
-    const moviesList = filterMovies(movies, query);
+  function handleSortMovies(movies, query, checkbox) {
+    // console.log('44 line. handleSortMovies >>> movies', movies);
+    const moviesList = sortMovies(movies, query, shortMovies);
 
-    console.log('>>> handleSetFilteredMovies moviesList => ', moviesList);
+    // console.log('>>> handleSortMovies moviesList => ', moviesList);
 
     if (!moviesList.length) {
       // Нет ни одного фильма отвечающему запросу
@@ -83,75 +51,54 @@ function Movies({ ...props }) {
       setIsNotFound(false);
     }
 
-    console.log(`>>> handleSetFilteredMovies > isNotFound = ${isNotFound}`);
-
-    setFilteredMovies(checkbox === 'on' ? filterShortMovies(moviesList) : moviesList);
-    localStorage.setItem('movies', JSON.stringify(moviesList));
+    let itemList = checkbox === 'on' ? filterSortShortMovies(moviesList) : moviesList;
+    setFilteredMovies(itemList);
+    // localStorage.setItem('filteredMovies', JSON.stringify(itemList));
   }
 
-  function filterShortMovies(movies) {
-    console.log('5');
-    if (movies !== null && movies.length > 0) {
-      // console.log('movies.length = ' + movies.length);
-      const getShortMovies = movies.filter((item) => item.duration <= 40);
-      // console.log(`getShortMovies =`, getShortMovies);
-      // localStorage.setItem('movies', JSON.stringify(getShortMovies));
-      console.log('getShortMovies = ', getShortMovies);
-      return getShortMovies;
-    }
-
-  };
-
   function handleSubmit(e) {
-    console.log('6');
-    /**
-     * Если пользователь ещё ничего не искал, блока с карточками на странице нет.
-    */
+    // Если пользователь ещё ничего не искал, блока с карточками на странице нет.
     e.preventDefault();
 
-    console.log(`handleSubmit() >>> val || searchText = ${searchQuery}`);
-    if (!searchQuery) {
-      // FIXME: Сделать проверку на отправку пустой строки!
-      console.error('handleSubmit >>> input.val пустой');
+    if (! searchQuery ) {
+      // console.error('handleSubmit >>> input.val пустой');
       setIsSearchError('Нужно ввести ключевое слово');
 
       return;
     }
 
-    //console.log(`searchQuery >>>> ${searchQuery}`);
-
     setIsSearchError('');
-    setIsLoadingMovies(true);
-    setSearchQuery(searchQuery);
+    let movies = localStorage.getItem('movies');
 
     localStorage.setItem('searchQuery', searchQuery);
-    localStorage.setItem('shortMovies', shortMovies);
+    // console.log('line 74. movies >>> ', movies);
 
-    // console.log(`handleSubmit >>> movies = ${movies}`);
-
-    if (movies.length) {
-      console.log('app.js >>> movies.length = ' + movies.length);
-      handleSetFilteredMovies(movies, searchQuery, shortMovies);
+    if (movies?.length && movies?.length !== 0 ) {
+      // П
+      // console.log('line 78, allMovies = ', allMovies);
+      setAllMovies(movies);
+      // console.log('allMovies', allMovies);
+      handleSortMovies(movies, searchQuery, shortMovies);
       setIsLoadingMovies(false);
+
     } else {
-      console.log('app.js >>> ! movies.length');
-      console.log('handleSubmit >>> Подгружаем фильмы >>> loading ... ...');
-      // console.log(`typeof apiMovies = ${typeof apiMovies}`);
+      console.log('>>> Подгружаем фильмы >>> loading ... ... API ...');
 
       Promise.all([apiMovies()])
         .then(([items]) => {
           if (items.length) {
+            if (!localStorage.hasOwnProperty('movies')) {
+              // console.log('Записываем в localStorage все фильмы');
+              localStorage.setItem('movies', JSON.stringify(items));
+              setAllMovies(items);
+            }
 
-            //if (!localStorage.hasOwnProperty('moviesAll')) {
-            // Записываем в localStorage все фильмы
-            // localStorage.setItem('moviesAll', JSON.stringify(items)); // fixme: Удалить
-            //}
-            setMovies(items);
+            if (!localStorage.hasOwnProperty('shortMovies')) {
+              localStorage.setItem('shortMovies', 'off');
+              setShortMovies('off');
+            }
 
-            // console.log(items);
-            // console.warn(searchQuery)
-            // console.warn(shortMovies)
-            handleSetFilteredMovies(items, searchQuery, shortMovies);
+            handleSortMovies(items, searchQuery, shortMovies);
           }
         })
         .catch((err) => {
@@ -166,33 +113,21 @@ function Movies({ ...props }) {
     }
   }
 
-  function filterMovies(movies) {
-    console.log('7');
-    let filteredMoviesArray = [];
 
-    // console.log(`movies`, movies);
 
-    if (movies !== null && movies.length > 0) {
-      // const films = movies;
-      // const films = JSON.parse(movies);
 
-      filteredMoviesArray = movies.filter((item) => {
-        const nameRU = item.nameRU.toUpperCase().includes(searchQuery.toUpperCase()); // toLocaleUpperCase
-        const nameEN = item.nameEN.toUpperCase().includes(searchQuery.toUpperCase());
+  useEffect(() => {
+    // console.log('1. useEffect >>> Если пользователь ничего не искал, то фильмы выводить не нужно!');
+    setIsSearchError('');
+    const searchQuery = localStorage.getItem('searchQuery') || '';
+    setSearchQuery(searchQuery);
 
-        return nameRU || nameEN;
-      });
+    const arr = JSON.parse(localStorage.getItem('filteredMovies'));
+    if (arr?.length ){
+      setFilteredMovies(shortMovies === 'on' ? filterSortShortMovies(arr) : arr);
+      setIsLoadingMovies(false);
     }
-
-    // console.log(`shortMovies = ${shortMovies}`);
-    if (shortMovies === 'on') {
-      filteredMoviesArray = filteredMoviesArray.filter(movie => movie.duration <= 40);
-    }
-
-    console.log('filteredMoviesArray = ', filteredMoviesArray);
-
-    return filteredMoviesArray;
-  }
+  }, [shortMovies]); // searchQuery, movies
 
 
   return (
@@ -204,8 +139,8 @@ function Movies({ ...props }) {
         searchQuery={searchQuery}
         handleSubmit={handleSubmit}
         shortMovies={shortMovies}
-        handleChangeShorts={handleChangeShorts}
-        handleChangeSearch={handleChangeSearch}
+        handleCheckbox={handleCheckbox}
+        handleChangeValue={handleChangeValue}
       />
       <MoviesCardList
         isPageSaveMovies={props.isPageSaveMovies}

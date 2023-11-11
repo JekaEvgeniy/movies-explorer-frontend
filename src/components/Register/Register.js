@@ -59,7 +59,7 @@ function Register({...props}) {
               console.log(`REGISTER.JS >>> res.token = ${res.token}`);
               if (res.token) {
                 localStorage.setItem('jwt', res.token);
-                navigate('/movies');
+                navigate('/');
               }
             })
             .catch((err) => { console.log(`При регистрации пользователя произошла ошибка. ${err}`) })
@@ -135,6 +135,9 @@ function Register({...props}) {
                     maxLength: {
                       value: 30,
                       message: 'Максимум 30 символов'
+                    },
+                    onChange: (e) => {
+                      console.log(e);
                     },
                   })}
                   type="text"

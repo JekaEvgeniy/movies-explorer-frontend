@@ -29,6 +29,10 @@
 При переходе пользователя на страницу сохранённых фильмов ему должны быть отображены все его фильмы.
 
 
+  // https://reactrouter.com/en/main/hooks/use-navigate
+  // ERROR useNavigate() may be used only in the context of a <Router> component.
+  // https://bobbyhadz.com/blog/react-usenavigate-may-be-used-only-in-context-of-router
+
   /**
     * Ширина >1024px — 3 в ряд и 4 ряда карточек (3*4). Кнопка «Ещё» загружает 3 карточки
     * Ширина 768px-1023 — 2 карточки и 4 ряда (2*4). Кнопка «Ещё» загружает 2 карточки
@@ -37,7 +41,7 @@
     * Поиск "да" => 9 (1 short) //
     * Поиск "part" => 1 elem
     * Поиск "all" => 6 elems
-    * Поиск "ал" => 7 elems
+    * Поиск "ал" => 7 elems (2 short)
     * Поиск "по" => 4 elems (1 short)
     * Поиск "га" => 2 elems (1 short)
     * Поиск "й" => 19 elems (2 short)

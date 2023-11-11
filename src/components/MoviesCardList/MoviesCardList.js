@@ -19,24 +19,6 @@ function MoviesCardList({ ...props }) {
   const [visibleMovies, setVisibleMovies] = useState(true);
   const [isNotFound, setIsNotFound] = useState('');
 
-  if (props.list ){
-    // console.log(`MoviesCardList >>> props.list.length =`, props.list.length);
-  }
-
-  /**
-    * Ширина >1024px — 3 в ряд и 4 ряда карточек (3*4). Кнопка «Ещё» загружает 3 карточки
-    * Ширина 768px-1023 — 2 карточки и 4 ряда (2*4). Кнопка «Ещё» загружает 2 карточки
-    * Ширина 320-767 — 1 карточка и 5 рядов (1*5). Кнопка «Ещё» загружает 2 карточки
-    *
-    * Поиск "да" => 9 (1 short) //
-    * Поиск "part" => 1 elem
-    * Поиск "all" => 6 elems
-    * Поиск "ал" => 7 elems
-    * Поиск "по" => 4 elems (1 short)
-    * Поиск "га" => 2 elems (1 short)
-    * Поиск "й" => 19 elems (2 short)
-  */
-
   React.useEffect(() => {
     function handleResize() {
 
@@ -96,8 +78,12 @@ function MoviesCardList({ ...props }) {
 
   function getSavedMovieCard(arr, id) {
     return arr.find((item) => {
-      // console.log(`item.movieId === id = ${item.movieId === id}`);
-      return item.movieId === id;
+
+      if (!props.isPageSaveMovies) {
+        return item.movieId === id;
+      }else {
+        return item._id === id;
+      }
     });
   };
 
@@ -120,11 +106,12 @@ function MoviesCardList({ ...props }) {
     });
 
   } else {
-    console.log('props.savedMovies = ', props.savedMovies);
+    // console.log('> Navigate > МЫ находимся на странице /saved-movies;  props.savedMovies = ', props.savedMovies);
 
     if ( props.savedMovies ){
+      // console.log('renderMovies = ', renderMovies);
       movieCard = renderMovies.map((item) => {
-        const likedMovieCard = getSavedMovieCard(props.savedMovies, item.id);
+        const likedMovieCard = getSavedMovieCard(props.savedMovies, item._id);
         const likedMovieId = likedMovieCard ? likedMovieCard._id : null;
 
         return <MoviesCard
@@ -185,14 +172,19 @@ function MoviesCardList({ ...props }) {
 
   function allMovies() {
 
-    const checkItems = movieCard.length && movieCard.length > 0;
-    console.log(`checkItems = ${checkItems}`);
+    if (movieCard === undefined || movieCard === null){
+      console.error('Ошибка в получении карточек: movieCard === undefined. См. строку 107 => return Card');
+      return;
+    }
+
+    const checkItems = movieCard !== null && movieCard.length && movieCard.length > 0;
+    // console.log(`checkItems = ${checkItems}`);
     // console.log('renderMovies => ', renderMovies);
     // console.log('<= renderMovies => ');
     // console.log(`MoviesCardList.js >>> renderMovies?.length = ${renderMovies?.length}; movieCard.length = ${movieCard.length} `);
 
     // console.log(`visibleMovies = ${visibleMovies}`);
-    //console.log(`props.setIsNotFound = ${isNotFound}`);
+    // console.log(`props.setIsNotFound = ${isNotFound}`);
     // console.log(`!visibleMovies || isNotFound ==== > ${!visibleMovies || isNotFound}`);
 
     if (checkItems){
@@ -220,7 +212,7 @@ function MoviesCardList({ ...props }) {
       );
     } else {
 
-      console.log('Пользователь что-то искал и решил обновить страницу, но элементов нет. => показывем сообщение об ошибке.');
+      //console.log('Пользователь что-то искал и решил обновить страницу, но элементов нет. => показывем сообщение об ошибке.');
       let localStorageMovies = JSON.parse(localStorage.getItem('movies'));
       if (localStorageMovies ){
         if (! localStorageMovies.length) {

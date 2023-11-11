@@ -3,13 +3,12 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
-import { apiMovies, api } from '../../utils/Api';
+import { api } from '../../utils/Api';
 import * as auth from '../../utils/Auth';
 
 import Main from "../Main/Main";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-import { arrMovies } from '../../utils/arrMovies'
 import Movies from "../Movies/Movies";
 import SavedMovies from "../Movies/SavedMovies";
 
@@ -24,14 +23,10 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
+  // const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
 
   const navigate = useNavigate();
-
-  // https://reactrouter.com/en/main/hooks/use-navigate
-  // ERROR useNavigate() may be used only in the context of a <Router> component.
-  // https://bobbyhadz.com/blog/react-usenavigate-may-be-used-only-in-context-of-router
 
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isVisibleLoader, setIsVisibleLoader] = useState(false); // Лоадер поверх всех элементов
@@ -43,6 +38,7 @@ function App() {
       Promise.all([api.getUserInfo(), api.getUsersMovies()])
         .then(([info, dataMovies]) => {
           // console.log('setCurrentUser info ===> ', info);
+          console.log('Сохраненные карточки = ', dataMovies);
 
           setSavedMovies(dataMovies);
 
@@ -79,21 +75,41 @@ function App() {
     if (token) {
       auth.checkToken(token)
         .then(user => {
+          // console.log('user', user);
           setLoggedIn(true);
           handleLogin(user);
 
-          // navigate('/');
+          // console.log('/')
+
+          // navigate('/movies');
         })
         .catch((err) => {
           // console.error(`front> >>> APP.js >>> useEffect`);
           console.error(err);
         });
     }
-  }, [navigate]);
+  }, []);
 
   const handleLogin = () => {
     setLoggedIn(true);
   }
+
+  const handleRegister = ({ email, password }) => {
+    //
+    auth
+      .register(email, password)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+
+        setLoggedIn(true);
+        navigate('/');
+      })
+      .catch(err => {
+        console.err(`front> >>> APP.js >>> handleRegister()`);
+        console.error(err);
+      });
+  }
+
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -123,8 +139,11 @@ function App() {
 
   function handleDeleteMovie(movie) {
     console.log(`>>> click handleDeleteMovie >>>`);
+    console.log('handleDeleteMovie movie', movie);
+
     api
       .deleteMovie(movie._id)
+      // .deleteMovie(movie.movieId)
       .then(() => {
 
         const newMoviesList = savedMovies.filter((m) => m._id === movie._id ? false : true);
@@ -149,6 +168,27 @@ function App() {
     <div className="app">
 
       <Routes>
+        <Route path="/signup" element={
+          <>
+            <main className="content">
+                <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} />
+              {isVisibleLoader && (
+                <Preloader currentPosition="fullscreen" />
+              )}
+            </main>
+          </>
+        } />
+
+        <Route path="/signin" element={
+          <>
+            <main className="content">
+                <Login setIsVisibleLoader={setIsVisibleLoader} handleLogin={handleLogin}  />
+              {isVisibleLoader && (
+                <Preloader currentPosition="fullscreen" />
+              )}
+            </main>
+          </>
+        } />
 
         <Route
           exact
@@ -162,73 +202,74 @@ function App() {
           }
         />
 
-
-        <Route path="/signup" element={
-          <>
-            <main className="content">
-              <Register setIsVisibleLoader={setIsVisibleLoader} />
-              {isVisibleLoader && (
-                <Preloader currentPosition="fullscreen" />
-              )}
-            </main>
-          </>
-        } />
-        <Route path="/signin" element={
-          <>
-            <main className="content">
-              <Login setIsVisibleLoader={setIsVisibleLoader}  />
-              {isVisibleLoader && (
-                <Preloader currentPosition="fullscreen" />
-              )}
-            </main>
-          </>
-        } />
-
-
-        <Route path="/movies" element={
-          <>
-            <Header isPageMovies />
-            <main className="content">
-              {/* <SearchForm
+            <Route path="/movies" element={
+              <>
+                <Header isPageMovies />
+                <main className="content">
+                  {/* <SearchForm
                 isSearchError={isSearchError}
                 searchQuery={searchQuery}
                 handleSubmit={handleSubmit}
-                handleChangeShorts={handleChangeShorts}
+                handleCheckbox={handleCheckbox}
                 shortMovies={shortMovies}
-                handleChangeSearch={handleChangeSearch}
+                handleChangeValue={handleChangeValue}
               /> */}
-              <Movies
-                // setIsNotFound={setIsNotFound}
+                  <Movies
+                    // setIsNotFound={setIsNotFound}
+                    loggedIn={loggedIn}
+                    savedMoviesList={savedMovies}
+                    // list={filteredMovies}
+                    onLikeClick={handleSaveMovie}
+                    onDeleteClick={handleDeleteMovie}
+                  />
 
-                savedMoviesList={savedMovies}
-                // list={filteredMovies}
-                onLikeClick={handleSaveMovie}
-                onDeleteClick={handleDeleteMovie}
-              />
+                </main>
+                <Footer />
+              </>
+            } />
 
-            </main>
-            <Footer />
-          </>
-        } />
-        <Route path="/saved-movies" element={
-          <>
-            <Header isPageMovies />
-            <main className="content">
-              <SavedMovies
-                isPageSaveMovies
-                // setIsNotFound={setIsNotFound}
 
-                savedMoviesList={savedMovies}
-                // list={savedMovies}
-                onDeleteClick={handleDeleteMovie}
-              />
 
-            </main>
-            <Footer />
-          </>
-        } />
+            <Route path="/saved-movies" element={
+              <>
+                <Header isPageMovies />
+                <main className="content">
+                  <SavedMovies
+                    isPageSaveMovies
+                    // setIsNotFound={setIsNotFound}
 
-        {/* <Route path="/saved-movies" element={
+                    savedMoviesList={savedMovies}
+                    // list={savedMovies}
+                    onDeleteClick={handleDeleteMovie}
+                  />
+
+                </main>
+                <Footer />
+              </>
+            } />
+
+            <Route path="/profile" element={
+              <>
+                <Header isPageProfile />
+                <main className="content">
+                  <Profile
+                    setCurrentUser={setCurrentUser}
+                    handleLogout={handleLogout}
+                    setIsVisibleLoader={setIsVisibleLoader}
+                  // handleProfileUpdate={handleProfileUpdate}
+                  />
+                  {isVisibleLoader && (
+                    <Preloader currentPosition="fullscreen" />
+                  )}
+                </main>
+              </>
+            } />
+
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+
+
+          {/* <Route path="/saved-movies" element={
           <>
             <Header isPageMovies />
             <main className="content">
@@ -237,9 +278,9 @@ function App() {
                 isSearchError={isSearchError}
                 searchQuery={savedSearchQuery}
                 handleSubmit={handleSubmit}
-                handleChangeShorts={handleChangeSavedShorts}
+                handleCheckbox={handleChangeSavedShorts}
                 shortMovies={shortMovies}
-                handleChangeSearch={handleChangeSavedSearch}
+                handleChangeValue={handleChangeSavedSearch}
               />
                 <Movies
                   isPageSaveMovies
@@ -259,26 +300,7 @@ function App() {
           </>
         } /> */}
 
-        <Route path="/profile" element={
-          <>
-            <Header isPageProfile />
-            <main className="content">
-              <Profile
-                setCurrentUser={setCurrentUser}
-                handleLogout={handleLogout}
-                setIsVisibleLoader={setIsVisibleLoader}
-                // handleProfileUpdate={handleProfileUpdate}
-              />
-              {isVisibleLoader && (
-                <Preloader currentPosition="fullscreen" />
-              )}
-            </main>
-          </>
-        } />
 
-        <Route path="*" element={<Page404 />} />
-
-      </Routes>
 
     </div>
     </CurrentUserContext.Provider>

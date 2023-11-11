@@ -81,10 +81,10 @@ class Api {
     thumbnail,
     id,
   }) {
-    console.log(
-      `api.js >>> saveNewMovie >>> country = ${country}; director = ${director}; duration = ${duration}; year = ${year}; description = ${description}; image = ${`https://api.nomoreparties.co${image.url}`}; trailerLink = ${trailerLink}; nameRU = ${nameRU}; nameEN = ${nameEN}; thumbnail = ${`https://api.nomoreparties.co${image.url}`}; id = ${id};
-      `
-    );
+    // console.log(
+    //   `api.js >>> saveNewMovie >>> country = ${country}; director = ${director}; duration = ${duration}; year = ${year}; description = ${description}; image = ${`https://api.nomoreparties.co${image.url}`}; trailerLink = ${trailerLink}; nameRU = ${nameRU}; nameEN = ${nameEN}; thumbnail = ${`https://api.nomoreparties.co${image.url}`}; id = ${id};
+    //   `
+    // );
 
     return fetch(this._cardsUrl, {
       method: 'POST',
@@ -112,8 +112,10 @@ class Api {
       })
   };
 
-  deleteMovie(movieId) {
-    return fetch(`${this._cardsUrl}/${movieId}`, {
+  deleteMovie(id) {
+    console.log(`id = ${id}`);
+    // return fetch(`${this._cardsUrl}/${movieId}`, {
+    return fetch(`${this._cardsUrl}/${id}`, {
       method: 'DELETE',
       headers: this._injectAuth(this._defaultHeaders),
     })

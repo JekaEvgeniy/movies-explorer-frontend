@@ -18,7 +18,7 @@ function SearchForm({ ...props }) {
             type="text"
             className="search-form__input"
             placeholder="Фильм"
-            onChange={props.handleChangeSearch}
+            onChange={props.handleChangeValue}
             value={props.searchQuery}
           />
           <button type='submit' className="search-form__btn" aria-label="Поиск">
@@ -36,10 +36,10 @@ function SearchForm({ ...props }) {
               name="shortMovies"
               checked={props.shortMovies === 'on' ? true : false}
               value={props.shortMovies === 'on' ? 'on' : 'off'}
-              onChange={props.handleChangeShorts}
+              onChange={props.handleCheckbox}
             />
             <span className="search-checkbox__ico"></span>
-            <span className="search-checkbox__title">Короткометражки</span>
+            <span className="search-checkbox__title">Короткометражки {props.shortMovies}</span>
           </label>
         </div>
       </form>

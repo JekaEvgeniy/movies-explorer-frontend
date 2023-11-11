@@ -53,6 +53,7 @@ export const authorize = ( email, password ) => {
 export const checkToken = (token) => {
   // const token = localStorage.getItem('jwt');
   const url = `${BASE_URL}/users/me`;
+  // const url = `${BASE_URL}/`;
 
   return fetch(url, {
     method: 'GET',

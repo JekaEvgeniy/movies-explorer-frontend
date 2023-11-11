@@ -8,6 +8,11 @@ import headerLogo from '../../images/header/logo.svg';
 function Login({...props}) {
   const navigate = useNavigate();
 
+  const [formValue, setFormValue] = useState({
+    email: '',
+    password: ''
+  });
+
   const {
     register,
     formState: { errors, isValid },
@@ -24,7 +29,8 @@ function Login({...props}) {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          navigate('/movies');
+          props.handleLogin();
+          navigate('/');
         }
       })
       .catch((err) => console.log("Ошибка", err))
@@ -33,7 +39,7 @@ function Login({...props}) {
       });
   };
 
-  // const handleSubmit = (e) => {
+  // const handleLoginSubmit = (e) => {
   //   e.preventDefault();
   //   const { email, password } = formValue;
   //   auth.authorize({ email, password })
@@ -81,6 +87,14 @@ function Login({...props}) {
                         value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                         message: "Введите e-mail в формате example@gmail.com",
                       },
+                      onChange: (e) => {
+                        const { name, value } = e.target;
+
+                        setFormValue({
+                          ...formValue,
+                          [name]: value
+                        });
+                      },
                     })}
                     type="email"
                     inputMode="email"
@@ -104,6 +118,14 @@ function Login({...props}) {
                       maxLength: {
                         value: 30,
                         message: 'Максимум 30 символов'
+                      },
+                      onChange: (e) => {
+                        const { name, value } = e.target;
+
+                        setFormValue({
+                          ...formValue,
+                          [name]: value
+                        });
                       },
                     })}
                     type="password"
