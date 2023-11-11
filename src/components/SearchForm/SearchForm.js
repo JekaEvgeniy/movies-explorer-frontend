@@ -39,7 +39,7 @@ function SearchForm({ ...props }) {
               onChange={props.handleCheckbox}
             />
             <span className="search-checkbox__ico"></span>
-            <span className="search-checkbox__title">Короткометражки {props.shortMovies}</span>
+            <span className="search-checkbox__title">Короткометражки</span>
           </label>
         </div>
       </form>

@@ -63,6 +63,7 @@ function Register({...props}) {
               if (res.token) {
                 localStorage.setItem('jwt', res.token);
                 // props.handleRegister();
+                console.log(`>>> !!! navigate('/movies')`);
                 navigate('/movies'); // ТЗ: Если запрос успешен, пользователь сразу авторизуется и будет перенаправлен на страницу «Фильмы».
               }
             })

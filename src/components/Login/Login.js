@@ -31,7 +31,12 @@ function Login({...props}) {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
           props.handleLogin();
-          navigate('/');
+
+          console.log(`>>> !!! navigate('/movies')`);
+          navigate('/movies');
+
+          // кнопка «Войти» становится активной
+          // После этого происходит редирект настраницу «Фильмы».
         }
       })
       .catch((err) => console.log("Ошибка", err))
@@ -145,6 +150,8 @@ function Login({...props}) {
 
               <div className="authorization-form__content-bottom">
                 <div className="authorization-form-actions">
+                  {/* <p className="authorization-form-actions__error-message">Переданы некорректные данные</p> */}
+
                   <button
                     type="submit"
                     className="authorization-form-actions__btn authorization-form-actions__btn_theme_accent"
