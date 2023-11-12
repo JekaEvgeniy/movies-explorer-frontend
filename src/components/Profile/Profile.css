@@ -132,13 +132,20 @@
   gap           : 2px 0;
 }
 
-.profile-form-actions__error-message {
+.profile-form-actions__message {
   margin     : 0;
   padding    : 7px 0;
   font-size  : 11px;
-  color      : #FF004C;
   line-height: normal;
   text-align : center;
+}
+
+.profile-form-actions__message_type_error {
+  color : #FF004C;
+}
+
+.profile-form-actions__message_type_success {
+  color : #2BE080;
 }
 
 .profile-form-actions__btn {

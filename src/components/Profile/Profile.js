@@ -6,10 +6,10 @@ import { api } from '../../utils/Api';
 function Profile({ ...props }) {
 
   const currentUser = useContext(CurrentUserContext);
-  console.log('currentUser', currentUser);
   const [name, setName] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
   const [messageError, setMessageError] = useState(false);
+  const [messageSuccess, setMessageSuccess] = useState(false);
 
   const [enabledEditMode, setEnableEditMode] = useState(false); // Внизу имеется кнопка для редактирования полей формы.
   const [disabledButtonSaved, setDisabledButtonSaved] = useState(false);
@@ -71,10 +71,12 @@ function Profile({ ...props }) {
         setMessageError(false);
         setEnableEditMode(false);
         setDisabledButtonSaved(false);
+        setMessageSuccess(true);
       })
       .catch(err => {
         setMessageError(true);
         setDisabledButtonSaved(true);
+        setMessageSuccess(false);
       })
       .finally(() => {
         props.setIsVisibleLoader(false);
@@ -156,7 +158,10 @@ function Profile({ ...props }) {
             <div className="profile-form__content-bottom">
               <div className="profile-form-actions">
                 {messageError && (
-                  <p className="profile-form-actions__error-message">При обновлении профиля произошла ошибка. Повторите попытку позже или попробуйте другой email</p>
+                  <p className="profile-form-actions__message profile-form-actions__message_type_error">При обновлении профиля произошла ошибка. Повторите попытку позже или попробуйте другой email</p>
+                )}
+                {messageSuccess && (
+                  <p className="profile-form-actions__message profile-form-actions__message_type_success">Профиль успешно изменен</p>
                 )}
                 {
                   !enabledEditMode ? (
