@@ -6,6 +6,7 @@ import { api } from '../../utils/Api';
 function Profile({ ...props }) {
 
   const currentUser = useContext(CurrentUserContext);
+  console.log('currentUser', currentUser);
   const [name, setName] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
   const [messageError, setMessageError] = useState(false);

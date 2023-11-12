@@ -1,6 +1,6 @@
 // import React from "react";
-export const BASE_URL = 'https://api.dip.nomoredomainsrocks.ru';
-// export const BASE_URL = 'http://localhost:3000';
+// export const BASE_URL = 'https://api.dip.nomoredomainsrocks.ru';
+export const BASE_URL = 'http://localhost:3000';
 
 const checkResponse = (res) => {
   // Проверка статуса ответа сервера
@@ -18,9 +18,13 @@ export const register = ( name, email, password ) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
+    // body: JSON.stringify({ name, email, password }),
     body: JSON.stringify({ name: name, email:email, password: password }),
   })
-    .then(checkResponse);
+    .then(res => {
+      return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+    })
+    // .then(checkResponse);
 };
 
 export const authorize = ( email, password ) => {
