@@ -17,7 +17,7 @@ function Movies({ ...props }) {
   const [isSearchError, setIsSearchError] = useState('');
   const [isNotFound, setIsNotFound] = useState(false);
 
-  const [isLoadingMovies, setIsLoadingMovies] = useState(true);
+  const [isLoadingMovies, setIsLoadingMovies] = useState(false);
 
   // https://stackoverflow.com/questions/56356900/way-to-determine-checkbox-checked-in-react-usestate
   function handleCheckbox(e) {
