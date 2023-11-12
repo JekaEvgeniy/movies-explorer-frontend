@@ -134,6 +134,8 @@ function Movies({ ...props }) {
       setFilteredMovies(shortMovies === 'on' ? filterSortShortMovies(arr) : arr);
       setIsLoadingMovies(false);
     }
+
+
   }, [shortMovies]); // searchQuery, movies
 
 

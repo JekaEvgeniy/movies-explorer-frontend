@@ -6,6 +6,7 @@ function MoviesCard(props) {
   const movieTitle = card.nameRU;
   const movieDuration = card.duration;
   const moviePath = card.image.url || card.image;
+  const trailerLink = card.trailerLink;
 
   // Когда мы на странице избранного, пути у изображении другие оО
   const movieUrl = props.isPageSaveMovies ? moviePath : `https://api.nomoreparties.co/${moviePath}`;
@@ -63,9 +64,9 @@ function MoviesCard(props) {
             {button}
           </div>
         </div>
-        <figure className="movie__figure">
+        <a href={trailerLink} className="movie__figure" target="_blank" rel="noreferrer">
           <img className="movie__image image-cover" src={movieUrl} loading="lazy" alt={movieTitle} />
-        </figure>
+        </a>
       </article>
     </li>
   );

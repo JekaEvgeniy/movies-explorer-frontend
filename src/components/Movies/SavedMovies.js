@@ -3,7 +3,7 @@ import { sortMovies, filterSortShortMovies } from '../../utils/Common';
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
+// import Preloader from '../Preloader/Preloader';
 
 function SavedMovies({ ...props }) {
   const [savedMovies, setSavedMovies] = useState(props.savedMoviesList);
