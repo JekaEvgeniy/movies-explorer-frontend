@@ -46,12 +46,6 @@
   animation : preloader-inside-red 1s ease-in-out infinite;
 }
 
-.preloader_position_absolute {
-  position: fixed;
-  top: 0;
-  left: 0;
-  user-select: none;
-}
 .preloader_position_fixed {
   position: fixed;
   top: 0;

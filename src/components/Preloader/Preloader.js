@@ -4,9 +4,8 @@ const Preloader = ({ ...props }) => {
   let className = 'preloader';
   if (props.currentPosition &&  props.currentPosition === 'fullscreen') {
     className += ` preloader_position_fixed`;
-  }else {
-    className += ` preloader_position_absolute`;
   }
+
   return (
     <div className={className}>
       <div className="preloader__container">

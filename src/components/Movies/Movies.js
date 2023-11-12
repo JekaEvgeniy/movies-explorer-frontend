@@ -17,7 +17,7 @@ function Movies({ ...props }) {
   const [isSearchError, setIsSearchError] = useState('');
   const [isNotFound, setIsNotFound] = useState(false);
 
-  const [isLoadingMovies, setIsLoadingMovies] = useState(false);
+  const [isLoadingMovies, setIsLoadingMovies] = useState(true);
 
   // https://stackoverflow.com/questions/56356900/way-to-determine-checkbox-checked-in-react-usestate
   function handleCheckbox(e) {
@@ -41,8 +41,10 @@ function Movies({ ...props }) {
 
     if (!moviesList.length) {
       // Нет ни одного фильма отвечающему запросу
+      console.log(`setIsNotFound = ${setIsNotFound(true) }`)
       setIsNotFound(true);
     } else {
+      console.log(`setIsNotFound = ${setIsNotFound(false)}`)
       setIsNotFound(false);
     }
 
@@ -104,6 +106,22 @@ function Movies({ ...props }) {
 
 
 
+  useEffect(() => {
+    console.log(`isNotFound = ${isNotFound}`);
+    const arr = localStorage.getItem('filteredMovies');
+    // console.log(`arr typeof =`, typeof arr);
+    if (arr === null) {
+      console.log(`setIsNotFound  true =>>> ${isNotFound}`)
+      setIsNotFound(true);
+    }
+
+    if (!arr?.length){
+      console.log(`setIsNotFound  true =>>> ${isNotFound}`)
+      setIsNotFound(true);
+    }
+
+    console.log(`isNotFound =>>> ${isNotFound}`);
+  }, []);
 
   useEffect(() => {
     // console.log('1. useEffect >>> Если пользователь ничего не искал, то фильмы выводить не нужно!');
