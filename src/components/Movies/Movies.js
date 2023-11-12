@@ -62,8 +62,9 @@ function Movies({ ...props }) {
 
     setIsSearchError('');
     let movies = localStorage.getItem('movies');
-
     localStorage.setItem('searchQuery', searchQuery);
+
+    setIsLoadingMovies(true);
 
     if (movies?.length && movies?.length !== 0) {
       setAllMovies(movies);
@@ -141,8 +142,8 @@ function Movies({ ...props }) {
         onDelete={props.onDeleteClick}
       />
 
-      {props.isLoadingMovies && (
-        <Preloader />
+      {isLoadingMovies && (
+        <Preloader currentPosition />
       )}
     </section>
   );

@@ -2,8 +2,10 @@ import React from 'react'
 
 const Preloader = ({ ...props }) => {
   let className = 'preloader';
-  if (props.currentPosition) {
-    className += ' preloader_position_fixed';
+  if (props.currentPosition &&  props.currentPosition === 'fullscreen') {
+    className += ` preloader_position_fixed`;
+  }else {
+    className += ` preloader_position_absolute`;
   }
   return (
     <div className={className}>
