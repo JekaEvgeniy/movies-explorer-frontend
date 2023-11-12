@@ -97,9 +97,7 @@ function App() {
   }
 
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-
+  const handleLogout = () => {
     localStorage.clear();
     navigate('/');
     setLoggedIn(false);
@@ -132,6 +130,8 @@ function App() {
 
 
   const handleTokenCheck = () => {
+    console.log(`handleTokenCheck >>>> handleTokenCheck()`);
+
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       checkToken(jwt)
@@ -143,7 +143,12 @@ function App() {
             // navigate("/movies");
           }
         })
-        .catch((err) => console.log("Ошибка", err));
+        .catch((err) => {
+          console.log("Ошибка", err);
+          handleLogout();
+        });
+    } else {
+      handleLogout();
     }
   };
 
