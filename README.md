@@ -10,9 +10,12 @@
 [github](https://github.com/JekaEvgeniy/movies-explorer-frontend)
 
 ## Ссылки на проект
-IP 51.250.8.33
+IP 51.250.8.233
 Backend https://api.dip.nomoredomainsrocks.ru/
 Frontend https://dip.nomoredomainsrocks.ru/
+
+## Ссылка на пул реквест
+https://github.com/JekaEvgeniy/movies-explorer-frontend/pull/2
 
 ## Возможности
 * генерация/добавление/удаление элементов
