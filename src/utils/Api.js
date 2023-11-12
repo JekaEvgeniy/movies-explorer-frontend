@@ -81,10 +81,6 @@ class Api {
     thumbnail,
     id,
   }) {
-    // console.log(
-    //   `api.js >>> saveNewMovie >>> country = ${country}; director = ${director}; duration = ${duration}; year = ${year}; description = ${description}; image = ${`https://api.nomoreparties.co${image.url}`}; trailerLink = ${trailerLink}; nameRU = ${nameRU}; nameEN = ${nameEN}; thumbnail = ${`https://api.nomoreparties.co${image.url}`}; id = ${id};
-    //   `
-    // );
 
     return fetch(this._cardsUrl, {
       method: 'POST',
@@ -113,8 +109,6 @@ class Api {
   };
 
   deleteMovie(id) {
-    console.log(`id = ${id}`);
-    // return fetch(`${this._cardsUrl}/${movieId}`, {
     return fetch(`${this._cardsUrl}/${id}`, {
       method: 'DELETE',
       headers: this._injectAuth(this._defaultHeaders),
@@ -150,7 +144,6 @@ class Api {
   // setUserInfo({ name, email }) {
   setUserInfo( data ) {
     return fetch(`${this._url}/users/me`, {
-      // credentials: 'include',
       method: 'PATCH',
       // headers: this._headers,
       headers: {
@@ -172,8 +165,8 @@ class Api {
 }
 
 const api = new Api({
-  url: 'http://localhost:3000',
-  // url: 'https://api.mmm.nomoredomainsrocks.ru',
+  // url: 'http://localhost:3000',
+  url: 'https://api.mmm.nomoredomainsrocks.ru',
 });
 
 export { apiMovies, api };

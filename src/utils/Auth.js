@@ -1,6 +1,6 @@
 // import React from "react";
-// export const BASE_URL = 'https://api.mmm.nomoredomainsrocks.ru';
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://api.mmm.nomoredomainsrocks.ru';
+// export const BASE_URL = 'http://localhost:3000';
 
 const checkResponse = (res) => {
   // Проверка статуса ответа сервера
@@ -10,10 +10,7 @@ const checkResponse = (res) => {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-// export const register = ({name, email, password }) => {
 export const register = ( name, email, password ) => {
-  // console.log(`email = ${email}`);
-  // console.log(`password = ${password}`);
 
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
@@ -26,10 +23,7 @@ export const register = ( name, email, password ) => {
     .then(checkResponse);
 };
 
-// export const authorize = ({ email, password }) => {
 export const authorize = ( email, password ) => {
-  // console.log(`email = ${email}`);
-  // console.log(`password = ${password}`);
 
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
@@ -51,9 +45,7 @@ export const authorize = ( email, password ) => {
 
 
 export const checkToken = (token) => {
-  // const token = localStorage.getItem('jwt');
   const url = `${BASE_URL}/users/me`;
-  // const url = `${BASE_URL}/`;
 
   return fetch(url, {
     method: 'GET',
