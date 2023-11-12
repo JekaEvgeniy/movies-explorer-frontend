@@ -166,7 +166,7 @@ class Api {
 
 const api = new Api({
   // url: 'http://localhost:3000',
-  url: 'https://api.mmm.nomoredomainsrocks.ru',
+  url: 'https://api.dip.nomoredomainsrocks.ru',
 });
 
 export { apiMovies, api };
