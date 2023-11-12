@@ -1,26 +1,32 @@
+/*
+  ISSUE:
+  https: //github.com/facebook/react/issues/21497
+*/
+
 @font-face {
 	font-display: swap;
-	font-family: "Inter", Arial, sans-serif;
+	/* font-family: 'Inter', Arial, sans-serif; */
+	font-family: 'Inter';
 	font-style  : normal;
 	font-weight : 400;
-	src         : url("./Inter-Regular.woff2?v=3.19") format("woff2"),
-		url("./Inter-Regular.woff?v=3.19") format("woff");
+	src         : url("./Inter-Regular.woff2") format("woff2"),
+		url("./Inter-Regular.woff") format("woff");
 }
 
 @font-face {
 	font-display: swap;
-	font-family: "Inter", Arial, sans-serif;
+	font-family: 'Inter';
 	font-style  : normal;
 	font-weight : 500;
-	src         : url("./Inter-Medium.woff2?v=3.19") format("woff2"),
-		url("./Inter-Medium.woff?v=3.19") format("woff");
+	src         : url("./Inter-Medium.woff2") format("woff2"),
+		url("./Inter-Medium.woff") format("woff");
 }
 
 @font-face {
 	font-display: swap;
-	font-family: "Inter", Arial, sans-serif;
+	font-family: 'Inter';
 	font-style  : normal;
 	font-weight : 900;
-	src         : url("./Inter-Black.woff2?v=3.19") format("woff2"),
-		url("./Inter-Black.woff?v=3.19") format("woff");
+	src         : url("./Inter-Black.woff2") format("woff2"),
+		url("./Inter-Black.woff") format("woff");
 }
