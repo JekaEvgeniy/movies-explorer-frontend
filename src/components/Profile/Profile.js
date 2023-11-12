@@ -13,8 +13,8 @@ function Profile({ ...props }) {
   const [email, setEmail] = useState(currentUser.email);
   const [messageError, setMessageError] = useState(false);
 
-  const [enabledEditMode, setEnableEditMode] = useState(true); // Внизу имеется кнопка для редактирования полей формы.
-  // const [isVisibleButtonSave, setIsVisibleButtonSave] = useState(false);
+  const [enabledEditMode, setEnableEditMode] = useState(false); // Внизу имеется кнопка для редактирования полей формы.
+  const [disabledButtonSaved, setDisabledButtonSaved] = useState(false);
 
   const {
     register,
@@ -26,27 +26,42 @@ function Profile({ ...props }) {
   });
 
   useEffect(() => {
-    if (currentUser.name) {
-      // Без проверки можно получить: Cannot read properties of undefined (reading 'name')
-      setName(currentUser.name);
+      if (currentUser.name) {
+        // Без проверки можно получить: Cannot read properties of undefined (reading 'name')
+        setName(currentUser.name);
+      }
+
+      if (currentUser.email) {
+        setEmail(currentUser.email);
+      }
+
+  }, [currentUser]);
+
+  useEffect(() => {
+    // console.log(` current: name > ${currentUser.name} ; newName : ${name} `);
+    // console.log(` current:email > ${currentUser.email}; newEmail: ${email}`);
+    switch (true) {
+      case !isValid:
+        setDisabledButtonSaved(true);
+        break;
+
+      case isValid && name === currentUser.name && email === currentUser.email:
+        setDisabledButtonSaved(true);
+        break;
+
+      case isValid && (name === currentUser.name || email === currentUser.email):
+        setDisabledButtonSaved(false);
+        break;
+
+      default:
+        setDisabledButtonSaved(false);
     }
 
-    if (currentUser.email) {
-      setEmail(currentUser.email);
-    }
+  }, [currentUser.email, currentUser.name, email, name, isValid, enabledEditMode]);
 
-  }, [currentUser, email, name, isValid, enabledEditMode]);
-
-  function handleInputChangeName(e) {
-    setName(e.target.value);
-  }
-
-  function handleInputChangeEmail(e) {
-    setEmail(e.target.value);
-  }
-
-  function handleBtnEdit(){
-    setEnableEditMode(false);
+   function handleBtnEdit(){
+    setEnableEditMode(true);
+    setDisabledButtonSaved(true);
   }
 
   const handleProfileUpdate = (userData) => {
@@ -57,12 +72,14 @@ function Profile({ ...props }) {
       .then((updateUserData) => {
         props.setCurrentUser(updateUserData.data);
         setMessageError(false);
-        setEnableEditMode(true);
+        setEnableEditMode(false);
+        setDisabledButtonSaved(false);
         // closeAllPopups();
       })
       .catch(err => {
-        console.error(err);
+        // console.error(err);
         setMessageError(true);
+        setDisabledButtonSaved(true);
       })
       .finally(() => {
         props.setIsVisibleLoader(false);
@@ -86,7 +103,7 @@ function Profile({ ...props }) {
                 <span className="profile-form__title">Имя</span>
                 <input
                   {...register('name', {
-                    disabled: enabledEditMode ? true : false,
+                    disabled: enabledEditMode ? false : true,
                     required: 'Поле обязательно к заполнению',
                     minLength: {
                       value: 2,
@@ -97,7 +114,9 @@ function Profile({ ...props }) {
                       message: 'Максимум 30 символов'
                     },
                     onChange: (e) => {
-                      handleInputChangeName(e);
+                      console.log(`e.target.va; = ${e.target.value}`)
+                      setName(e.target.value);
+                      setMessageError(false);
                     },
                   })}
                   type="text"
@@ -116,21 +135,23 @@ function Profile({ ...props }) {
                 <span className="profile-form__title">E-mail</span>
                 <input
                   {...register("email", {
-                    disabled: enabledEditMode ? true : false,
+                    disabled: enabledEditMode ? false : true,
                     required: "Обязательно укажите e-mail",
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                       message: "Введите e-mail в формате example@gmail.com",
                     },
                     onChange: (e) => {
-                      handleInputChangeEmail(e);
+                      // handleInputChangeEmail(e);
+                      setEmail(e.target.value);
+                      setMessageError(false);
                     },
                   })}
                   type="email"
                   inputMode="email"
                   className="profile-form__input"
                   name="email"
-                  defaultValue={email}
+                  defaultValue={currentUser.email}
                 />
               </label>
 
@@ -142,10 +163,10 @@ function Profile({ ...props }) {
             <div className="profile-form__content-bottom">
               <div className="profile-form-actions">
                 {messageError && (
-                  <p className="profile-form-actions__error-message">При обновлении профиля произошла ошибка.</p>
+                  <p className="profile-form-actions__error-message">При обновлении профиля произошла ошибка. Повторите попытку позже или попробуйте другой email</p>
                 )}
                 {
-                 enabledEditMode ? (
+                 ! enabledEditMode ? (
                   <>
                     <button
                       onClick={handleBtnEdit}
@@ -160,7 +181,8 @@ function Profile({ ...props }) {
                   </>
                   ) : (
                     <button type="submit"
-                      disabled={!isValid}
+                      disabled={disabledButtonSaved}
+                      data-target={disabledButtonSaved}
                       className="profile-form-actions__btn profile-form-actions__btn_theme_accent">Сохранить</button>
                   )
                 }

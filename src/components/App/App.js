@@ -36,7 +36,7 @@ function App() {
     // При обновлении страницы - идет редирект на галвную.
     handleTokenCheck();
   }, []);
-/* 
+/*
   useEffect(() => {
     if (localStorage.getItem('jwt')) {
       setLoggedIn(true)
@@ -174,11 +174,11 @@ console.log("loggedIn", loggedIn)
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
       <Routes>
-       
+
           <Route
             path="/movies"
             element={
-              
+
               <>
                 <Header isPageMovies />
                 <ProtectedRoute
@@ -197,7 +197,7 @@ console.log("loggedIn", loggedIn)
           <Route
             path="/saved-movies"
             element={
-             
+
               <>
                 <Header isPageMovies />
                 <ProtectedRoute
@@ -215,7 +215,31 @@ console.log("loggedIn", loggedIn)
             }
           />
 
+
           <Route
+            path="/profile"
+            element={
+              <>
+                <Header isPageProfile />
+                <main className="content">
+                  <ProtectedRoute
+                    loggedIn={loggedIn}
+                    element={Profile}
+                    setCurrentUser={setCurrentUser}
+                    handleLogout={handleLogout}
+                    setIsVisibleLoader={setIsVisibleLoader}
+                  />
+                  {isVisibleLoader && (
+                    <Preloader currentPosition="fullscreen" />
+                  )}
+                </main>
+                <Footer />
+              </>
+            }
+          />
+
+
+          {/* <Route
             path="/profile"
             element={
               <>
@@ -234,7 +258,7 @@ console.log("loggedIn", loggedIn)
                 <Footer />
               </>
             }
-          />
+          /> */}
 
           <Route path="*" element={<Page404 />} />
 
@@ -250,7 +274,7 @@ console.log("loggedIn", loggedIn)
             }
           />
 
-          
+
           <Route path="/signup" element={
             loggedIn ? <Navigate to='/movies' /> :
             <>
@@ -273,7 +297,7 @@ console.log("loggedIn", loggedIn)
             </>
           } />
 
-          
+
 
         </Routes>
 

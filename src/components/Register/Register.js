@@ -75,43 +75,14 @@ function Register({...props}) {
             });
         }
       })
-      .catch((err) => { console.log(`При регистрации пользователя произошла ошибка. ${err}`) })
+      .catch((err) => {
+        setMessageError(true);
+        console.log(`При регистрации пользователя произошла ошибка. ${err}`)
+      })
       .finally(() => {
         props.setIsVisibleLoader(false);
       });
   };
-
-  // const [formValue, setFormValue] = useState({
-  //   email: '',
-  //   password: '',
-  // })
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-
-  //   setFormValue({
-  //     ...formValue,
-  //     [name]: value
-  //   });
-  // }
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const {name, email, password } = formValue;
-
-  //   auth.register({ name, email, password })
-  //     .then((data) => {
-  //       navigate('/signin');
-
-  //       console.log('success');
-  //       // handleInfoTooltip('success');
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       // handleInfoTooltip('error');
-  //     });
-  // }
 
   return (
     <main className="content">
@@ -143,6 +114,9 @@ function Register({...props}) {
                       value: 30,
                       message: 'Максимум 30 символов'
                     },
+                    onChange: (e) => {
+                      setMessageError(false);
+                    },
                   })}
                   type="text"
                   className={`authorization-form__input ${errors?.name ? 'authorization-form__input_invalid' : '' }`}
@@ -163,6 +137,9 @@ function Register({...props}) {
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                       message: "Введите e-mail в формате example@gmail.com",
+                    },
+                    onChange: (e) => {
+                      setMessageError(false);
                     },
                   })}
                   type="email"
@@ -209,7 +186,7 @@ function Register({...props}) {
               <div className="authorization-form-actions">
                   {messageError && (
                     <>
-                      <p className="authorization-form-actions__error-message">Переданы некорректные данные</p>
+                      <p className="authorization-form-actions__error-message">При регистрации пользователя произошла ошибка.</p>
                     </>
                   )}
 
