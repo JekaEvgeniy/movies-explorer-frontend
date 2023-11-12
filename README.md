@@ -10,7 +10,7 @@
 [github](https://github.com/JekaEvgeniy/movies-explorer-frontend)
 
 ## Ссылки на проект
-IP 158.160.39.56
+IP 51.250.8.33
 Backend https://api.dip.nomoredomainsrocks.ru/
 Frontend https://dip.nomoredomainsrocks.ru/
 
