@@ -32,17 +32,12 @@ function Movies({ ...props }) {
   }
 
   function handleChangeValue(e) {
-    // console.log('3. handleChangeValue');
     let val = e.target.value;
     setSearchQuery(val);
-    // console.log(`handleChangeValue >>> val = ${val}`);
   }
 
   function handleSortMovies(movies, query, checkbox) {
-    // console.log('44 line. handleSortMovies >>> movies', movies);
     const moviesList = sortMovies(movies, query, shortMovies);
-
-    // console.log('>>> handleSortMovies moviesList => ', moviesList);
 
     if (!moviesList.length) {
       // Нет ни одного фильма отвечающему запросу
@@ -53,15 +48,13 @@ function Movies({ ...props }) {
 
     let itemList = checkbox === 'on' ? filterSortShortMovies(moviesList) : moviesList;
     setFilteredMovies(itemList);
-    // localStorage.setItem('filteredMovies', JSON.stringify(itemList));
   }
 
   function handleSubmit(e) {
     // Если пользователь ещё ничего не искал, блока с карточками на странице нет.
     e.preventDefault();
 
-    if (! searchQuery ) {
-      // console.error('handleSubmit >>> input.val пустой');
+    if (!searchQuery) {
       setIsSearchError('Нужно ввести ключевое слово');
 
       return;
@@ -71,13 +64,9 @@ function Movies({ ...props }) {
     let movies = localStorage.getItem('movies');
 
     localStorage.setItem('searchQuery', searchQuery);
-    // console.log('line 74. movies >>> ', movies);
 
-    if (movies?.length && movies?.length !== 0 ) {
-      // П
-      // console.log('line 78, allMovies = ', allMovies);
+    if (movies?.length && movies?.length !== 0) {
       setAllMovies(movies);
-      // console.log('allMovies', allMovies);
       handleSortMovies(movies, searchQuery, shortMovies);
       setIsLoadingMovies(false);
 
@@ -88,7 +77,6 @@ function Movies({ ...props }) {
         .then(([items]) => {
           if (items.length) {
             if (!localStorage.hasOwnProperty('movies')) {
-              // console.log('Записываем в localStorage все фильмы');
               localStorage.setItem('movies', JSON.stringify(items));
               setAllMovies(items);
             }
@@ -123,7 +111,7 @@ function Movies({ ...props }) {
     setSearchQuery(searchQuery);
 
     const arr = JSON.parse(localStorage.getItem('filteredMovies'));
-    if (arr?.length ){
+    if (arr?.length) {
       setFilteredMovies(shortMovies === 'on' ? filterSortShortMovies(arr) : arr);
       setIsLoadingMovies(false);
     }

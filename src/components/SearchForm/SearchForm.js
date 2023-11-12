@@ -3,8 +3,6 @@ import Sprite from '../../images/common/sprite.svg';
 
 function SearchForm({ ...props }) {
 
-  // const checkPageSavedMovies = !!props.isPageSaveMovies;
-
   return (
     <section className="search">
       <form className="search-form" name="search" onSubmit={props.handleSubmit}>

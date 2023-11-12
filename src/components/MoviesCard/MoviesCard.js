@@ -12,17 +12,15 @@ function MoviesCard(props) {
   // const movieUrl = `https://api.nomoreparties.co/${moviePath}`;
 
   function handleLikeClick() {
-    // console.log(`handleLikeClick>>>`);
     props.onLike(card);
   };
   function handleDeleteClick() {
-    // console.log(`handleDeleteClick>>>`);
     props.onDelete(card);
   };
 
 
   function convertTimeDuration(value) {
-    if (! value ){
+    if (!value) {
       console.warn('Нет value!');
       return;
     }
@@ -39,17 +37,16 @@ function MoviesCard(props) {
 
   let button;
 
-  if (props.isPageSaveMovies ){
+  if (props.isPageSaveMovies) {
     // console.log('Мы находимся на странице saved-movies');
 
     button = <button className="movie__button-remove" type="button" name="button" aria-label="Удалить из избранного" onClick={handleDeleteClick}></button>;
-  }else {
+  } else {
     // console.log('Мы находимся на странице movies');
 
     if (isLiked) {
       button = <button className="movie__button-save movie__button-save_active" type="button" name="button" aria-label="Удалить из избранного" onClick={handleDeleteClick}></button>;
     } else {
-      // console.log(`isLiked = ${isLiked}`);
       button = <button className="movie__button-save" type="button" name="button" aria-label="Добавить в избранное" onClick={handleLikeClick}></button>;
     }
   }

@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Page404() {
-  // const navigate = useNavigate();
-
   return (
     <section className="page404">
       <div className="page404__container">

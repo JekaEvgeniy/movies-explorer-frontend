@@ -38,17 +38,17 @@ function Header({ ...props }) {
         ) : (
           props.isPageIndex ? (
             <Navigation />
-          ):(
+          ) : (
             ''
           )
         )
       }
 
       {
-       (props.isPageMovies || props.isPageProfile) && (
+        (props.isPageMovies || props.isPageProfile) && (
           <>
             <HeaderBurger setIsMenuOpened={setIsMenuOpened} />
-            <HeaderProfileNav isOpen={isMenuOpened} setIsMenuOpened={setIsMenuOpened}  />
+            <HeaderProfileNav isOpen={isMenuOpened} setIsMenuOpened={setIsMenuOpened} />
           </>
         )
       }

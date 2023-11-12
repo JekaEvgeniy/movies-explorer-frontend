@@ -36,13 +36,6 @@ function App() {
     // При обновлении страницы - идет редирект на галвную.
     handleTokenCheck();
   }, []);
-/*
-  useEffect(() => {
-    if (localStorage.getItem('jwt')) {
-      setLoggedIn(true)
-    }
-console.log("loggedIn", loggedIn)
-  }, [navigate]); */
 
   useEffect(() => {
     if (loggedIn) {
@@ -56,10 +49,8 @@ console.log("loggedIn", loggedIn)
 
             setSavedMovies(dataMovies);
             setCurrentUser(info);
-            console.log('info = ', info);
-            console.log('Сохраненные карточки = ', dataMovies);
           }
-          // console.log('setCurrentUser info ===> ', info);
+
         })
         .catch((err) => console.log(`Ошибка promise.all: ${err}`));
     }
@@ -68,7 +59,6 @@ console.log("loggedIn", loggedIn)
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
-    // console.log(`jwt token = ${token}`);
 
     if (token) {
       auth.checkToken(token)
@@ -83,7 +73,7 @@ console.log("loggedIn", loggedIn)
           console.error(err);
         });
     }
-    // }, []); // remove 21-40
+    // }, []); // remove 21
   }, [navigate]);
 
   const handleLogin = () => {
@@ -102,7 +92,6 @@ console.log("loggedIn", loggedIn)
         navigate('/');
       })
       .catch(err => {
-        console.err(`front> >>> APP.js >>> handleRegister()`);
         console.error(err);
       });
   }
@@ -110,8 +99,6 @@ console.log("loggedIn", loggedIn)
 
   const handleLogout = (e) => {
     e.preventDefault();
-
-    console.log('handleLogout>>>>');
 
     localStorage.clear();
     navigate('/');
@@ -121,12 +108,6 @@ console.log("loggedIn", loggedIn)
 
 
   function handleSaveMovie(movie) {
-    // console.log(`>>> click handleSaveMovie >>>`);
-
-    // let currentMovie = movie.currentTarget.closest('.movie');
-    // let currentMovie = movie;
-    // console.log('currentMovie >>> ', currentMovie);
-
     api
       .saveNewMovie(movie)
       .then(newMovie => {
@@ -137,8 +118,6 @@ console.log("loggedIn", loggedIn)
   };
 
   function handleDeleteMovie(movie) {
-    // console.log(`>>> click handleDeleteMovie >>>`);
-    // console.log('handleDeleteMovie movie', movie);
     api
       .deleteMovie(movie._id)
       // .deleteMovie(movie.movieId)
@@ -158,7 +137,6 @@ console.log("loggedIn", loggedIn)
       checkToken(jwt)
         .then((res) => {
           if (res) {
-            console.log("loggedIn", loggedIn)
             setLoggedIn(true);
 
             // console.log(`>>> !!! navigate('/movies')`);
@@ -173,7 +151,7 @@ console.log("loggedIn", loggedIn)
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-      <Routes>
+        <Routes>
 
           <Route
             path="/movies"
@@ -238,28 +216,6 @@ console.log("loggedIn", loggedIn)
             }
           />
 
-
-          {/* <Route
-            path="/profile"
-            element={
-              <>
-                <Header isPageProfile />
-                <main className="content">
-                  <Profile
-                    loggedIn={loggedIn}
-                    setCurrentUser={setCurrentUser}
-                    handleLogout={handleLogout}
-                    setIsVisibleLoader={setIsVisibleLoader}
-                  />
-                  {isVisibleLoader && (
-                    <Preloader currentPosition="fullscreen" />
-                  )}
-                </main>
-                <Footer />
-              </>
-            }
-          /> */}
-
           <Route path="*" element={<Page404 />} />
 
           <Route
@@ -277,26 +233,25 @@ console.log("loggedIn", loggedIn)
 
           <Route path="/signup" element={
             loggedIn ? <Navigate to='/movies' /> :
-            <>
-              <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} />
-              {isVisibleLoader && (
-                <Preloader currentPosition="fullscreen" />
-              )}
-            </>
+              <>
+                <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} />
+                {isVisibleLoader && (
+                  <Preloader currentPosition="fullscreen" />
+                )}
+              </>
           } />
 
           <Route path="/signin" element={
             loggedIn ? <Navigate to='/movies' /> :
-            <>
-              <main className="content">
-                <Login setIsVisibleLoader={setIsVisibleLoader} handleLogin={handleLogin} />
-                {isVisibleLoader && (
-                  <Preloader currentPosition="fullscreen" />
-                )}
-              </main>
-            </>
+              <>
+                <main className="content">
+                  <Login setIsVisibleLoader={setIsVisibleLoader} handleLogin={handleLogin} />
+                  {isVisibleLoader && (
+                    <Preloader currentPosition="fullscreen" />
+                  )}
+                </main>
+              </>
           } />
-
 
 
         </Routes>

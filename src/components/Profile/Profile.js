@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { useForm, SubmitHandler } from "react-hook-form"
-import * as auth from '../../utils/Auth';
+import { useForm } from "react-hook-form"
 import { api } from '../../utils/Api';
-import { Link, useNavigate } from "react-router-dom";
 
 function Profile({ ...props }) {
-  const navigate = useNavigate();
 
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
@@ -26,20 +23,19 @@ function Profile({ ...props }) {
   });
 
   useEffect(() => {
-      if (currentUser.name) {
-        // Без проверки можно получить: Cannot read properties of undefined (reading 'name')
-        setName(currentUser.name);
-      }
+    if (currentUser.name) {
+      // Без проверки можно получить: Cannot read properties of undefined (reading 'name')
+      setName(currentUser.name);
+    }
 
-      if (currentUser.email) {
-        setEmail(currentUser.email);
-      }
+    if (currentUser.email) {
+      setEmail(currentUser.email);
+    }
 
   }, [currentUser]);
 
   useEffect(() => {
-    // console.log(` current: name > ${currentUser.name} ; newName : ${name} `);
-    // console.log(` current:email > ${currentUser.email}; newEmail: ${email}`);
+
     switch (true) {
       case !isValid:
         setDisabledButtonSaved(true);
@@ -59,7 +55,7 @@ function Profile({ ...props }) {
 
   }, [currentUser.email, currentUser.name, email, name, isValid, enabledEditMode]);
 
-   function handleBtnEdit(){
+  function handleBtnEdit() {
     setEnableEditMode(true);
     setDisabledButtonSaved(true);
   }
@@ -74,10 +70,8 @@ function Profile({ ...props }) {
         setMessageError(false);
         setEnableEditMode(false);
         setDisabledButtonSaved(false);
-        // closeAllPopups();
       })
       .catch(err => {
-        // console.error(err);
         setMessageError(true);
         setDisabledButtonSaved(true);
       })
@@ -114,7 +108,6 @@ function Profile({ ...props }) {
                       message: 'Максимум 30 символов'
                     },
                     onChange: (e) => {
-                      console.log(`e.target.va; = ${e.target.value}`)
                       setName(e.target.value);
                       setMessageError(false);
                     },
@@ -142,7 +135,6 @@ function Profile({ ...props }) {
                       message: "Введите e-mail в формате example@gmail.com",
                     },
                     onChange: (e) => {
-                      // handleInputChangeEmail(e);
                       setEmail(e.target.value);
                       setMessageError(false);
                     },
@@ -166,19 +158,19 @@ function Profile({ ...props }) {
                   <p className="profile-form-actions__error-message">При обновлении профиля произошла ошибка. Повторите попытку позже или попробуйте другой email</p>
                 )}
                 {
-                 ! enabledEditMode ? (
-                  <>
-                    <button
-                      onClick={handleBtnEdit}
-                      type="button"
-                      className="profile-form-actions__btn profile-form-actions__btn_type_edit"
-                    >Редактировать</button>
-                    <button
-                      onClick={props.handleLogout}
-                      type="button"
-                      className="profile-form-actions__btn profile-form-actions__btn_type_exit"
-                    >Выйти из аккаунта</button>
-                  </>
+                  !enabledEditMode ? (
+                    <>
+                      <button
+                        onClick={handleBtnEdit}
+                        type="button"
+                        className="profile-form-actions__btn profile-form-actions__btn_type_edit"
+                      >Редактировать</button>
+                      <button
+                        onClick={props.handleLogout}
+                        type="button"
+                        className="profile-form-actions__btn profile-form-actions__btn_type_exit"
+                      >Выйти из аккаунта</button>
+                    </>
                   ) : (
                     <button type="submit"
                       disabled={disabledButtonSaved}

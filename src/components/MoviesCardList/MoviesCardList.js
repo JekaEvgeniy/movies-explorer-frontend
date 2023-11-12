@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-
 import MoviesCard from '../MoviesCard/MoviesCard';
-
-
-/*
-  https://ru.react.js.org/docs/conditional-rendering.html
-*/
-
 
 function MoviesCardList({ ...props }) {
 
@@ -23,7 +16,6 @@ function MoviesCardList({ ...props }) {
     function handleResize() {
 
       const screenWidth = window.innerWidth || document.documentElement.clientWidth;
-      // console.log(`screenWidth = ${screenWidth}`);
       setScreenWidth(screenWidth);
     }
 
@@ -46,18 +38,15 @@ function MoviesCardList({ ...props }) {
   }, [screenWidth]);
 
   React.useEffect(() => {
-    // console.log(`isPageSaveMovies = ${props.isPageSaveMovies}`);
-
     const items = props.list;
     if (items && items.length) {
-      // console.log('????');
       setVisibleMovies(true);
       setIsNotFound(false);
       setRenderMovies(props.list.slice(0, numberElementsDisplay));
 
-      if (! props.isPageSaveMovies){
+      if (!props.isPageSaveMovies) {
         setRenderMovies(props.list.slice(0, numberElementsDisplay));
-      }else {
+      } else {
         setRenderMovies(props.list.slice());
       }
 
@@ -68,7 +57,6 @@ function MoviesCardList({ ...props }) {
       };
 
     } else {
-      // console.log('>>> нет элементов');
       setVisibleMovies(false);
       setIsNotFound(true);
       hiddenBtnMore();
@@ -81,7 +69,7 @@ function MoviesCardList({ ...props }) {
 
       if (!props.isPageSaveMovies) {
         return item.movieId === id;
-      }else {
+      } else {
         return item._id === id;
       }
     });
@@ -89,7 +77,7 @@ function MoviesCardList({ ...props }) {
 
 
   let movieCard;
-  if (! props.isPageSaveMovies) {
+  if (!props.isPageSaveMovies) {
     movieCard = renderMovies.map((item) => {
       const likedMovieCard = getSavedMovieCard(props.savedMovies, item.id);
       const likedMovieId = likedMovieCard ? likedMovieCard._id : null;
@@ -106,9 +94,8 @@ function MoviesCardList({ ...props }) {
     });
 
   } else {
-    // console.log('> Navigate > МЫ находимся на странице /saved-movies;  props.savedMovies = ', props.savedMovies);
 
-    if ( props.savedMovies ){
+    if (props.savedMovies) {
       // console.log('renderMovies = ', renderMovies);
       movieCard = renderMovies.map((item) => {
         const likedMovieCard = getSavedMovieCard(props.savedMovies, item._id);
@@ -125,32 +112,8 @@ function MoviesCardList({ ...props }) {
 
       });
     }
-    // if ( 1 ){
-    //   movieCard = props.savedMovies.map((item) => {
 
-    //     return <MoviesCard
-    //       isPageSaveMovies={props.isPageSaveMovies}
-    //       key={item._id}
-    //       // card={item}
-    //       card={{ ...item, _id: item._id }}
-    //       liked={true}
-    //       onDelete={props.onDelete}
-    //     />
-
-    //   });
-    // }
   }
-
-
-    // console.log(`item.id = ${item.id}`);
-
-    // if (props.isPageSaveMovies && ! likedMovieCard){
-    //   // Если мы находимся на странице /saved-movies, то отрисовывать не лайкнутые карточки не нужно!
-    //   return;
-    // }
-
-
-
 
 
   function handleButtonMore() {
@@ -172,7 +135,7 @@ function MoviesCardList({ ...props }) {
 
   function allMovies() {
 
-    if (movieCard === undefined || movieCard === null){
+    if (movieCard === undefined || movieCard === null) {
       console.error('Ошибка в получении карточек: movieCard === undefined. См. строку 107 => return Card');
       return;
     }
@@ -187,7 +150,7 @@ function MoviesCardList({ ...props }) {
     // console.log(`props.setIsNotFound = ${isNotFound}`);
     // console.log(`!visibleMovies || isNotFound ==== > ${!visibleMovies || isNotFound}`);
 
-    if (checkItems){
+    if (checkItems) {
       return (
         <>
           {
@@ -214,8 +177,8 @@ function MoviesCardList({ ...props }) {
 
       //console.log('Пользователь что-то искал и решил обновить страницу, но элементов нет. => показывем сообщение об ошибке.');
       let localStorageMovies = JSON.parse(localStorage.getItem('movies'));
-      if (localStorageMovies ){
-        if (! localStorageMovies.length) {
+      if (localStorageMovies) {
+        if (!localStorageMovies.length) {
           return (
             <>
               <p className="movies__message movies__message_error">Ничего не найдено</p>

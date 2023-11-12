@@ -1,7 +1,7 @@
 import React from "react";
 import Sprite from '../../images/common/sprite.svg';
 
-function Portfolio(){
+function Portfolio() {
   return (
     <section className="portfolio">
       <h2 className="portfolio__section-header">Портфолио</h2>

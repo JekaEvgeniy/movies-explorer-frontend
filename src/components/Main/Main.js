@@ -8,7 +8,7 @@ import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 import Footer from "../Footer/Footer";
 
-function Main({...props}) {
+function Main({ ...props }) {
   return (
     <>
       <Header isPageIndex loggedIn={props.loggedIn} />

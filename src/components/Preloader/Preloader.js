@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Preloader = ({...props}) => {
+const Preloader = ({ ...props }) => {
   let className = 'preloader';
-  if (props.currentPosition){
+  if (props.currentPosition) {
     className += ' preloader_position_fixed';
   }
   return (
