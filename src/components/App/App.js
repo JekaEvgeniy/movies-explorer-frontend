@@ -40,56 +40,25 @@ function App() {
     handleTokenCheck();
   }, []);
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     const token = localStorage.getItem('jwt');
+  useEffect(() => {
+    if (loggedIn) {
+      const token = localStorage.getItem('jwt');
 
-  //     Promise.all([api.getUserInfo(), api.getUsersMovies()])
-  //       .then(([info, dataMovies]) => {
+      Promise.all([api.getUserInfo(), api.getUsersMovies()])
+        .then(([info, dataMovies]) => {
 
-  //         if (token) {
-  //           handleLogin();
+          if (token) {
+            handleLogin();
 
-  //           setSavedMovies(dataMovies);
-  //           setCurrentUser(info);
-  //         }
+            setSavedMovies(dataMovies);
+            setCurrentUser(info);
+          }
 
-  //       })
-  //       .catch((err) => console.log(`Ошибка promise.all: ${err}`));
-  //   }
-
-  // }, [loggedIn]); // currentUser._id
-
-
-  React.useEffect(() => {
-    if (!localStorage.getItem("jwt")) return;
-
-    api.getUserInfo()
-      .then(data => {
-        handleLogin();
-        setCurrentUser(data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [loggedIn]);
-
-  React.useEffect(() => {
-    if (location.pathname === "/saved-movies" || location.pathname === "/movies") {
-      api.getUsersMovies()
-        .then((data) => {
-          setSavedMovies(data);
         })
-        .catch(err => {
-
-          console.log(err);
-        })
+        .catch((err) => console.log(`Ошибка promise.all: ${err}`));
     }
-  }, [loggedIn]);
 
-
-
-
+  }, [loggedIn]); // currentUser._id
 
 
   useEffect(() => {
@@ -165,12 +134,12 @@ function App() {
 
 
   const handleTokenCheck = () => {
-    setLoggedIn(true);
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       checkToken(jwt)
-        .then((res) => {
-          if (res) {
+      .then((res) => {
+        if (res) {
+            setLoggedIn(true);
 
             // console.log(`>>> !!! navigate('/movies')`);
             // navigate("/movies");
