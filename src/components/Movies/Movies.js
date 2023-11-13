@@ -41,10 +41,8 @@ function Movies({ ...props }) {
 
     if (!moviesList.length) {
       // Нет ни одного фильма отвечающему запросу
-      console.log(`setIsNotFound = ${setIsNotFound(true) }`)
       setIsNotFound(true);
     } else {
-      console.log(`setIsNotFound = ${setIsNotFound(false)}`)
       setIsNotFound(false);
     }
 
@@ -74,7 +72,7 @@ function Movies({ ...props }) {
       setIsLoadingMovies(false);
 
     } else {
-      console.log('>>> Подгружаем фильмы >>> loading ... ... API ...');
+      // console.log('>>> Подгружаем фильмы >>> loading ... ... API ...');
 
       Promise.all([apiMovies()])
         .then(([items]) => {

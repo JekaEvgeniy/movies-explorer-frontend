@@ -1,6 +1,6 @@
 // import React from "react";
-// export const BASE_URL = 'https://api.dip.nomoredomainsrocks.ru';
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://api.dip.nomoredomainsrocks.ru';
+// export const BASE_URL = 'http://localhost:3000';
 
 const checkResponse = (res) => {
   // Проверка статуса ответа сервера

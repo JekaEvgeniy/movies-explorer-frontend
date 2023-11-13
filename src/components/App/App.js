@@ -40,64 +40,32 @@ function App() {
     handleTokenCheck();
   }, []);
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     const token = localStorage.getItem('jwt');
+  // React.useEffect(() => {
+  //   if (! localStorage.getItem("jwt")) return;
 
-  //     Promise.all([api.getUserInfo(), api.getUsersMovies()])
-  //       .then(([info, dataMovies]) => {
-
-  //         if (token) {
-  //           handleLogin();
-
-  //           setSavedMovies(dataMovies);
-  //           setCurrentUser(info);
-  //         }
-
-  //       })
-  //       .catch((err) => console.log(`Ошибка promise.all: ${err}`));
-  //   }
-
-  // }, [loggedIn]); // currentUser._id
+  //   api.getUserInfo()
+  //     .then(data => {
+  //       handleLogin();
+  //       setCurrentUser(data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }, [loggedIn]);
 
 
-  React.useEffect(() => {
-    if (! localStorage.getItem("jwt")) return;
+  // React.useEffect(() => {
+  //     api
+  //     .getUsersMovies()
+  //     .then((data) => {
+  //       setSavedMovies(data);
+  //     })
+  //     .catch(err => {
 
-    api.getUserInfo()
-      .then(data => {
-        handleLogin();
-        setCurrentUser(data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, [loggedIn]);
+  //       console.log(err);
+  //     })
 
-
-  React.useEffect(() => {
-      api
-      .getUsersMovies()
-      .then((data) => {
-        setSavedMovies(data);
-      })
-      .catch(err => {
-
-        console.log(err);
-      })
-
-
-
-
-
-
-
-  }, [loggedIn]);
-
-
-
-
-
+  // }, [loggedIn]);
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
@@ -192,8 +160,26 @@ function App() {
     //   handleLogout();
     // }
   };
+  useEffect(() => {
+    if (loggedIn) {
+      const token = localStorage.getItem('jwt');
 
-  console.log(`loggedIn = ${loggedIn}`); // false
+      Promise.all([api.getUserInfo(), api.getUsersMovies()])
+        .then(([info, dataMovies]) => {
+
+          if (token) {
+            handleLogin();
+
+            setSavedMovies(dataMovies);
+            setCurrentUser(info);
+          }
+
+        })
+        .catch((err) => console.log(`Ошибка promise.all: ${err}`));
+    }
+  }, [loggedIn]); // currentUser._id
+
+  // console.log(`loggedIn = ${loggedIn}`); // false
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
