@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Page404() {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate(-1);
+  };
+
   return (
     <section className="page404">
       <div className="page404__container">
@@ -10,8 +16,7 @@ function Page404() {
           <p className="page404__caption">Страница не найдена</p>
         </div>
 
-        {/* <Link onClick={() => navigate("/", { replace: true })}  className="page404__link" type="button">Назад</Link> */}
-        <Link to='/' className="page404__link" type="button">Назад</Link>
+        <button type="button" onClick={handleClick} className="page404__link">Назад</button>
 
       </div>
     </section>
