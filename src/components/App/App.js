@@ -236,7 +236,7 @@ function App() {
 
 
           <Route path="/signup" element={
-            // loggedIn ? <Navigate to='/movies' /> :
+            loggedIn ? <Navigate to='/movies' /> :
             <>
               <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} setLoggedIn={setLoggedIn} />
               {isVisibleLoader && (
@@ -246,7 +246,7 @@ function App() {
           } />
 
           <Route path="/signin" element={
-            // loggedIn ? <Navigate to='/movies' /> :
+            loggedIn ? <Navigate to='/movies' /> :
             <>
               <main className="content">
                 <Login setIsVisibleLoader={setIsVisibleLoader} handleLogin={handleLogin} />
