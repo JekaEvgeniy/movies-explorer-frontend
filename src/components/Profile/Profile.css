@@ -1,0 +1,216 @@
+.profile {
+  box-sizing     : border-box;
+  min-height     : calc(100vh - 74px);
+  display        : flex;
+  flex-direction : column;
+  justify-content: center;
+}
+
+.profile__container {
+  box-sizing  : border-box;
+  max-width   : 470px;
+  width       : 100%;
+  margin-left : auto;
+  margin-right: auto;
+  padding     : 74px 30px 100px 30px;
+}
+
+@media all and (max-width: 767px) {
+  .profile__container {
+    display       : flex;
+    flex-direction: column;
+    flex          : 1;
+    padding-top   : 70px;
+    padding-bottom: 33px;
+  }
+}
+
+.profile__header {
+  display    : block;
+  margin     : 0;
+  padding    : 0;
+  font-size  : 24px;
+  font-weight: 500;
+  line-height: normal;
+  text-align : center;
+}
+
+.profile-form {
+  all           : unset;
+  display       : flex;
+  flex-direction: column;
+  margin-top    : 107px;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .profile-form {
+    margin-top: 80px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .profile-form {
+    margin-top: 64px;
+    flex      : 1;
+  }
+}
+
+.profile-form__content {
+  display       : flex;
+  flex-direction: column;
+  min-height    : 353px;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .profile-form__content {
+    min-height: 343px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .profile-form__content {
+    min-height: auto;
+    flex      : 1;
+  }
+}
+
+.profile-form__content-bottom {
+  margin-top: auto;
+}
+
+.profile-form__label {
+  all            : unset;
+  box-sizing     : border-box;
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  border-bottom  : 1px solid #E8E8E8;
+  margin-bottom  : 1px;
+}
+
+.profile-form__label:last-of-type {
+  border-bottom-color: transparent;
+}
+
+.profile-form__title {
+  font-size  : 11px;
+  font-weight: 500;
+  color      : #000;
+  white-space: nowrap;
+}
+
+.profile-form__input {
+  all        : unset;
+  box-sizing : border-box;
+  padding    : 16px 0 16px 0;
+  width      : 100%;
+  font-family: "Inter", Arial, sans-serif;
+  font-size  : 11px;
+  line-height: normal;
+  font-weight: 400;
+  color      : #000;
+  text-align : right;
+  transition : padding-right 0.3s ease-in-out;
+}
+
+.profile-form__input[disabled] {
+  pointer-events: none;
+  user-select   : none;
+}
+
+.profile-form__input:focus {
+  /* box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08); */
+  /* background-color: #f3f3f3; */
+  padding-right: 4px;
+}
+
+
+.profile-form-actions {
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+  gap           : 2px 0;
+}
+
+.profile-form-actions__message {
+  margin     : 0;
+  padding    : 7px 0;
+  font-size  : 11px;
+  line-height: normal;
+  text-align : center;
+}
+
+.profile-form-actions__message_type_error {
+  color : #FF004C;
+}
+
+.profile-form-actions__message_type_success {
+  color : #2BE080;
+}
+
+.profile-form-actions__btn {
+  all        : unset;
+  display    : block;
+  padding    : 7px 12px 7px 12px;
+  font-family: "Inter", Arial, sans-serif;
+  font-size  : 13px;
+  line-height: normal;
+  font-weight: 400;
+  color      : #000;
+  user-select: none;
+  cursor     : pointer;
+  transition : opacity 0.3s ease-in-out;
+}
+
+.profile-form-actions__btn[disabled] {
+  cursor: default;
+  pointer-events: none;
+}
+
+.profile-form-actions__btn_theme_accent {
+  box-sizing      : border-box;
+  background-color: #3456F3;
+  width           : 100%;
+  padding         : 13px 12px 15px 12px;
+  height          : 45px;
+  font-size       : 14px;
+  font-weight     : 500;
+  color           : #fff;
+  text-align      : center;
+}
+
+.profile-form-actions__btn_theme_accent[disabled],
+.profile-form-actions__btn:hover {
+  opacity: 0.7;
+}
+
+
+@media all and (max-width: 767px) {
+  .profile-form-actions__btn {
+    font-size: 12px;
+  }
+}
+
+.profile-form-actions__btn_type_exit {
+  color: #FF004D;
+}
+
+
+.profile-form__error-message {
+  display    : block;
+  margin     : 11px 0 0 0;
+  min-height : 9px;
+  font-size  : 10px;
+  line-height: 10px;
+  color      : #EE3465;
+  transition : opacity 0.3s ease-in-out;
+}
+
+.profile-form__error-message:empty {
+  opacity: 0;
+}
+
+.profile-form__error-message:not(:empty) {
+  margin-bottom: 20px;
+  /* На макетах нет примера, когда после поля с ошибкой идет input ( */
+}

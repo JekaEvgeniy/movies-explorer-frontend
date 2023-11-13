@@ -1,0 +1,161 @@
+.promo {
+  box-sizing           : border-box;
+  position             : relative;
+  padding-left         : 70px;
+  padding-right        : 70px;
+  display              : grid;
+  grid-template-columns: auto 310px;
+  grid-template-rows   : auto 1fr auto;
+  gap                  : 0 64px;
+  grid-template-areas  : 'header pic'
+    'desc pic'
+    'footer .';
+  background-color: #465DFF;
+  padding-top     : 75px;
+  padding-bottom  : 75px;
+  min-height      : 574px;
+  color           : #fff;
+}
+
+.promo:before {
+  position        : absolute;
+  bottom          : 100%;
+  left            : 0;
+  right           : 0;
+  height          : 74px;
+  background-color: #465DFF;
+  content         : '';
+  pointer-events  : none;
+}
+
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .promo {
+    padding-left : 50px;
+    padding-right: 50px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .promo {
+    padding-left : 18px;
+    padding-right: 18px;
+  }
+}
+
+@media all and (max-width: 1024px) {
+  .promo {
+    grid-template-columns: 1fr;
+    grid-template-areas  : 'pic'
+      'header'
+      'desc'
+      'footer';
+    justify-items     : center;
+    grid-template-rows: auto;
+  }
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .promo {
+    padding-top   : 140px;
+    padding-bottom: 76px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .promo {
+    padding-top   : 70px;
+    padding-bottom: 30px;
+  }
+}
+
+.promo__header {
+  grid-area  : header;
+  margin     : 0;
+  max-width  : 640px;
+  font-size  : 50px;
+  font-weight: 400;
+  line-height: 58px;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .promo__header {
+    max-width  : 680px;
+    margin-top : 49px;
+    text-align : center;
+    font-size  : 40px;
+    line-height: 50px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .promo__header {
+    margin-top    : 44px;
+    font-size     : 30px;
+    line-height   : 38px;
+    letter-spacing: -1.2px;
+    text-align    : center;
+  }
+}
+
+.promo__desc {
+  grid-area  : desc;
+  margin     : 36px 0 0 0;
+  max-width  : 310px;
+  font-size  : 13px;
+  font-style : normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity    : 0.5;
+}
+
+@media all and (max-width: 1024px) {
+  .promo__desc {
+    max-width : 260px;
+    text-align: center;
+  }
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .promo__desc {
+    margin-top: 21px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .promo__desc {
+    margin-top: 24px;
+  }
+}
+
+.promo__pic {
+  grid-area: pic;
+  width    : 310px;
+  height   : 304px;
+}
+
+@media all and (max-width: 767px) {
+  .promo__pic {
+    width : 210px;
+    height: 206px;
+  }
+}
+
+.promo__actions {
+  margin-top: auto;
+  padding-top: 82px;
+
+  grid-area: footer;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .promo__actions {
+    padding-top: 92px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .promo__actions {
+    padding-top: 80px;
+  }
+}
