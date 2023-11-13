@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate, useLocation} from 'react-router-dom';
 
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
@@ -23,11 +23,14 @@ import Preloader from '../Preloader/Preloader';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
+  const navigate = useNavigate();
+  //const location = useLocation();
+
+
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('jwt') ? true : false);
   // const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
 
-  const navigate = useNavigate();
 
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [isVisibleLoader, setIsVisibleLoader] = useState(false); // Лоадер поверх всех элементов
@@ -37,25 +40,64 @@ function App() {
     handleTokenCheck();
   }, []);
 
-  useEffect(() => {
-    if (loggedIn) {
-      const token = localStorage.getItem('jwt');
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     const token = localStorage.getItem('jwt');
 
-      Promise.all([api.getUserInfo(), api.getUsersMovies()])
-        .then(([info, dataMovies]) => {
+  //     Promise.all([api.getUserInfo(), api.getUsersMovies()])
+  //       .then(([info, dataMovies]) => {
 
-          if (token) {
-            handleLogin();
+  //         if (token) {
+  //           handleLogin();
 
-            setSavedMovies(dataMovies);
-            setCurrentUser(info);
-          }
+  //           setSavedMovies(dataMovies);
+  //           setCurrentUser(info);
+  //         }
 
-        })
-        .catch((err) => console.log(`Ошибка promise.all: ${err}`));
-    }
+  //       })
+  //       .catch((err) => console.log(`Ошибка promise.all: ${err}`));
+  //   }
 
-  }, [loggedIn]); // currentUser._id
+  // }, [loggedIn]); // currentUser._id
+
+
+  React.useEffect(() => {
+    if (! localStorage.getItem("jwt")) return;
+
+    api.getUserInfo()
+      .then(data => {
+        handleLogin();
+        setCurrentUser(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [loggedIn]);
+
+
+  React.useEffect(() => {
+      api
+      .getUsersMovies()
+      .then((data) => {
+        setSavedMovies(data);
+      })
+      .catch(err => {
+
+        console.log(err);
+      })
+
+
+
+
+
+
+
+  }, [loggedIn]);
+
+
+
+
+
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
@@ -73,8 +115,8 @@ function App() {
           console.error(err);
         });
     }
-    // }, []); // remove 21
   }, [navigate]);
+  // }, []);
 
   const handleLogin = () => {
     setLoggedIn(true);
@@ -89,7 +131,7 @@ function App() {
         localStorage.setItem("jwt", res.token);
 
         setLoggedIn(true);
-        navigate('/');
+        navigate('/movies');
       })
       .catch(err => {
         console.error(err);
@@ -130,14 +172,12 @@ function App() {
 
 
   const handleTokenCheck = () => {
-    console.log(`handleTokenCheck >>>> handleTokenCheck()`);
-
+    setLoggedIn(true);
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
       checkToken(jwt)
         .then((res) => {
           if (res) {
-            setLoggedIn(true);
 
             // console.log(`>>> !!! navigate('/movies')`);
             // navigate("/movies");
@@ -147,11 +187,13 @@ function App() {
           console.log("Ошибка", err);
           handleLogout();
         });
-    } else {
-      handleLogout();
     }
+    // else {
+    //   handleLogout();
+    // }
   };
 
+  console.log(`loggedIn = ${loggedIn}`); // false
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -221,7 +263,7 @@ function App() {
             }
           />
 
-          <Route path="*" element={<Page404 />} />
+
 
           <Route
             exact
@@ -237,7 +279,7 @@ function App() {
 
 
           <Route path="/signup" element={
-            loggedIn ? <Navigate to='/movies' /> :
+            // loggedIn ? <Navigate to='/movies' /> :
               <>
                 <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} />
                 {isVisibleLoader && (
@@ -247,7 +289,7 @@ function App() {
           } />
 
           <Route path="/signin" element={
-            loggedIn ? <Navigate to='/movies' /> :
+            // loggedIn ? <Navigate to='/movies' /> :
               <>
                 <main className="content">
                   <Login setIsVisibleLoader={setIsVisibleLoader} handleLogin={handleLogin} />
@@ -257,6 +299,9 @@ function App() {
                 </main>
               </>
           } />
+
+
+          <Route path="*" element={<Page404 />} />
 
 
         </Routes>

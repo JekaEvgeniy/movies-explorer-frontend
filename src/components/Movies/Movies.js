@@ -107,20 +107,20 @@ function Movies({ ...props }) {
 
 
   useEffect(() => {
-    console.log(`isNotFound = ${isNotFound}`);
+    //console.log(`isNotFound = ${isNotFound}`);
     const arr = localStorage.getItem('filteredMovies');
     // console.log(`arr typeof =`, typeof arr);
     if (arr === null) {
-      console.log(`setIsNotFound  true =>>> ${isNotFound}`)
+      //console.log(`setIsNotFound  true =>>> ${isNotFound}`)
       setIsNotFound(true);
     }
 
     if (!arr?.length){
-      console.log(`setIsNotFound  true =>>> ${isNotFound}`)
+      //console.log(`setIsNotFound  true =>>> ${isNotFound}`)
       setIsNotFound(true);
     }
 
-    console.log(`isNotFound =>>> ${isNotFound}`);
+    //console.log(`isNotFound =>>> ${isNotFound}`);
   }, []);
 
   useEffect(() => {

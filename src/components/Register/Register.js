@@ -43,7 +43,7 @@ function Register({ ...props }) {
                 setMessageError(false);
                 localStorage.setItem('jwt', res.token);
                 // props.handleRegister();
-                navigate('/movies'); // ТЗ: Если запрос успешен, пользователь сразу авторизуется и будет перенаправлен на страницу «Фильмы».
+                navigate('/movies', {replace: true}); // ТЗ: Если запрос успешен, пользователь сразу авторизуется и будет перенаправлен на страницу «Фильмы».
               }
             })
             .catch((err) => {
@@ -57,7 +57,7 @@ function Register({ ...props }) {
       })
       .catch((err) => {
         setMessageError(true);
-        console.log(`При регистрации пользователя произошла ошибка. ${err}`)
+        console.log(`Пользователь с таким email уже существует. ${err}`)
       })
       .finally(() => {
         props.setIsVisibleLoader(false);

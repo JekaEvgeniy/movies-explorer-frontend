@@ -13,16 +13,25 @@ function MoviesCardList({ ...props }) {
   const [isNotFound, setIsNotFound] = useState('');
 
   React.useEffect(() => {
-    function handleResize() {
+    let resizeTimer;
 
-      const screenWidth = window.innerWidth || document.documentElement.clientWidth;
-      setScreenWidth(screenWidth);
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const screenWidth = window.innerWidth || document.documentElement.clientWidth;
+        setScreenWidth(screenWidth);
+        // console.log(`screenWidth = ${screenWidth}`);
+      }, 50);
     }
 
-    window.addEventListener("resize", function () {
-      handleResize();
-    });
-  });
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      // Очистка таймера при удалении компонента
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setScreenWidth]);
 
   React.useEffect(() => {
     if (screenWidth >= 1024) {
@@ -35,7 +44,7 @@ function MoviesCardList({ ...props }) {
       setNumberElementsDisplay(5);
       setNumberElementsAdd(2);
     }
-  }, [screenWidth]);
+  }, [screenWidth, setNumberElementsDisplay, setNumberElementsAdd]);
 
   React.useEffect(() => {
     const items = props.list;
