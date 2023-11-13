@@ -41,6 +41,7 @@ function Register({ ...props }) {
             .then((res) => {
               if (res.token) {
                 setMessageError(false);
+                props.setLoggedIn(true);
                 localStorage.setItem('jwt', res.token);
                 // props.handleRegister();
                 navigate('/movies', {replace: true}); // ТЗ: Если запрос успешен, пользователь сразу авторизуется и будет перенаправлен на страницу «Фильмы».
@@ -49,6 +50,7 @@ function Register({ ...props }) {
             .catch((err) => {
               console.log(`При регистрации пользователя произошла ошибка. ${err}`)
               setMessageError(true);
+              props.setLoggedIn(false);
             })
             .finally(() => {
               props.setIsVisibleLoader(false);

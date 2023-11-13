@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
@@ -24,9 +24,6 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const navigate = useNavigate();
-  const location = useLocation();
-
-
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('jwt') ? true : false);
   // const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
@@ -241,7 +238,7 @@ function App() {
           <Route path="/signup" element={
             // loggedIn ? <Navigate to='/movies' /> :
             <>
-              <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} />
+              <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} setLoggedIn={setLoggedIn} />
               {isVisibleLoader && (
                 <Preloader currentPosition="fullscreen" />
               )}
