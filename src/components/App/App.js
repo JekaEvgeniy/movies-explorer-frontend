@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, Navigate, useNavigate, useLocation} from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
 
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
@@ -24,7 +24,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const navigate = useNavigate();
-  //const location = useLocation();
+  const location = useLocation();
 
 
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('jwt') ? true : false);
@@ -40,32 +40,57 @@ function App() {
     handleTokenCheck();
   }, []);
 
-  // React.useEffect(() => {
-  //   if (! localStorage.getItem("jwt")) return;
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     const token = localStorage.getItem('jwt');
 
-  //   api.getUserInfo()
-  //     .then(data => {
-  //       handleLogin();
-  //       setCurrentUser(data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }, [loggedIn]);
+  //     Promise.all([api.getUserInfo(), api.getUsersMovies()])
+  //       .then(([info, dataMovies]) => {
+
+  //         if (token) {
+  //           handleLogin();
+
+  //           setSavedMovies(dataMovies);
+  //           setCurrentUser(info);
+  //         }
+
+  //       })
+  //       .catch((err) => console.log(`Ошибка promise.all: ${err}`));
+  //   }
+
+  // }, [loggedIn]); // currentUser._id
 
 
-  // React.useEffect(() => {
-  //     api
-  //     .getUsersMovies()
-  //     .then((data) => {
-  //       setSavedMovies(data);
-  //     })
-  //     .catch(err => {
+  React.useEffect(() => {
+    if (!localStorage.getItem("jwt")) return;
 
-  //       console.log(err);
-  //     })
+    api.getUserInfo()
+      .then(data => {
+        handleLogin();
+        setCurrentUser(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, [loggedIn]);
 
-  // }, [loggedIn]);
+  React.useEffect(() => {
+    if (location.pathname === "/saved-movies" || location.pathname === "/movies") {
+      api.getUsersMovies()
+        .then((data) => {
+          setSavedMovies(data);
+        })
+        .catch(err => {
+
+          console.log(err);
+        })
+    }
+  }, [loggedIn]);
+
+
+
+
+
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
@@ -160,26 +185,6 @@ function App() {
     //   handleLogout();
     // }
   };
-  useEffect(() => {
-    if (loggedIn) {
-      const token = localStorage.getItem('jwt');
-
-      Promise.all([api.getUserInfo(), api.getUsersMovies()])
-        .then(([info, dataMovies]) => {
-
-          if (token) {
-            handleLogin();
-
-            setSavedMovies(dataMovies);
-            setCurrentUser(info);
-          }
-
-        })
-        .catch((err) => console.log(`Ошибка promise.all: ${err}`));
-    }
-  }, [loggedIn]); // currentUser._id
-
-  // console.log(`loggedIn = ${loggedIn}`); // false
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -249,7 +254,7 @@ function App() {
             }
           />
 
-
+          <Route path="*" element={<Page404 />} />
 
           <Route
             exact
@@ -266,28 +271,25 @@ function App() {
 
           <Route path="/signup" element={
             // loggedIn ? <Navigate to='/movies' /> :
-              <>
-                <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} />
-                {isVisibleLoader && (
-                  <Preloader currentPosition="fullscreen" />
-                )}
-              </>
+            <>
+              <Register setIsVisibleLoader={setIsVisibleLoader} handleRegister={handleRegister} />
+              {isVisibleLoader && (
+                <Preloader currentPosition="fullscreen" />
+              )}
+            </>
           } />
 
           <Route path="/signin" element={
             // loggedIn ? <Navigate to='/movies' /> :
-              <>
-                <main className="content">
-                  <Login setIsVisibleLoader={setIsVisibleLoader} handleLogin={handleLogin} />
-                  {isVisibleLoader && (
-                    <Preloader currentPosition="fullscreen" />
-                  )}
-                </main>
-              </>
+            <>
+              <main className="content">
+                <Login setIsVisibleLoader={setIsVisibleLoader} handleLogin={handleLogin} />
+                {isVisibleLoader && (
+                  <Preloader currentPosition="fullscreen" />
+                )}
+              </main>
+            </>
           } />
-
-
-          <Route path="*" element={<Page404 />} />
 
 
         </Routes>
